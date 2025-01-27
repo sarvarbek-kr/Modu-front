@@ -19,6 +19,7 @@ import { MemberUpdate } from '../../../libs/types/member/member.update';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ALL_MEMBERS_BY_ADMIN } from '../../../apollo/admin/query';
 import { UPDATE_MEMBER_BY_ADMIN } from '../../../apollo/admin/mutation';
+import { T } from '../../../libs/types/common';
 
 const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);

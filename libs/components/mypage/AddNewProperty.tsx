@@ -231,7 +231,6 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 											setInsertPropertyData({ ...insertPropertyData, propertyType: value })
 										}
 									>
-										<>
 											<option selected={true} disabled={true} value={'select'}>
 												Select
 											</option>
@@ -240,7 +239,6 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 													{type}
 												</option>
 											))}
-										</>
 									</select>
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
@@ -259,7 +257,6 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 											setInsertPropertyData({ ...insertPropertyData, propertyLocation: value })
 										}
 									>
-										<>
 											<option selected={true} disabled={true} value={'select'}>
 												Select
 											</option>
@@ -268,7 +265,6 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 													{location}
 												</option>
 											))}
-										</>
 									</select>
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
