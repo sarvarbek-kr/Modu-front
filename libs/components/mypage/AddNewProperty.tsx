@@ -231,7 +231,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 											setInsertPropertyData({ ...insertPropertyData, propertyType: value })
 										}
 									>
-											<option selected={true} disabled={true} value={'select'}>
+											<option disabled={true} value={'select'}>
 												Select
 											</option>
 											{propertyType.map((type: any) => (
@@ -257,7 +257,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 											setInsertPropertyData({ ...insertPropertyData, propertyLocation: value })
 										}
 									>
-											<option selected={true} disabled={true} value={'select'}>
+											<option disabled={true} value={'select'}>
 												Select
 											</option>
 											{propertyLocation.map((location: any) => (
@@ -335,11 +335,11 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 											setInsertPropertyData({ ...insertPropertyData, propertyRooms: parseInt(value) })
 										}
 									>
-										<option disabled={true} selected={true} value={'select'}>
+										<option disabled={true} value={'select'}>
 											Select
 										</option>
 										{[1, 2, 3, 4, 5].map((room: number) => (
-											<option value={`${room}`}>{room}</option>
+											<option value={`${room}`} key={room}>{room}</option>
 										))}
 									</select>
 									<div className={'divider'}></div>
@@ -355,11 +355,11 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 											setInsertPropertyData({ ...insertPropertyData, propertyBeds: parseInt(value) })
 										}
 									>
-										<option disabled={true} selected={true} value={'select'}>
+										<option disabled={true} value={'select'}>
 											Select
 										</option>
 										{[1, 2, 3, 4, 5].map((bed: number) => (
-											<option value={`${bed}`}>{bed}</option>
+											<option value={`${bed}`} key={bed}>{bed}</option>
 										))}
 									</select>
 									<div className={'divider'}></div>
@@ -380,7 +380,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										</option>
 										{propertySquare.map((square: number) => {
 											if (square !== 0) {
-												return <option value={`${square}`}>{square}</option>;
+												return <option value={`${square}`} key={square}>{square}</option>;
 											}
 										})}
 									</select>
