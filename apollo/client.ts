@@ -41,12 +41,12 @@ class LoggingWebSocket {
 			console.log("WebSocket connection!");
 		};
 
-		this.socket.onmessage = (msg) => {
+		this.socket.onmessage = (msg: any) => {
 			console.log("WebSocket message:", msg.data);
 		};
 
-		this.socket.onerror = (error) => {
-			console.log("WebSocket error:", error);
+		this.socket.onerror = (err) => {
+			console.log("WebSocket error:", err);
 		}
 	}
 
@@ -74,12 +74,12 @@ function createIsomorphicLink() {
 
 		// @ts-ignore
 		const link = new createUploadLink({
-			uri: process.env.REACT_APP_API_GRAPHQL_URL,
-		});
+			uri: process.env.REACT_APP_API_GRAPHQL_URL ?? 'http://localhost:3007/graphql',
+		  });
 
 		/* WEBSOCKET SUBSCRIPTION LINK */
 		const wsLink = new WebSocketLink({
-			uri: process.env.REACT_APP_API_WS ?? 'ws://127.0.0.1:3007',
+			uri: process.env.REACT_APP_API_WS ?? 'ws://localhost:3007',
 			options: {
 				reconnect: false,
 				timeout: 30000,

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, Box, Stack } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import Badge from '@mui/material/Badge';
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import MarkChatUnreadIcon from '@mui/icons-material/MarkChatUnread';
 import { useRouter } from 'next/router';
@@ -41,14 +40,14 @@ interface MessagePayload {
 	event: string;
 	text: string;
 	memberData: Member;
-  }
-  
-  interface InfoPayload {
+}
+
+interface InfoPayload {
 	event: string;
 	totalClients: number;
 	memberData: Member;
 	action: string;
-  }
+}
 
 const Chat = () => {
 	const chatContentRef = useRef<HTMLDivElement>(null);
@@ -67,24 +66,23 @@ const Chat = () => {
 	useEffect(() => {
 		socket.onmessage = (msg) => {
 			const data = JSON.parse(msg.data);
-			console.log("WebSocket message:", data);
-
-			switch(data.event) {
+			console.log('websocket message', data);
+			switch (data.event) {
 				case 'info':
 					const newInfo: InfoPayload = data;
 					setOnlineUsers(newInfo.totalClients);
 					break;
-				case 'getMessages':
+				case 'history':
 					const list: MessagePayload[] = data.list;
 					setMessagesList(list);
 					break;
-				case 'messages':
-					const NewMessage: MessagePayload = data;
-					messagesList.push(NewMessage);
+				case 'message':
+					const newMessage: MessagePayload = data;
+					messagesList.push(newMessage);
 					setMessagesList([...messagesList]);
 					break;
 			}
-		}
+		};
 	}, [socket, messagesList]);
 
 	useEffect(() => {
@@ -122,9 +120,9 @@ const Chat = () => {
 	};
 
 	const onClickHandler = () => {
-		if(!messageInput) sweetErrorAlert(Messages.error4);
+		if (!messageInput) sweetErrorAlert(Messages.error4);
 		else {
-			socket.send(JSON.stringify({event: "message", data: messageInput }));
+			socket.send(JSON.stringify({ event: 'message', data: messageInput }));
 			setMessageInput('');
 		}
 	};
@@ -139,7 +137,7 @@ const Chat = () => {
 			<Stack className={`chat-frame ${open ? 'open' : ''}`}>
 				<Box className={'chat-top'} component={'div'}>
 					<div style={{ fontFamily: 'Nunito' }}>Online Chat</div>
-					<RippleBadge style={{ margin: '-18px 0 0 21px' }} badgeContent={onlineUsers}/>
+					<RippleBadge style={{ margin: '-18px 0 0 21px' }} badgeContent={onlineUsers} />
 				</Box>
 				<Box className={'chat-content'} id="chat-content" ref={chatContentRef} component={'div'}>
 					<ScrollableFeed>
@@ -147,28 +145,35 @@ const Chat = () => {
 							<Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
 								<div className={'welcome'}>Welcome to Live chat!</div>
 							</Box>
-							{messagesList.map((ele: MessagePayload) => {
-								const {text, memberData } = ele;
-								const memberImage = memberData?.memberImage 
-								? `${REACT_APP_API_URL}/${memberData.memberImage}` 
-								: '/img/profile/defaultUser.svg';
+							{messagesList.map((ele: MessagePayload, index: number) => {
+								const { text, memberData } = ele;
+								const memberImage = memberData?.memberImage
+									? `${REACT_APP_API_URL}/${memberData.memberImage}`
+									: `/img/profile/defaultUser.svg`;
 
 								return memberData?._id === user?._id ? (
-								<Box
-									component={'div'}
-									flexDirection={'row'}
-									style={{ display: 'flex' }}
-									alignItems={'flex-end'}
-									justifyContent={'flex-end'}
-									sx={{ m: '10px 0px' }}
-								>
-									<div className={'msg-right'}>{text}</div>
-								</Box>
-							) : (
-							    <Box flexDirection={'row'} style={{ display: 'flex' }} sx={{ m: '10px 0px' }} component={'div'}>
-									<Avatar alt={'jonik'} src={memberImage} />
-									<div className={'msg-left'}>{text}</div>
-								</Box>
+									<Box
+										component={'div'}
+										key={`${text}-${index}`}
+										flexDirection={'row'}
+										style={{ display: 'flex' }}
+										alignItems={'flex-end'}
+										justifyContent={'flex-end'}
+										sx={{ m: '10px 0px' }}
+									>
+										<div className={'msg-right'}>{text}</div>
+									</Box>
+								) : (
+									<Box
+										key={`${text}-${index}`}
+										flexDirection={'row'}
+										style={{ display: 'flex' }}
+										sx={{ m: '10px 0px' }}
+										component={'div'}
+									>
+										<Avatar alt={'jonik'} src={memberImage} />
+										<div className={'msg-left'}>{text}</div>
+									</Box>
 								);
 							})}
 						</Stack>
@@ -176,6 +181,7 @@ const Chat = () => {
 				</Box>
 				<Box className={'chat-bott'} component={'div'}>
 					<input
+						ref={textInput}
 						type={'text'}
 						name={'message'}
 						className={'msg-input'}
