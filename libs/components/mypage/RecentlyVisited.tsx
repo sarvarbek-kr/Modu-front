@@ -39,7 +39,7 @@ const RecentlyVisited: NextPage = () => {
 	};
 
 	if (device === 'mobile') {
-		return <div>NESTAR MY FAVORITES MOBILE</div>;
+		return <div>MODU MY FAVORITES MOBILE</div>;
 	} else {
 		return (
 			<div id="my-favorites-page">
