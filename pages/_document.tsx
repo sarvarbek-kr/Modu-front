@@ -5,7 +5,7 @@ export default function Document() {
 		<Html lang="en">
 			<Head>
 				<meta name="robots" content="index,follow" />
-				<link rel="icon" type="image/png" href="/img/logo/favicon.svg" />
+				<link rel="icon" type="image/png" href="/img/logo/logo-modu.svg" />
 
 				{/* SEO */}
 				<meta name="keyword" content={'modu, modu.uz, modu design, modu furnitura'} />

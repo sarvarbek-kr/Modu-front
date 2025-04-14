@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
 				align-items: center;
 				border-top: 1px solid rgba(255, 255, 255, 0.07);
 				&.transparent {
-					background-color: #181a209e;
+					background-color: #fff3e380;
 				}
 				background: white;
 				.container {
@@ -135,19 +135,19 @@ body::-webkit-scrollbar {
 							align-items: center;
 							justify-content: center;
 							border-radius: 60px;
-							border: 1px solid #ffffff;
+							border: 1px solid #000;
 							cursor: pointer;
 							svg {
-								color: #ffffff;
+								color: #000;
 								margin-right: 10px;
 							}
 							span {
-								font-family: $font;
+								font-family: Poppins;
 								font-size: 14px;
 								font-style: normal;
-								font-weight: 600;
+								font-weight: 500;
 								line-height: normal;
-								color: #ffffff;
+								color: #000;
 							}
 						}
 						.login-user {
@@ -192,11 +192,90 @@ body::-webkit-scrollbar {
 		height: 860px;
 		background-image: url('/img/banner/main_page.jpg');
 		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: calc(50% - 20px) center;
+
 		.container {
 			position: relative;
-			margin-top: 690px;
-			flex-direction: column;
+			width: 643px;
+			height: 443px;
+			flex-shrink: 0;
+			display: flex;
+			justify-content: flex-end;
+			border-radius: 10px;
+			background-color: #fff3e3;
+			margin-top: 280px;
+			margin-right: 60px;
+		}
+		.arrivalText {
+			color: var(--Font-Color, #333);
+			font-family: Poppins;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: normal;
+			letter-spacing: 3px;
+			margin-left: 40px;
+			margin-top: 60px;
+		}
+
+		.heroTitle {
+			width: 559px;
+			height: 127px;
+			flex-shrink: 0;
+			color: var(--Primary, #b88e2f);
+			font-family: Poppins;
+			font-size: 52px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 65px; /* 125% */
+			margin-left: 40px;
+		}
+
+		.description {
+			width: 546px;
+			height: 52px;
+			flex-shrink: 0;
+			color: var(--Font-Color, #333);
+			font-family: Poppins;
+			font-size: 18px;
+			font-style: normal;
+			font-weight: 500;
+			line-height: 24px; /* 133.333% */
+			margin-left: 40px;
+			margin-top: 17px;
+		}
+
+		.buyButton {
+			display: flex;
+			height: 74px;
+			width: 222px;
 			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			background: #b88e2f;
+			cursor: pointer;
+			&:hover {
+				background-color: #a6782d;
+			}
+			margin-top: 45px;
+			margin-left: 40px;
+			margin-bottom: 40px;
+		}
+		.buyNow {
+			color: #fff;
+			font-family: Poppins;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: normal;
+			text-transform: uppercase;
+			background-color: transparent;
+			border-color: transparent;
+			cursor: pointer;
+			&:hover {
+				background-color: #a6782d;
+			}
 		}
 	}
 

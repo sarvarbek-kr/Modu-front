@@ -11,6 +11,7 @@ import Chat from '../Chat';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import Link from 'next/link';
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
@@ -60,7 +61,21 @@ const withLayoutMain = (Component: any) => {
 						</Stack>
 
 						<Stack className={'header-main'}>
-							<Stack className={'container'}></Stack>
+							<Stack className={'container'}>
+								<p className={'arrivalText'}>New Arrival</p>
+								<h2 className={'heroTitle'}>
+									Discover Our <br /> New Collection
+								</h2>
+								<p className={'description'}>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+									mattis.
+								</p>
+								<Link href={'/property'}>
+									<div className={'buyButton'}>
+										<button className={'buyNow'}>BUY NOW</button>
+									</div>
+								</Link>
+							</Stack>
 						</Stack>
 
 						<Stack id={'main'}>
