@@ -25,7 +25,7 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const [total, setTotal] = useState<number>(0);
-	const category: any = router.query?.category ?? 'properties';
+	const category: any = router.query?.category ?? 'furnitures';
 	const [followInquiry, setFollowInquiry] = useState<FollowInquiry>(initialInput);
 	const [memberFollowings, setMemberFollowings] = useState<Following[]>([]);
 	const user = useReactiveVar(userVar);
@@ -111,16 +111,17 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 									</Box>
 									<Box className={'info-box'} component={'div'}>
 										{follower?.meLiked && follower?.meLiked[0]?.myFavorite ? (
-											<FavoriteIcon 
-											color="primary"
-											onClick={() =>
-												likeMemberHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)
-											} />
+											<FavoriteIcon
+												color="primary"
+												onClick={() =>
+													likeMemberHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)
+												}
+											/>
 										) : (
-											<FavoriteBorderIcon 
-											onClick={() =>
-												likeMemberHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)
-											}
+											<FavoriteBorderIcon
+												onClick={() =>
+													likeMemberHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)
+												}
 											/>
 										)}
 										<span>({follower?.followingData?.memberLikes})</span>
@@ -134,8 +135,9 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 												<Button
 													variant="outlined"
 													sx={{ background: '#f78181', ':hover': { background: '#f06363' } }}
-													onClick={() => 
-														unsubscribeHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)}
+													onClick={() =>
+														unsubscribeHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)
+													}
 												>
 													Unfollow
 												</Button>
@@ -144,8 +146,9 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 											<Button
 												variant="contained"
 												sx={{ background: '#60eb60d4', ':hover': { background: '#60eb60d4' } }}
-												onClick={() => 
-													subscribeHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)}
+												onClick={() =>
+													subscribeHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)
+												}
 											>
 												Follow
 											</Button>

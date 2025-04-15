@@ -2,41 +2,41 @@ import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { Pagination, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { PropertyCard } from './PropertyCard';
+import { FurnitureCard } from './FurnitureCard';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
-import { Property } from '../../types/property/property';
-import { AgentPropertiesInquiry } from '../../types/property/property.input';
+import { Furniture } from '../../types/furniture/furniture';
+import { AgentFurnituresInquiry } from '../../types/furniture/furniture.input';
 import { T } from '../../types/common';
-import { PropertyStatus } from '../../enums/property.enum';
+import { FurnitureStatus } from '../../enums/furniture.enum';
 import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
-import { UPDATE_PROPERTY } from '../../../apollo/user/mutation';
-import { GET_AGENT_PROPERTIES } from '../../../apollo/user/query';
+import { UPDATE_FURNITURE } from '../../../apollo/user/mutation';
+import { GET_AGENT_FURNITURES } from '../../../apollo/user/query';
 import { sweetConfirmAlert, sweetErrorHandling } from '../../sweetAlert';
 
-const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
+const MyFurnitures: NextPage = ({ initialInput, ...props }: any) => {
 	const device = useDeviceDetect();
-	const [searchFilter, setSearchFilter] = useState<AgentPropertiesInquiry>(initialInput);
-	const [agentProperties, setAgentProperties] = useState<Property[]>([]);
+	const [searchFilter, setSearchFilter] = useState<AgentFurnituresInquiry>(initialInput);
+	const [agentFurnitures, setAgentFurnitures] = useState<Furniture[]>([]);
 	const [total, setTotal] = useState<number>(0);
 	const user = useReactiveVar(userVar);
 	const router = useRouter();
 
 	/** APOLLO REQUESTS **/
-	const [updateProperty] = useMutation(UPDATE_PROPERTY);
+	const [updateFurniture] = useMutation(UPDATE_FURNITURE);
 
 	const {
-		loading: getAgentPropertiesLoading,
-		data: getAgentPropertiesData,
-		error: getAgentPropertiesError,
-		refetch: getAgentPropertiesRefetch,
-	} = useQuery(GET_AGENT_PROPERTIES, {
+		loading: getAgentFurnituresLoading,
+		data: getAgentFurnituresData,
+		error: getAgentFurnituresError,
+		refetch: getAgentFurnituresRefetch,
+	} = useQuery(GET_AGENT_FURNITURES, {
 		fetchPolicy: 'network-only',
 		variables: { input: searchFilter },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setAgentProperties(data?.getAgentProperties?.list);
-			setTotal(data?.getAgentProperties?.metaCounter[0]?.total ?? 0);
+			setAgentFurnitures(data?.getAgentFurnitures?.list);
+			setTotal(data?.getAgentFurnitures?.metaCounter[0]?.total ?? 0);
 		},
 	});
 
@@ -45,41 +45,41 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 		setSearchFilter({ ...searchFilter, page: value });
 	};
 
-	const changeStatusHandler = (value: PropertyStatus) => {
-		setSearchFilter({ ...searchFilter, search: { propertyStatus: value } });
+	const changeStatusHandler = (value: FurnitureStatus) => {
+		setSearchFilter({ ...searchFilter, search: { furnitureStatus: value } });
 	};
 
-	const deletePropertyHandler = async (id: string) => {
+	const deleteFurnitureHandler = async (id: string) => {
 		try {
-			if (await sweetConfirmAlert('Are you sure to delete this property?')) {
-				await updateProperty({
+			if (await sweetConfirmAlert('Are you sure to delete this furniture?')) {
+				await updateFurniture({
 					variables: {
 						input: {
 							_id: id,
-							propertyStatus: 'DELETE',
+							furnitureStatus: 'DELETE',
 						},
 					},
 				});
 
-				await getAgentPropertiesRefetch({ input: searchFilter });
+				await getAgentFurnituresRefetch({ input: searchFilter });
 			}
 		} catch (err: any) {
 			await sweetErrorHandling(err);
 		}
 	};
 
-	const updatePropertyHandler = async (status: string, id: string) => {
+	const updateFurnitureHandler = async (status: string, id: string) => {
 		try {
 			if (await sweetConfirmAlert(`Are you sure to change the ${status} status?`)) {
-				await updateProperty({
+				await updateFurniture({
 					variables: {
 						input: {
 							_id: id,
-							propertyStatus: status,
+							furnitureStatus: status,
 						},
 					},
 				});
-				await getAgentPropertiesRefetch({ input: searchFilter });
+				await getAgentFurnituresRefetch({ input: searchFilter });
 			}
 		} catch (err: any) {
 			await sweetErrorHandling(err);
@@ -91,27 +91,27 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 	}
 
 	if (device === 'mobile') {
-		return <div>MODU PROPERTIES MOBILE</div>;
+		return <div>MODU FURNITURES MOBILE</div>;
 	} else {
 		return (
-			<div id="my-property-page">
+			<div id="my-furniture-page">
 				<Stack className="main-title-box">
 					<Stack className="right-box">
-						<Typography className="main-title">My Properties</Typography>
+						<Typography className="main-title">My Furnitures</Typography>
 						<Typography className="sub-title">We are glad to see you again!</Typography>
 					</Stack>
 				</Stack>
-				<Stack className="property-list-box">
+				<Stack className="furniture-list-box">
 					<Stack className="tab-name-box">
 						<Typography
-							onClick={() => changeStatusHandler(PropertyStatus.ACTIVE)}
-							className={searchFilter.search.propertyStatus === 'ACTIVE' ? 'active-tab-name' : 'tab-name'}
+							onClick={() => changeStatusHandler(FurnitureStatus.ACTIVE)}
+							className={searchFilter.search.furnitureStatus === 'ACTIVE' ? 'active-tab-name' : 'tab-name'}
 						>
 							On Sale
 						</Typography>
 						<Typography
-							onClick={() => changeStatusHandler(PropertyStatus.SOLD)}
-							className={searchFilter.search.propertyStatus === 'SOLD' ? 'active-tab-name' : 'tab-name'}
+							onClick={() => changeStatusHandler(FurnitureStatus.SOLD)}
+							className={searchFilter.search.furnitureStatus === 'SOLD' ? 'active-tab-name' : 'tab-name'}
 						>
 							On Sold
 						</Typography>
@@ -122,27 +122,29 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 							<Typography className="title-text">Date Published</Typography>
 							<Typography className="title-text">Status</Typography>
 							<Typography className="title-text">View</Typography>
-							{searchFilter.search.propertyStatus === 'ACTIVE' && <Typography className="title-text">Action</Typography>}
+							{searchFilter.search.furnitureStatus === 'ACTIVE' && (
+								<Typography className="title-text">Action</Typography>
+							)}
 						</Stack>
 
-						{agentProperties?.length === 0 ? (
+						{agentFurnitures?.length === 0 ? (
 							<div className={'no-data'}>
 								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>No Property found!</p>
+								<p>No Furniture found!</p>
 							</div>
 						) : (
-							agentProperties.map((property: Property) => {
+							agentFurnitures.map((furniture: Furniture) => {
 								return (
-									<PropertyCard
-										property={property}
-										deletePropertyHandler={deletePropertyHandler}
-										updatePropertyHandler={updatePropertyHandler}
+									<FurnitureCard
+										furniture={furniture}
+										deleteFurnitureHandler={deleteFurnitureHandler}
+										updateFurnitureHandler={updateFurnitureHandler}
 									/>
 								);
 							})
 						)}
 
-						{agentProperties.length !== 0 && (
+						{agentFurnitures.length !== 0 && (
 							<Stack className="pagination-config">
 								<Stack className="pagination-box">
 									<Pagination
@@ -154,7 +156,7 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 									/>
 								</Stack>
 								<Stack className="total-result">
-									<Typography>{total} property available</Typography>
+									<Typography>{total} furniture available</Typography>
 								</Stack>
 							</Stack>
 						)}
@@ -165,15 +167,15 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 	}
 };
 
-MyProperties.defaultProps = {
+MyFurnitures.defaultProps = {
 	initialInput: {
 		page: 1,
 		limit: 5,
 		sort: 'createdAt',
 		search: {
-			propertyStatus: 'ACTIVE',
+			furnitureStatus: 'ACTIVE',
 		},
 	},
 };
 
-export default MyProperties;
+export default MyFurnitures;

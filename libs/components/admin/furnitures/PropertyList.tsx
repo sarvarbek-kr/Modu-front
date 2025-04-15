@@ -14,11 +14,11 @@ import {
 } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import { Stack } from '@mui/material';
-import { Property } from '../../../types/property/property';
+import { Furniture } from '../../../types/furniture/furniture';
 import { REACT_APP_API_URL } from '../../../config';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
-import { PropertyStatus } from '../../../enums/property.enum';
+import { FurnitureStatus } from '../../../enums/furniture.enum';
 
 interface Data {
 	id: string;
@@ -86,7 +86,7 @@ const headCells: readonly HeadCell[] = [
 
 interface EnhancedTableProps {
 	numSelected: number;
-	onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+	onRequestSort: (event: React.MouseEvent<unknown>, furniture: keyof Data) => void;
 	onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	order: Order;
 	orderBy: string;
@@ -113,23 +113,23 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 	);
 }
 
-interface PropertyPanelListType {
-	properties: Property[];
+interface FurniturePanelListType {
+	furnitures: Furniture[];
 	anchorEl: any;
 	menuIconClickHandler: any;
 	menuIconCloseHandler: any;
-	updatePropertyHandler: any;
-	removePropertyHandler: any;
+	updateFurnitureHandler: any;
+	removeFurnitureHandler: any;
 }
 
-export const PropertyPanelList = (props: PropertyPanelListType) => {
+export const FurniturePanelList = (props: FurniturePanelListType) => {
 	const {
-		properties,
+		furnitures,
 		anchorEl,
 		menuIconClickHandler,
 		menuIconCloseHandler,
-		updatePropertyHandler,
-		removePropertyHandler,
+		updateFurnitureHandler,
+		removeFurnitureHandler,
 	} = props;
 
 	return (
@@ -139,7 +139,7 @@ export const PropertyPanelList = (props: PropertyPanelListType) => {
 					{/*@ts-ignore*/}
 					<EnhancedTableHead />
 					<TableBody>
-						{properties.length === 0 && (
+						{furnitures.length === 0 && (
 							<TableRow>
 								<TableCell align="center" colSpan={8}>
 									<span className={'no-data'}>data not found!</span>
@@ -147,57 +147,57 @@ export const PropertyPanelList = (props: PropertyPanelListType) => {
 							</TableRow>
 						)}
 
-						{properties.length !== 0 &&
-							properties.map((property: Property, index: number) => {
-								const propertyImage = `${REACT_APP_API_URL}/${property?.propertyImages[0]}`;
+						{furnitures.length !== 0 &&
+							furnitures.map((furniture: Furniture, index: number) => {
+								const furnitureImage = `${REACT_APP_API_URL}/${furniture?.furnitureImages[0]}`;
 
 								return (
-									<TableRow hover key={property?._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-										<TableCell align="left">{property._id}</TableCell>
+									<TableRow hover key={furniture?._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+										<TableCell align="left">{furniture._id}</TableCell>
 										<TableCell align="left" className={'name'}>
-										{property.propertyStatus === PropertyStatus.ACTIVE ?  (
-										    <Stack direction={'row'}>
-												<Link href={`/property/detail?id=${property?._id}`}>
+											{furniture.furnitureStatus === FurnitureStatus.ACTIVE ? (
+												<Stack direction={'row'}>
+													<Link href={`/furniture/detail?id=${furniture?._id}`}>
+														<div>
+															<Avatar alt="Remy Sharp" src={furnitureImage} sx={{ ml: '2px', mr: '10px' }} />
+														</div>
+													</Link>
+													<Link href={`/furniture/detail?id=${furniture?._id}`}>
+														<div>{furniture.furnitureTitle}</div>
+													</Link>
+												</Stack>
+											) : (
+												<Stack direction={'row'}>
 													<div>
-														<Avatar alt="Remy Sharp" src={propertyImage} sx={{ ml: '2px', mr: '10px' }} />
+														<Avatar alt="Remy Sharp" src={furnitureImage} sx={{ ml: '2px', mr: '10px' }} />
 													</div>
-												</Link>
-												<Link href={`/property/detail?id=${property?._id}`}>
-													<div>{property.propertyTitle}</div>
-												</Link>
-											</Stack> 
-											) : ( 
-											<Stack direction={'row'}>
-													<div>
-														<Avatar alt="Remy Sharp" src={propertyImage} sx={{ ml: '2px', mr: '10px' }} />
-													</div>
-													<div style={{ marginTop: '10px' }}>{property.propertyTitle}</div>
-											</Stack> )} 
-											
+													<div style={{ marginTop: '10px' }}>{furniture.furnitureTitle}</div>
+												</Stack>
+											)}
 										</TableCell>
-										<TableCell align="center">{property.propertyPrice}</TableCell>
-										<TableCell align="center">{property.memberData?.memberNick}</TableCell>
-										<TableCell align="center">{property.propertyLocation}</TableCell>
-										<TableCell align="center">{property.propertyType}</TableCell>
+										<TableCell align="center">{furniture.furniturePrice}</TableCell>
+										<TableCell align="center">{furniture.memberData?.memberNick}</TableCell>
+										<TableCell align="center">{furniture.furnitureLocation}</TableCell>
+										<TableCell align="center">{furniture.furnitureType}</TableCell>
 										<TableCell align="center">
-											{property.propertyStatus === PropertyStatus.DELETE && (
+											{furniture.furnitureStatus === FurnitureStatus.DELETE && (
 												<Button
 													variant="outlined"
 													sx={{ p: '3px', border: 'none', ':hover': { border: '1px solid #000000' } }}
-													onClick={() => removePropertyHandler(property._id)}
+													onClick={() => removeFurnitureHandler(furniture._id)}
 												>
 													<DeleteIcon fontSize="small" />
 												</Button>
 											)}
 
-											{property.propertyStatus === PropertyStatus.SOLD && (
-												<Button className={'badge warning'}>{property.propertyStatus}</Button>
+											{furniture.furnitureStatus === FurnitureStatus.SOLD && (
+												<Button className={'badge warning'}>{furniture.furnitureStatus}</Button>
 											)}
 
-											{property.propertyStatus === PropertyStatus.ACTIVE && (
+											{furniture.furnitureStatus === FurnitureStatus.ACTIVE && (
 												<>
 													<Button onClick={(e: any) => menuIconClickHandler(e, index)} className={'badge success'}>
-														{property.propertyStatus}
+														{furniture.furnitureStatus}
 													</Button>
 
 													<Menu
@@ -211,11 +211,13 @@ export const PropertyPanelList = (props: PropertyPanelListType) => {
 														TransitionComponent={Fade}
 														sx={{ p: 1 }}
 													>
-														{Object.values(PropertyStatus)
-															.filter((ele) => ele !== property.propertyStatus)
+														{Object.values(FurnitureStatus)
+															.filter((ele) => ele !== furniture.furnitureStatus)
 															.map((status: string) => (
 																<MenuItem
-																	onClick={() => updatePropertyHandler({ _id: property._id, propertyStatus: status })}
+																	onClick={() =>
+																		updateFurnitureHandler({ _id: furniture._id, furnitureStatus: status })
+																	}
 																	key={status}
 																>
 																	<Typography variant={'subtitle1'} component={'span'}>

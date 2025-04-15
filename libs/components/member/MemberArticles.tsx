@@ -53,7 +53,7 @@ const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
 		try {
 			e.stopPropagation();
 			if (!id) return;
-			if(!user._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
 			await likeTargetBoardArticle({
 				variables: {
@@ -86,12 +86,12 @@ const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
 					)}
 					{memberBoArticles?.map((boardArticle: BoardArticle) => {
 						return (
-						<CommunityCard 
-						boardArticle={boardArticle} 
-						likeArticleHandler={likeArticleHandler}
-						key={boardArticle?._id} 
-						size={'small'} 
-						/> 
+							<CommunityCard
+								boardArticle={boardArticle}
+								likeArticleHandler={likeArticleHandler}
+								key={boardArticle?._id}
+								size={'small'}
+							/>
 						);
 					})}
 				</Stack>
@@ -107,7 +107,7 @@ const MemberArticles: NextPage = ({ initialInput, ...props }: any) => {
 							/>
 						</Stack>
 						<Stack className="total-result">
-							<Typography>{total} property available</Typography>
+							<Typography>{total} furniture available</Typography>
 						</Stack>
 					</Stack>
 				)}

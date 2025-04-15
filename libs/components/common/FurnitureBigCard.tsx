@@ -3,91 +3,91 @@ import { Stack, Box, Divider, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Property } from '../../types/property/property';
-import { REACT_APP_API_URL, topPropertyRank } from '../../config';
+import { Furniture } from '../../types/furniture/furniture';
+import { REACT_APP_API_URL, topFurnitureRank } from '../../config';
 import { formatterStr } from '../../utils';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
-interface PropertyBigCardProps {
-	property: Property;
-	likePropertyHandler?: any;
+interface FurnitureBigCardProps {
+	furniture: Furniture;
+	likeFurnitureHandler?: any;
 }
 
-const PropertyBigCard = (props: PropertyBigCardProps) => {
-	const { property, likePropertyHandler } = props;
+const FurnitureBigCard = (props: FurnitureBigCardProps) => {
+	const { furniture, likeFurnitureHandler } = props;
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const router = useRouter();
 
 	/** HANDLERS **/
-	const goPropertyDetatilPage = (propertyId: string) => {
-		router.push(`/property/detail?id=${propertyId}`);
+	const goFurnitureDetatilPage = (furnitureId: string) => {
+		router.push(`/furniture/detail?id=${furnitureId}`);
 	};
 
 	if (device === 'mobile') {
 		return <div>APARTMEND BIG CARD</div>;
 	} else {
 		return (
-			<Stack className="property-big-card-box" onClick={() => goPropertyDetatilPage(property?._id)}>
+			<Stack className="furniture-big-card-box" onClick={() => goFurnitureDetatilPage(furniture?._id)}>
 				<Box
 					component={'div'}
 					className={'card-img'}
-					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages?.[0]})` }}
+					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${furniture?.furnitureImages?.[0]})` }}
 				>
-					{property && property?.propertyRank >= topPropertyRank && (
+					{furniture && furniture?.furnitureRank >= topFurnitureRank && (
 						<div className={'status'}>
 							<img src="/img/icons/electricity.svg" alt="" />
 							<span>top</span>
 						</div>
 					)}
 
-					<div className={'price'}>${formatterStr(property?.propertyPrice)}</div>
+					<div className={'price'}>${formatterStr(furniture?.furniturePrice)}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property?.propertyTitle}</strong>
-					<p className={'desc'}>{property?.propertyAddress}</p>
+					<strong className={'title'}>{furniture?.furnitureTitle}</strong>
+					<p className={'desc'}>{furniture?.furnitureAddress}</p>
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property?.propertyBeds} bed</span>
+							<span>{furniture?.furnitureBeds} bed</span>
 						</div>
 						<div>
 							<img src="/img/icons/room.svg" alt="" />
-							<span>{property?.propertyRooms} rooms</span>
+							<span>{furniture?.furnitureRooms} rooms</span>
 						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property?.propertySquare} m2</span>
+							<span>{furniture?.furnitureSquare} m2</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
 						<div>
-							{property?.propertyRent ? <p>Rent</p> : <span>Rent</span>}
-							{property?.propertyBarter ? <p>Barter</p> : <span>Barter</span>}
+							{furniture?.furnitureRent ? <p>Rent</p> : <span>Rent</span>}
+							{furniture?.furnitureBarter ? <p>Barter</p> : <span>Barter</span>}
 						</div>
 						<div className="buttons-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />
 							</IconButton>
-							<Typography className="view-cnt">{property?.propertyViews}</Typography>
+							<Typography className="view-cnt">{furniture?.furnitureViews}</Typography>
 							<IconButton
 								color={'default'}
 								onClick={(e) => {
 									e.stopPropagation();
-									likePropertyHandler(user, property?._id);
+									likeFurnitureHandler(user, furniture?._id);
 								}}
 							>
-								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
+								{furniture?.meLiked && furniture?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (
 									<FavoriteIcon />
 								)}
 							</IconButton>
-							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
+							<Typography className="view-cnt">{furniture?.furnitureLikes}</Typography>
 						</div>
 					</div>
 				</Box>
@@ -96,4 +96,4 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 	}
 };
 
-export default PropertyBigCard;
+export default FurnitureBigCard;

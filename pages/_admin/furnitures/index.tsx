@@ -8,65 +8,64 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { TabContext } from '@mui/lab';
 import TablePagination from '@mui/material/TablePagination';
-import { PropertyPanelList } from '../../../libs/components/admin/properties/PropertyList';
-import { AllPropertiesInquiry } from '../../../libs/types/property/property.input';
-import { Property } from '../../../libs/types/property/property';
-import { PropertyLocation, PropertyStatus } from '../../../libs/enums/property.enum';
+import { FurniturePanelList } from '../../../libs/components/admin/furnitures/FurnitureList';
+import { AllFurnituresInquiry } from '../../../libs/types/furniture/furniture.input';
+import { Furniture } from '../../../libs/types/furniture/furniture';
+import { FurnitureLocation, FurnitureStatus } from '../../../libs/enums/furniture.enum';
 import { sweetConfirmAlert, sweetErrorHandling } from '../../../libs/sweetAlert';
-import { PropertyUpdate } from '../../../libs/types/property/property.update';
+import { FurnitureUpdate } from '../../../libs/types/furniture/furniture.update';
 import { useMutation, useQuery } from '@apollo/client';
-import { REMOVE_PROPERTY_BY_ADMIN, UPDATE_PROPERTY_BY_ADMIN } from '../../../apollo/admin/mutation';
-import { GET_ALL_PROPERTIES_BY_ADMIN } from '../../../apollo/admin/query';
+import { REMOVE_FURNITURE_BY_ADMIN, UPDATE_FURNITURE_BY_ADMIN } from '../../../apollo/admin/mutation';
+import { GET_ALL_FURNITURES_BY_ADMIN } from '../../../apollo/admin/query';
 import { T } from '../../../libs/types/common';
 
-
-const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
+const AdminFurnitures: NextPage = ({ initialInquiry, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
-	const [propertiesInquiry, setPropertiesInquiry] = useState<AllPropertiesInquiry>(initialInquiry);
-	const [properties, setProperties] = useState<Property[]>([]);
-	const [propertiesTotal, setPropertiesTotal] = useState<number>(0);
+	const [furnituresInquiry, setFurnituresInquiry] = useState<AllFurnituresInquiry>(initialInquiry);
+	const [furnitures, setFurnitures] = useState<Furniture[]>([]);
+	const [furnituresTotal, setFurnituresTotal] = useState<number>(0);
 	const [value, setValue] = useState(
-		propertiesInquiry?.search?.propertyStatus ? propertiesInquiry?.search?.propertyStatus : 'ALL',
+		furnituresInquiry?.search?.furnitureStatus ? furnituresInquiry?.search?.furnitureStatus : 'ALL',
 	);
 	const [searchType, setSearchType] = useState('ALL');
 
 	/** APOLLO REQUESTS **/
 
-	const [updatePropertyByAdmin] = useMutation(UPDATE_PROPERTY_BY_ADMIN);
-	const [removePropertyByAdmin] = useMutation(REMOVE_PROPERTY_BY_ADMIN);
+	const [updateFurnitureByAdmin] = useMutation(UPDATE_FURNITURE_BY_ADMIN);
+	const [removeFurnitureByAdmin] = useMutation(REMOVE_FURNITURE_BY_ADMIN);
 
-const {
-  loading: getAllPropertiesByAdminLoading,
-  data: getAllPropertiesByAdminData,
-  error: getAllPropertiesByAdminError,
-  refetch: getAllPropertiesByAdminRefetch,
-} = useQuery(GET_ALL_PROPERTIES_BY_ADMIN, {
-  fetchPolicy: 'network-only',
-  variables: { input: propertiesInquiry },
-  notifyOnNetworkStatusChange: true,
-  onCompleted: (data: T) => {
-    setProperties(data?.getAllPropertiesByAdmin?.list);
-    setPropertiesTotal(data?.getAllPropertiesByAdmin?.metaCounter[0]?.total ?? 0);
-  },
-});
+	const {
+		loading: getAllFurnituresByAdminLoading,
+		data: getAllFurnituresByAdminData,
+		error: getAllFurnituresByAdminError,
+		refetch: getAllFurnituresByAdminRefetch,
+	} = useQuery(GET_ALL_FURNITURES_BY_ADMIN, {
+		fetchPolicy: 'network-only',
+		variables: { input: furnituresInquiry },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setFurnitures(data?.getAllFurnituresByAdmin?.list);
+			setFurnituresTotal(data?.getAllFurnituresByAdmin?.metaCounter[0]?.total ?? 0);
+		},
+	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		getAllPropertiesByAdminRefetch({ input: propertiesInquiry }).then();
-	}, [propertiesInquiry]);
+		getAllFurnituresByAdminRefetch({ input: furnituresInquiry }).then();
+	}, [furnituresInquiry]);
 
 	/** HANDLERS **/
 	const changePageHandler = async (event: unknown, newPage: number) => {
-		propertiesInquiry.page = newPage + 1;
-		await getAllPropertiesByAdminRefetch({ input: propertiesInquiry })
-		setPropertiesInquiry({ ...propertiesInquiry });
+		furnituresInquiry.page = newPage + 1;
+		await getAllFurnituresByAdminRefetch({ input: furnituresInquiry });
+		setFurnituresInquiry({ ...furnituresInquiry });
 	};
 
 	const changeRowsPerPageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
-		propertiesInquiry.limit = parseInt(event.target.value, 10);
-		propertiesInquiry.page = 1;
-		await getAllPropertiesByAdminRefetch({ input: propertiesInquiry })
-		setPropertiesInquiry({ ...propertiesInquiry });
+		furnituresInquiry.limit = parseInt(event.target.value, 10);
+		furnituresInquiry.page = 1;
+		await getAllFurnituresByAdminRefetch({ input: furnituresInquiry });
+		setFurnituresInquiry({ ...furnituresInquiry });
 	};
 
 	const menuIconClickHandler = (e: any, index: number) => {
@@ -82,34 +81,34 @@ const {
 	const tabChangeHandler = async (event: any, newValue: string) => {
 		setValue(newValue);
 
-		setPropertiesInquiry({ ...propertiesInquiry, page: 1, sort: 'createdAt' });
+		setFurnituresInquiry({ ...furnituresInquiry, page: 1, sort: 'createdAt' });
 
 		switch (newValue) {
 			case 'ACTIVE':
-				setPropertiesInquiry({ ...propertiesInquiry, search: { propertyStatus: PropertyStatus.ACTIVE } });
+				setFurnituresInquiry({ ...furnituresInquiry, search: { furnitureStatus: FurnitureStatus.ACTIVE } });
 				break;
 			case 'SOLD':
-				setPropertiesInquiry({ ...propertiesInquiry, search: { propertyStatus: PropertyStatus.SOLD } });
+				setFurnituresInquiry({ ...furnituresInquiry, search: { furnitureStatus: FurnitureStatus.SOLD } });
 				break;
 			case 'DELETE':
-				setPropertiesInquiry({ ...propertiesInquiry, search: { propertyStatus: PropertyStatus.DELETE } });
+				setFurnituresInquiry({ ...furnituresInquiry, search: { furnitureStatus: FurnitureStatus.DELETE } });
 				break;
 			default:
-				delete propertiesInquiry?.search?.propertyStatus;
-				setPropertiesInquiry({ ...propertiesInquiry });
+				delete furnituresInquiry?.search?.furnitureStatus;
+				setFurnituresInquiry({ ...furnituresInquiry });
 				break;
 		}
 	};
 
-	const removePropertyHandler = async (id: string) => {
+	const removeFurnitureHandler = async (id: string) => {
 		try {
 			if (await sweetConfirmAlert('Are you sure to remove?')) {
-				await removePropertyByAdmin({
+				await removeFurnitureByAdmin({
 					variables: {
 						input: id,
 					},
 				});
-				await getAllPropertiesByAdminRefetch({ input: propertiesInquiry });
+				await getAllFurnituresByAdminRefetch({ input: furnituresInquiry });
 			}
 			menuIconCloseHandler();
 		} catch (err: any) {
@@ -122,34 +121,34 @@ const {
 			setSearchType(newValue);
 
 			if (newValue !== 'ALL') {
-				setPropertiesInquiry({
-					...propertiesInquiry,
+				setFurnituresInquiry({
+					...furnituresInquiry,
 					page: 1,
 					sort: 'createdAt',
 					search: {
-						...propertiesInquiry.search,
-						propertyLocationList: [newValue as PropertyLocation],
+						...furnituresInquiry.search,
+						furnitureLocationList: [newValue as FurnitureLocation],
 					},
 				});
 			} else {
-				delete propertiesInquiry?.search?.propertyLocationList;
-				setPropertiesInquiry({ ...propertiesInquiry });
+				delete furnituresInquiry?.search?.furnitureLocationList;
+				setFurnituresInquiry({ ...furnituresInquiry });
 			}
 		} catch (err: any) {
 			console.log('searchTypeHandler: ', err.message);
 		}
 	};
 
-	const updatePropertyHandler = async (updateData: PropertyUpdate) => {
+	const updateFurnitureHandler = async (updateData: FurnitureUpdate) => {
 		try {
 			console.log('+updateData: ', updateData);
-			await updatePropertyByAdmin({
+			await updateFurnitureByAdmin({
 				variables: {
 					input: updateData,
 				},
 			});
 			menuIconCloseHandler();
-			await getAllPropertiesByAdminRefetch({ input: propertiesInquiry });
+			await getAllFurnituresByAdminRefetch({ input: furnituresInquiry });
 		} catch (err: any) {
 			menuIconCloseHandler();
 			sweetErrorHandling(err).then();
@@ -159,7 +158,7 @@ const {
 	return (
 		<Box component={'div'} className={'content'}>
 			<Typography variant={'h2'} className={'tit'} sx={{ mb: '24px' }}>
-				Property List
+				Furniture List
 			</Typography>
 			<Box component={'div'} className={'table-wrap'}>
 				<Box component={'div'} sx={{ width: '100%', typography: 'body1' }}>
@@ -201,7 +200,7 @@ const {
 									<MenuItem value={'ALL'} onClick={() => searchTypeHandler('ALL')}>
 										ALL
 									</MenuItem>
-									{Object.values(PropertyLocation).map((location: string) => (
+									{Object.values(FurnitureLocation).map((location: string) => (
 										<MenuItem value={location} onClick={() => searchTypeHandler(location)} key={location}>
 											{location}
 										</MenuItem>
@@ -210,21 +209,21 @@ const {
 							</Stack>
 							<Divider />
 						</Box>
-						<PropertyPanelList
-							properties={properties}
+						<FurniturePanelList
+							furnitures={furnitures}
 							anchorEl={anchorEl}
 							menuIconClickHandler={menuIconClickHandler}
 							menuIconCloseHandler={menuIconCloseHandler}
-							updatePropertyHandler={updatePropertyHandler}
-							removePropertyHandler={removePropertyHandler}
+							updateFurnitureHandler={updateFurnitureHandler}
+							removeFurnitureHandler={removeFurnitureHandler}
 						/>
 
 						<TablePagination
 							rowsPerPageOptions={[10, 20, 40, 60]}
 							component="div"
-							count={propertiesTotal}
-							rowsPerPage={propertiesInquiry?.limit}
-							page={propertiesInquiry?.page - 1}
+							count={furnituresTotal}
+							rowsPerPage={furnituresInquiry?.limit}
+							page={furnituresInquiry?.page - 1}
 							onPageChange={changePageHandler}
 							onRowsPerPageChange={changeRowsPerPageHandler}
 						/>
@@ -235,7 +234,7 @@ const {
 	);
 };
 
-AdminProperties.defaultProps = {
+AdminFurnitures.defaultProps = {
 	initialInquiry: {
 		page: 1,
 		limit: 10,
@@ -245,4 +244,4 @@ AdminProperties.defaultProps = {
 	},
 };
 
-export default withAdminLayout(AdminProperties);
+export default withAdminLayout(AdminFurnitures);

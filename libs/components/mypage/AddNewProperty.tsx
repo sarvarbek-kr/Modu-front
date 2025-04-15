@@ -2,60 +2,59 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { PropertyLocation, PropertyType } from '../../enums/property.enum';
-import { REACT_APP_API_URL, propertySquare } from '../../config';
-import { PropertyInput } from '../../types/property/property.input';
+import { FurnitureLocation, FurnitureType } from '../../enums/furniture.enum';
+import { REACT_APP_API_URL, furnitureSquare } from '../../config';
+import { FurnitureInput } from '../../types/furniture/furniture.input';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
-import { CREATE_PROPERTY, UPDATE_PROPERTY } from '../../../apollo/user/mutation';
-import { GET_PROPERTY } from '../../../apollo/user/query';
+import { CREATE_FURNITURE, UPDATE_FURNITURE } from '../../../apollo/user/mutation';
+import { GET_FURNITURE } from '../../../apollo/user/query';
 
-const AddProperty = ({ initialValues, ...props }: any) => {
+const AddFurniture = ({ initialValues, ...props }: any) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const inputRef = useRef<any>(null);
-	const [insertPropertyData, setInsertPropertyData] = useState<PropertyInput>(initialValues);
-	const [propertyType, setPropertyType] = useState<PropertyType[]>(Object.values(PropertyType));
-	const [propertyLocation, setPropertyLocation] = useState<PropertyLocation[]>(Object.values(PropertyLocation));
+	const [insertFurnitureData, setInsertFurnitureData] = useState<FurnitureInput>(initialValues);
+	const [furnitureType, setFurnitureType] = useState<FurnitureType[]>(Object.values(FurnitureType));
+	const [furnitureLocation, setFurnitureLocation] = useState<FurnitureLocation[]>(Object.values(FurnitureLocation));
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 
 	/** APOLLO REQUESTS **/
-	const [createProperty] = useMutation(CREATE_PROPERTY);
-	const [updateProperty] = useMutation(UPDATE_PROPERTY);
+	const [createFurniture] = useMutation(CREATE_FURNITURE);
+	const [updateFurniture] = useMutation(UPDATE_FURNITURE);
 
 	const {
-		loading: getPropertyLoading,
-		data: getPropertyData,
-		error: getPropertyError,
-		refetch: getPropertyRefetch,
-	} = useQuery(GET_PROPERTY, {
+		loading: getFurnitureLoading,
+		data: getFurnitureData,
+		error: getFurnitureError,
+		refetch: getFurnitureRefetch,
+	} = useQuery(GET_FURNITURE, {
 		fetchPolicy: 'network-only',
-		variables: { input: router.query.propertyId,
-		},
+		variables: { input: router.query.furnitureId },
 	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		setInsertPropertyData({
-			...insertPropertyData,
-			propertyTitle: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyTitle : '',
-			propertyPrice: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyPrice : 0,
-			propertyType: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyType : '',
-			propertyLocation: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyLocation : '',
-			propertyAddress: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyAddress : '',
-			propertyBarter: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyBarter : false,
-			propertyRent: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyRent : false,
-			propertyRooms: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyRooms : 0,
-			propertyBeds: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyBeds : 0,
-			propertySquare: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertySquare : 0,
-			propertyDesc: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyDesc : '',
-			propertyImages: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyImages : [],
+		setInsertFurnitureData({
+			...insertFurnitureData,
+			furnitureTitle: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureTitle : '',
+			furniturePrice: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furniturePrice : 0,
+			furnitureType: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureType : '',
+			furnitureLocation: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureLocation : '',
+			furnitureAddress: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureAddress : '',
+			furnitureBarter: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureBarter : false,
+			furnitureRent: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureRent : false,
+			furnitureRooms: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureRooms : 0,
+			furnitureBeds: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureBeds : 0,
+			furnitureSquare: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureSquare : 0,
+			furnitureDesc: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureDesc : '',
+			furnitureImages: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureImages : [],
 		});
-	}, [getPropertyLoading, getPropertyData]);
+	}, [getFurnitureLoading, getFurnitureData]);
 
 	/** HANDLERS **/
 	async function uploadImages() {
@@ -74,7 +73,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 				  }`,
 					variables: {
 						files: [null, null, null, null, null],
-						target: 'property',
+						target: 'furniture',
 					},
 				}),
 			);
@@ -103,7 +102,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 			const responseImages = response.data.data.imagesUploader;
 
 			console.log('+responseImages: ', responseImages);
-			setInsertPropertyData({ ...insertPropertyData, propertyImages: responseImages });
+			setInsertFurnitureData({ ...insertFurnitureData, furnitureImages: responseImages });
 		} catch (err: any) {
 			console.log('err: ', err.message);
 			await sweetMixinErrorAlert(err.message);
@@ -112,79 +111,78 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 
 	const doDisabledCheck = () => {
 		if (
-			insertPropertyData.propertyTitle === '' ||
-			insertPropertyData.propertyPrice === 0 || // @ts-ignore
-			insertPropertyData.propertyType === '' || // @ts-ignore
-			insertPropertyData.propertyLocation === '' || // @ts-ignore
-			insertPropertyData.propertyAddress === '' || // @ts-ignore
-			insertPropertyData.propertyBarter === '' || // @ts-ignore
-			insertPropertyData.propertyRent === '' ||
-			insertPropertyData.propertyRooms === 0 ||
-			insertPropertyData.propertyBeds === 0 ||
-			insertPropertyData.propertySquare === 0 ||
-			insertPropertyData.propertyDesc === '' ||
-			insertPropertyData.propertyImages.length === 0
+			insertFurnitureData.furnitureTitle === '' ||
+			insertFurnitureData.furniturePrice === 0 || // @ts-ignore
+			insertFurnitureData.furnitureType === '' || // @ts-ignore
+			insertFurnitureData.furnitureLocation === '' || // @ts-ignore
+			insertFurnitureData.furnitureAddress === '' || // @ts-ignore
+			insertFurnitureData.furnitureBarter === '' || // @ts-ignore
+			insertFurnitureData.furnitureRent === '' ||
+			insertFurnitureData.furnitureRooms === 0 ||
+			insertFurnitureData.furnitureBeds === 0 ||
+			insertFurnitureData.furnitureSquare === 0 ||
+			insertFurnitureData.furnitureDesc === '' ||
+			insertFurnitureData.furnitureImages.length === 0
 		) {
 			return true;
 		}
 	};
 
-
-	const insertPropertyHandler = useCallback(async () => {
+	const insertFurnitureHandler = useCallback(async () => {
 		try {
-			const result = await createProperty({
+			const result = await createFurniture({
 				variables: {
-					input: insertPropertyData,
+					input: insertFurnitureData,
 				},
 			});
 
-			await sweetMixinSuccessAlert('This property has been created successfully.');
+			await sweetMixinSuccessAlert('This furniture has been created successfully.');
 			await router.push({
 				pathname: '/mypage',
 				query: {
-					category: 'myProperties',
+					category: 'myFurnitures',
 				},
 			});
 		} catch (err: any) {
 			sweetErrorHandling(err).then();
 		}
-	}, [insertPropertyData]);
+	}, [insertFurnitureData]);
 
-	const updatePropertyHandler = useCallback(async () => {
+	const updateFurnitureHandler = useCallback(async () => {
 		try {
 			// @ts-ignore
-			insertPropertyData._id = getPropertyData?.getProperty?._id;
-			const result = await updateProperty({
+			insertFurnitureData._id = getFurnitureData?.getFurniture?._id;
+			const result = await updateFurniture({
 				variables: {
-					input: insertPropertyData,
+					input: insertFurnitureData,
 				},
 			});
 
-			await sweetMixinSuccessAlert('This property has been updated successfully.');
+			await sweetMixinSuccessAlert('This furniture has been updated successfully.');
 			await router.push({
 				pathname: '/mypage',
 				query: {
-					category: 'myProperties',
+					category: 'myFurnitures',
 				},
 			});
 		} catch (err: any) {
 			sweetErrorHandling(err).then();
 		}
-	}, [insertPropertyData]);	
+	}, [insertFurnitureData]);
 
 	if (user?.memberType !== 'AGENT') {
 		router.back();
 	}
 
-	console.log('+insertPropertyData', insertPropertyData);
+	console.log('+insertFurnitureData', insertFurnitureData);
 
 	if (device === 'mobile') {
-		return <div>ADD NEW PROPERTY MOBILE PAGE</div>;
+		return <div>ADD NEW FURNITURE MOBILE PAGE</div>;
 	} else {
 		return (
-			<div id="add-property-page">
+			<div id="add-furniture-page">
 				<Stack className="main-title-box">
-					<Typography className="main-title">Add New Property</Typography>
+					<Typography className="main-title">Add New Furniture</Typography>
 					<Typography className="sub-title">We are glad to see you again!</Typography>
 				</Stack>
 
@@ -197,9 +195,9 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									type="text"
 									className="description-input"
 									placeholder={'Title'}
-									value={insertPropertyData.propertyTitle}
+									value={insertFurnitureData.furnitureTitle}
 									onChange={({ target: { value } }) =>
-										setInsertPropertyData({ ...insertPropertyData, propertyTitle: value })
+										setInsertFurnitureData({ ...insertFurnitureData, furnitureTitle: value })
 									}
 								/>
 							</Stack>
@@ -211,34 +209,34 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										type="text"
 										className="description-input"
 										placeholder={'Price'}
-										value={insertPropertyData.propertyPrice}
+										value={insertFurnitureData.furniturePrice}
 										onChange={({ target: { value } }) => {
-											setInsertPropertyData({
-											 ...insertPropertyData,
-											 propertyPrice: value === '' ? 0 : parseInt(value, 10), // Bo'sh qiymat uchun 0 saqlanadi
+											setInsertFurnitureData({
+												...insertFurnitureData,
+												furniturePrice: value === '' ? 0 : parseInt(value, 10), // Bo'sh qiymat uchun 0 saqlanadi
 											});
-										   }}
+										}}
 									/>
 								</Stack>
 								<Stack className="price-year-after-price">
 									<Typography className="title">Select Type</Typography>
 									<select
 										className={'select-description'}
-										defaultValue={insertPropertyData.propertyType || 'select'}
-										value={insertPropertyData.propertyType || 'select'}
+										defaultValue={insertFurnitureData.furnitureType || 'select'}
+										value={insertFurnitureData.furnitureType || 'select'}
 										onChange={({ target: { value } }) =>
 											// @ts-ignore
-											setInsertPropertyData({ ...insertPropertyData, propertyType: value })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureType: value })
 										}
 									>
-											<option disabled={true} value={'select'}>
-												Select
+										<option disabled={true} value={'select'}>
+											Select
+										</option>
+										{furnitureType.map((type: any) => (
+											<option value={`${type}`} key={type}>
+												{type}
 											</option>
-											{propertyType.map((type: any) => (
-												<option value={`${type}`} key={type}>
-													{type}
-												</option>
-											))}
+										))}
 									</select>
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
@@ -250,21 +248,21 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<Typography className="title">Select Location</Typography>
 									<select
 										className={'select-description'}
-										defaultValue={insertPropertyData.propertyLocation || 'select'}
-										value={insertPropertyData.propertyLocation || 'select'}
+										defaultValue={insertFurnitureData.furnitureLocation || 'select'}
+										value={insertFurnitureData.furnitureLocation || 'select'}
 										onChange={({ target: { value } }) =>
 											// @ts-ignore
-											setInsertPropertyData({ ...insertPropertyData, propertyLocation: value })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureLocation: value })
 										}
 									>
-											<option disabled={true} value={'select'}>
-												Select
+										<option disabled={true} value={'select'}>
+											Select
+										</option>
+										{furnitureLocation.map((location: any) => (
+											<option value={`${location}`} key={location}>
+												{location}
 											</option>
-											{propertyLocation.map((location: any) => (
-												<option value={`${location}`} key={location}>
-													{location}
-												</option>
-											))}
+										))}
 									</select>
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
@@ -275,9 +273,9 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										type="text"
 										className="description-input"
 										placeholder={'Address'}
-										value={insertPropertyData.propertyAddress}
+										value={insertFurnitureData.furnitureAddress}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyAddress: value })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureAddress: value })
 										}
 									/>
 								</Stack>
@@ -288,10 +286,10 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<Typography className="title">Barter</Typography>
 									<select
 										className={'select-description'}
-										value={insertPropertyData.propertyBarter ? 'yes' : 'no'}
-										defaultValue={insertPropertyData.propertyBarter ? 'yes' : 'no'}
+										value={insertFurnitureData.furnitureBarter ? 'yes' : 'no'}
+										defaultValue={insertFurnitureData.furnitureBarter ? 'yes' : 'no'}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyBarter: value === 'yes' })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureBarter: value === 'yes' })
 										}
 									>
 										<option disabled={true} selected={true}>
@@ -307,10 +305,10 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<Typography className="title">Rent</Typography>
 									<select
 										className={'select-description'}
-										value={insertPropertyData.propertyRent ? 'yes' : 'no'}
-										defaultValue={insertPropertyData.propertyRent ? 'yes' : 'no'}
+										value={insertFurnitureData.furnitureRent ? 'yes' : 'no'}
+										defaultValue={insertFurnitureData.furnitureRent ? 'yes' : 'no'}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyRent: value === 'yes' })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureRent: value === 'yes' })
 										}
 									>
 										<option disabled={true} selected={true}>
@@ -329,17 +327,19 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<Typography className="title">Rooms</Typography>
 									<select
 										className={'select-description'}
-										value={insertPropertyData.propertyRooms || 'select'}
-										defaultValue={insertPropertyData.propertyRooms || 'select'}
+										value={insertFurnitureData.furnitureRooms || 'select'}
+										defaultValue={insertFurnitureData.furnitureRooms || 'select'}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyRooms: parseInt(value) })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureRooms: parseInt(value) })
 										}
 									>
 										<option disabled={true} value={'select'}>
 											Select
 										</option>
 										{[1, 2, 3, 4, 5].map((room: number) => (
-											<option value={`${room}`} key={room}>{room}</option>
+											<option value={`${room}`} key={room}>
+												{room}
+											</option>
 										))}
 									</select>
 									<div className={'divider'}></div>
@@ -349,17 +349,19 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<Typography className="title">Bed</Typography>
 									<select
 										className={'select-description'}
-										value={insertPropertyData.propertyBeds || 'select'}
-										defaultValue={insertPropertyData.propertyBeds || 'select'}
+										value={insertFurnitureData.furnitureBeds || 'select'}
+										defaultValue={insertFurnitureData.furnitureBeds || 'select'}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyBeds: parseInt(value) })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureBeds: parseInt(value) })
 										}
 									>
 										<option disabled={true} value={'select'}>
 											Select
 										</option>
 										{[1, 2, 3, 4, 5].map((bed: number) => (
-											<option value={`${bed}`} key={bed}>{bed}</option>
+											<option value={`${bed}`} key={bed}>
+												{bed}
+											</option>
 										))}
 									</select>
 									<div className={'divider'}></div>
@@ -369,18 +371,22 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									<Typography className="title">Square</Typography>
 									<select
 										className={'select-description'}
-										value={insertPropertyData.propertySquare || 'select'}
-										defaultValue={insertPropertyData.propertySquare || 'select'}
+										value={insertFurnitureData.furnitureSquare || 'select'}
+										defaultValue={insertFurnitureData.furnitureSquare || 'select'}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertySquare: parseInt(value) })
+											setInsertFurnitureData({ ...insertFurnitureData, furnitureSquare: parseInt(value) })
 										}
 									>
 										<option disabled={true} selected={true} value={'select'}>
 											Select
 										</option>
-										{propertySquare.map((square: number) => {
+										{furnitureSquare.map((square: number) => {
 											if (square !== 0) {
-												return <option value={`${square}`} key={square}>{square}</option>;
+												return (
+													<option value={`${square}`} key={square}>
+														{square}
+													</option>
+												);
 											}
 										})}
 									</select>
@@ -389,22 +395,22 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								</Stack>
 							</Stack>
 
-							<Typography className="property-title">Property Description</Typography>
+							<Typography className="furniture-title">Furniture Description</Typography>
 							<Stack className="config-column">
 								<Typography className="title">Description</Typography>
 								<textarea
 									name=""
 									id=""
 									className="description-text"
-									value={insertPropertyData.propertyDesc}
+									value={insertFurnitureData.furnitureDesc}
 									onChange={({ target: { value } }) =>
-										setInsertPropertyData({ ...insertPropertyData, propertyDesc: value })
+										setInsertFurnitureData({ ...insertFurnitureData, furnitureDesc: value })
 									}
 								></textarea>
 							</Stack>
 						</Stack>
 
-						<Typography className="upload-title">Upload photos of your property</Typography>
+						<Typography className="upload-title">Upload photos of your furniture</Typography>
 						<Stack className="images-box">
 							<Stack className="upload-box">
 								<svg xmlns="http://www.w3.org/2000/svg" width="121" height="120" viewBox="0 0 121 120" fill="none">
@@ -483,7 +489,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 								</Button>
 							</Stack>
 							<Stack className="gallery-box">
-								{insertPropertyData?.propertyImages.map((image: string) => {
+								{insertFurnitureData?.furnitureImages.map((image: string) => {
 									const imagePath: string = `${REACT_APP_API_URL}/${image}`;
 									return (
 										<Stack className="image-box">
@@ -495,12 +501,12 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 						</Stack>
 
 						<Stack className="buttons-row">
-							{router.query.propertyId ? (
-								<Button className="next-button" disabled={doDisabledCheck()} onClick={updatePropertyHandler}>
+							{router.query.furnitureId ? (
+								<Button className="next-button" disabled={doDisabledCheck()} onClick={updateFurnitureHandler}>
 									<Typography className="next-button-text">Save</Typography>
 								</Button>
 							) : (
-								<Button className="next-button" disabled={doDisabledCheck()} onClick={insertPropertyHandler}>
+								<Button className="next-button" disabled={doDisabledCheck()} onClick={insertFurnitureHandler}>
 									<Typography className="next-button-text">Save</Typography>
 								</Button>
 							)}
@@ -512,21 +518,21 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 	}
 };
 
-AddProperty.defaultProps = {
+AddFurniture.defaultProps = {
 	initialValues: {
-		propertyTitle: '',
-		propertyPrice: 0,
-		propertyType: '',
-		propertyLocation: '',
-		propertyAddress: '',
-		propertyBarter: false,
-		propertyRent: false,
-		propertyRooms: 0,
-		propertyBeds: 0,
-		propertySquare: 0,
-		propertyDesc: '',
-		propertyImages: [],
+		furnitureTitle: '',
+		furniturePrice: 0,
+		furnitureType: '',
+		furnitureLocation: '',
+		furnitureAddress: '',
+		furnitureBarter: false,
+		furnitureRent: false,
+		furnitureRooms: 0,
+		furnitureBeds: 0,
+		furnitureSquare: 0,
+		furnitureDesc: '',
+		furnitureImages: [],
 	},
 };
 
-export default AddProperty;
+export default AddFurniture;

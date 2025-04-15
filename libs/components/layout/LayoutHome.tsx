@@ -70,7 +70,7 @@ const withLayoutMain = (Component: any) => {
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
 									mattis.
 								</p>
-								<Link href={'/property'}>
+								<Link href={'/furniture'}>
 									<div className={'buyButton'}>
 										<button className={'buyNow'}>BUY NOW</button>
 									</div>

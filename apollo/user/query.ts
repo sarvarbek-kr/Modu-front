@@ -20,7 +20,7 @@ export const GET_AGENTS = gql`
 				memberDesc
 				memberWarnings
 				memberBlocks
-				memberProperties
+				memberFurnitures
 				memberRank
 				memberPoints
 				memberLikes
@@ -55,7 +55,7 @@ query GetMember($input: String!) {
         memberImage
         memberAddress
         memberDesc
-        memberProperties
+        memberFurnitures
         memberArticles
         memberPoints
         memberLikes
@@ -79,28 +79,28 @@ query GetMember($input: String!) {
 `);
 
 /**************************
- *        PROPERTY        *
+ *        FURNITURE        *
  *************************/
 
-export const GET_PROPERTY = gql`
-	query GetProperty($input: String!) {
-		getProperty(propertyId: $input) {
+export const GET_FURNITURE = gql`
+	query GetFurniture($input: String!) {
+		getFurniture(furnitureId: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			furnitureType
+			furnitureStatus
+			furnitureLocation
+			furnitureAddress
+			furnitureTitle
+			furniturePrice
+			furnitureSquare
+			furnitureBeds
+			furnitureRooms
+			furnitureViews
+			furnitureLikes
+			furnitureImages
+			furnitureDesc
+			furnitureBarter
+			furnitureRent
 			memberId
 			soldAt
 			deletedAt
@@ -137,27 +137,27 @@ export const GET_PROPERTY = gql`
 	}
 `;
 
-export const GET_PROPERTIES = gql`
-	query GetProperties($input: PropertiesInquiry!) {
-		getProperties(input: $input) {
+export const GET_FURNITURES = gql`
+	query GetFurnitures($input: FurnituresInquiry!) {
+		getFurnitures(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				furnitureType
+				furnitureStatus
+				furnitureLocation
+				furnitureAddress
+				furnitureTitle
+				furniturePrice
+				furnitureSquare
+				furnitureBeds
+				furnitureRooms
+				furnitureViews
+				furnitureLikes
+				furnitureRank
+				furnitureImages
+				furnitureDesc
+				furnitureBarter
+				furnitureRent
 				memberId
 				soldAt
 				deletedAt
@@ -177,7 +177,7 @@ export const GET_PROPERTIES = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberFurnitures
 					memberRank
 					memberPoints
 					memberLikes
@@ -199,26 +199,26 @@ export const GET_PROPERTIES = gql`
 	}
 `;
 
-export const GET_AGENT_PROPERTIES = gql`
-	query GetAgentProperties($input: AgentPropertiesInquiry!) {
-		getAgentProperties(input: $input) {
+export const GET_AGENT_FURNITURES = gql`
+	query GetAgentFurnitures($input: AgentFurnituresInquiry!) {
+		getAgentFurnitures(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				furnitureType
+				furnitureStatus
+				furnitureLocation
+				furnitureAddress
+				furnitureTitle
+				furniturePrice
+				furnitureSquare
+				furnitureBeds
+				furnitureRooms
+				furnitureViews
+				furnitureLikes
+				furnitureImages
+				furnitureDesc
+				furnitureBarter
+				furnitureRent
 				memberId
 				soldAt
 				deletedAt
@@ -238,23 +238,23 @@ export const GET_FAVORITES = gql`
 		getFavorites(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyComments
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				furnitureType
+				furnitureStatus
+				furnitureLocation
+				furnitureAddress
+				furnitureTitle
+				furniturePrice
+				furnitureSquare
+				furnitureBeds
+				furnitureRooms
+				furnitureViews
+				furnitureLikes
+				furnitureComments
+				furnitureRank
+				furnitureImages
+				furnitureDesc
+				furnitureBarter
+				furnitureRent
 				memberId
 				soldAt
 				deletedAt
@@ -272,7 +272,7 @@ export const GET_FAVORITES = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberFurnitures
 					memberArticles
 					memberPoints
 					memberLikes
@@ -301,23 +301,23 @@ export const GET_VISITED = gql`
 		getVisited(input: $input) {
 			list {
 				_id
-				propertyType
-				propertyStatus
-				propertyLocation
-				propertyAddress
-				propertyTitle
-				propertyPrice
-				propertySquare
-				propertyBeds
-				propertyRooms
-				propertyViews
-				propertyLikes
-				propertyComments
-				propertyRank
-				propertyImages
-				propertyDesc
-				propertyBarter
-				propertyRent
+				furnitureType
+				furnitureStatus
+				furnitureLocation
+				furnitureAddress
+				furnitureTitle
+				furniturePrice
+				furnitureSquare
+				furnitureBeds
+				furnitureRooms
+				furnitureViews
+				furnitureLikes
+				furnitureComments
+				furnitureRank
+				furnitureImages
+				furnitureDesc
+				furnitureBarter
+				furnitureRent
 				memberId
 				soldAt
 				deletedAt
@@ -335,7 +335,7 @@ export const GET_VISITED = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberFurnitures
 					memberArticles
 					memberPoints
 					memberLikes
@@ -391,7 +391,7 @@ export const GET_BOARD_ARTICLE = gql`
 				memberDesc
 				memberWarnings
 				memberBlocks
-				memberProperties
+				memberFurnitures
 				memberRank
 				memberPoints
 				memberLikes
@@ -443,7 +443,7 @@ export const GET_BOARD_ARTICLES = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberFurnitures
 					memberRank
 					memberPoints
 					memberLikes
@@ -489,7 +489,7 @@ export const GET_COMMENTS = gql`
 					memberDesc
 					memberWarnings
 					memberBlocks
-					memberProperties
+					memberFurnitures
 					memberRank
 					memberPoints
 					memberLikes
@@ -540,7 +540,7 @@ export const GET_MEMBER_FOLLOWERS = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberFurnitures
 					memberArticles
 					memberPoints
 					memberLikes
@@ -583,7 +583,7 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberProperties
+					memberFurnitures
 					memberArticles
 					memberPoints
 					memberLikes

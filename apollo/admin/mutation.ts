@@ -17,7 +17,7 @@ export const UPDATE_MEMBER_BY_ADMIN = gql`
 			memberImage
 			memberAddress
 			memberDesc
-			memberProperties
+			memberFurnitures
 			memberRank
 			memberArticles
 			memberPoints
@@ -34,28 +34,28 @@ export const UPDATE_MEMBER_BY_ADMIN = gql`
 `;
 
 /**************************
- *        PROPERTY        *
+ *        FURNITURE        *
  *************************/
 
-export const UPDATE_PROPERTY_BY_ADMIN = gql`
-	mutation UpdatePropertyByAdmin($input: PropertyUpdate!) {
-		updatePropertyByAdmin(input: $input) {
+export const UPDATE_FURNITURE_BY_ADMIN = gql`
+	mutation UpdateFurnitureByAdmin($input: FurnitureUpdate!) {
+		updateFurnitureByAdmin(input: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			furnitureType
+			furnitureStatus
+			furnitureLocation
+			furnitureAddress
+			furnitureTitle
+			furniturePrice
+			furnitureSquare
+			furnitureBeds
+			furnitureRooms
+			furnitureViews
+			furnitureLikes
+			furnitureImages
+			furnitureDesc
+			furnitureBarter
+			furnitureRent
 			memberId
 			soldAt
 			deletedAt
@@ -66,25 +66,25 @@ export const UPDATE_PROPERTY_BY_ADMIN = gql`
 	}
 `;
 
-export const REMOVE_PROPERTY_BY_ADMIN = gql`
-	mutation RemovePropertyByAdmin($input: String!) {
-		removePropertyByAdmin(propertyId: $input) {
+export const REMOVE_FURNITURE_BY_ADMIN = gql`
+	mutation RemoveFurnitureByAdmin($input: String!) {
+		removeFurnitureByAdmin(furnitureId: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			furnitureType
+			furnitureStatus
+			furnitureLocation
+			furnitureAddress
+			furnitureTitle
+			furniturePrice
+			furnitureSquare
+			furnitureBeds
+			furnitureRooms
+			furnitureViews
+			furnitureLikes
+			furnitureImages
+			furnitureDesc
+			furnitureBarter
+			furnitureRent
 			memberId
 			soldAt
 			deletedAt

@@ -4,12 +4,17 @@ import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import { Stack } from '@mui/material';
 import MemberMenu from '../../libs/components/member/MemberMenu';
-import MemberProperties from '../../libs/components/member/MemberProperties';
+import MemberFurnitures from '../../libs/components/member/MemberFurnitures';
 import { useRouter } from 'next/router';
 import MemberFollowers from '../../libs/components/member/MemberFollowers';
 import MemberArticles from '../../libs/components/member/MemberArticles';
 import { useMutation, useReactiveVar } from '@apollo/client';
-import { sweetErrorAlert, sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import {
+	sweetErrorAlert,
+	sweetErrorHandling,
+	sweetMixinErrorAlert,
+	sweetTopSmallSuccessAlert,
+} from '../../libs/sweetAlert';
 import MemberFollowings from '../../libs/components/member/MemberFollowings';
 import { userVar } from '../../apollo/store';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -40,7 +45,7 @@ const MemberPage: NextPage = () => {
 			router.replace(
 				{
 					pathname: router.pathname,
-					query: { ...router.query, category: 'properties' },
+					query: { ...router.query, category: 'furnitures' },
 				},
 				undefined,
 				{ shallow: true },
@@ -52,7 +57,7 @@ const MemberPage: NextPage = () => {
 	const subscribeHandler = async (id: string, refetch: any, query: any) => {
 		try {
 			if (!id) throw new Error(Messages.error1);
-			if(!user._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
 			await subscribe({
 				variables: {
@@ -69,7 +74,7 @@ const MemberPage: NextPage = () => {
 	const unsubscribeHandler = async (id: string, refetch: any, query: any) => {
 		try {
 			if (!id) throw new Error(Messages.error1);
-			if(!user._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
 			await unsubscribe({
 				variables: {
@@ -86,7 +91,7 @@ const MemberPage: NextPage = () => {
 	const likeMemberHandler = async (id: string, refetch: any, query: any) => {
 		try {
 			if (!id) return;
-			if(!user._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
 			await likeTargetMember({
 				variables: {
@@ -122,7 +127,7 @@ const MemberPage: NextPage = () => {
 							</Stack>
 							<Stack className="main-config" mb={'76px'}>
 								<Stack className={'list-config'}>
-									{category === 'properties' && <MemberProperties />}
+									{category === 'furnitures' && <MemberFurnitures />}
 									{category === 'followers' && (
 										<MemberFollowers
 											subscribeHandler={subscribeHandler}

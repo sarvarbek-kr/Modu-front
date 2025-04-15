@@ -19,7 +19,7 @@ export const SIGN_UP = gql`
 			memberDesc
 			memberWarnings
 			memberBlocks
-			memberProperties
+			memberFurnitures
 			memberRank
 			memberArticles
 			memberPoints
@@ -48,7 +48,7 @@ export const LOGIN = gql`
 			memberDesc
 			memberWarnings
 			memberBlocks
-			memberProperties
+			memberFurnitures
 			memberRank
 			memberPoints
 			memberLikes
@@ -74,7 +74,7 @@ export const UPDATE_MEMBER = gql`
 			memberImage
 			memberAddress
 			memberDesc
-			memberProperties
+			memberFurnitures
 			memberRank
 			memberArticles
 			memberPoints
@@ -105,7 +105,7 @@ export const LIKE_TARGET_MEMBER = gql`
 			memberDesc
 			memberWarnings
 			memberBlocks
-			memberProperties
+			memberFurnitures
 			memberRank
 			memberPoints
 			memberLikes
@@ -119,28 +119,28 @@ export const LIKE_TARGET_MEMBER = gql`
 `;
 
 /**************************
- *        PROPERTY        *
+ *        FURNITURE        *
  *************************/
 
-export const CREATE_PROPERTY = gql`
-	mutation CreateProperty($input: PropertyInput!) {
-		createProperty(input: $input) {
+export const CREATE_FURNITURE = gql`
+	mutation CreateFurniture($input: FurnitureInput!) {
+		createFurniture(input: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			furnitureType
+			furnitureStatus
+			furnitureLocation
+			furnitureAddress
+			furnitureTitle
+			furniturePrice
+			furnitureSquare
+			furnitureBeds
+			furnitureRooms
+			furnitureViews
+			furnitureLikes
+			furnitureImages
+			furnitureDesc
+			furnitureBarter
+			furnitureRent
 			memberId
 			soldAt
 			deletedAt
@@ -151,25 +151,25 @@ export const CREATE_PROPERTY = gql`
 	}
 `;
 
-export const UPDATE_PROPERTY = gql`
-	mutation UpdateProperty($input: PropertyUpdate!) {
-		updateProperty(input: $input) {
+export const UPDATE_FURNITURE = gql`
+	mutation UpdateFurniture($input: FurnitureUpdate!) {
+		updateFurniture(input: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			furnitureType
+			furnitureStatus
+			furnitureLocation
+			furnitureAddress
+			furnitureTitle
+			furniturePrice
+			furnitureSquare
+			furnitureBeds
+			furnitureRooms
+			furnitureViews
+			furnitureLikes
+			furnitureImages
+			furnitureDesc
+			furnitureBarter
+			furnitureRent
 			memberId
 			soldAt
 			deletedAt
@@ -180,25 +180,25 @@ export const UPDATE_PROPERTY = gql`
 	}
 `;
 
-export const LIKE_TARGET_PROPERTY = gql`
-	mutation LikeTargetProperty($input: String!) {
-		likeTargetProperty(propertyId: $input) {
+export const LIKE_TARGET_FURNITURE = gql`
+	mutation LikeTargetFurniture($input: String!) {
+		likeTargetFurniture(furnitureId: $input) {
 			_id
-			propertyType
-			propertyStatus
-			propertyLocation
-			propertyAddress
-			propertyTitle
-			propertyPrice
-			propertySquare
-			propertyBeds
-			propertyRooms
-			propertyViews
-			propertyLikes
-			propertyImages
-			propertyDesc
-			propertyBarter
-			propertyRent
+			furnitureType
+			furnitureStatus
+			furnitureLocation
+			furnitureAddress
+			furnitureTitle
+			furniturePrice
+			furnitureSquare
+			furnitureBeds
+			furnitureRooms
+			furnitureViews
+			furnitureLikes
+			furnitureImages
+			furnitureDesc
+			furnitureBarter
+			furnitureRent
 			memberId
 			soldAt
 			deletedAt

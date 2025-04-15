@@ -4,10 +4,8 @@ import { NextPage } from 'next';
 import { Stack } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import MyProperties from '../../libs/components/mypage/MyProperties';
 import MyFavorites from '../../libs/components/mypage/MyFavorites';
 import RecentlyVisited from '../../libs/components/mypage/RecentlyVisited';
-import AddProperty from '../../libs/components/mypage/AddNewProperty';
 import MyProfile from '../../libs/components/mypage/MyProfile';
 import MyArticles from '../../libs/components/mypage/MyArticles';
 import { useMutation, useReactiveVar } from '@apollo/client';
@@ -20,6 +18,8 @@ import MemberFollowings from '../../libs/components/member/MemberFollowings';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { LIKE_TARGET_MEMBER, SUBSCRIBE, UNSUBSCRIBE } from '../../apollo/user/mutation';
 import { Messages } from '../../libs/config';
+import AddFurniture from '../../libs/components/mypage/AddNewProperty';
+import MyFurnitures from '../../libs/components/mypage/MyFurnitures';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -46,7 +46,7 @@ const MyPage: NextPage = () => {
 	const subscribeHandler = async (id: string, refetch: any, query: any) => {
 		try {
 			if (!id) throw new Error(Messages.error1);
-			if(!user._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
 			await subscribe({
 				variables: {
@@ -63,7 +63,7 @@ const MyPage: NextPage = () => {
 	const unsubscribeHandler = async (id: string, refetch: any, query: any) => {
 		try {
 			if (!id) throw new Error(Messages.error1);
-			if(!user._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
 			await unsubscribe({
 				variables: {
@@ -80,7 +80,7 @@ const MyPage: NextPage = () => {
 	const likeMemberHandler = async (id: string, refetch: any, query: any) => {
 		try {
 			if (!id) return;
-			if(!user._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
 			await likeTargetMember({
 				variables: {
@@ -116,8 +116,8 @@ const MyPage: NextPage = () => {
 							</Stack>
 							<Stack className="main-config" mb={'76px'}>
 								<Stack className={'list-config'}>
-									{category === 'addProperty' && <AddProperty />}
-									{category === 'myProperties' && <MyProperties />}
+									{category === 'addFurniture' && <AddFurniture />}
+									{category === 'myFurnitures' && <MyFurnitures />}
 									{category === 'myFavorites' && <MyFavorites />}
 									{category === 'recentlyVisited' && <RecentlyVisited />}
 									{category === 'myArticles' && <MyArticles />}

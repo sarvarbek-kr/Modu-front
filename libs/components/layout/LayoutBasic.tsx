@@ -28,10 +28,10 @@ const withLayoutBasic = (Component: any) => {
 				bgImage = '';
 
 			switch (router.pathname) {
-				case '/property':
-					title = 'Property Search';
+				case '/furniture':
+					title = 'Furniture Search';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/properties.png';
+					bgImage = '/img/banner/furnitures.png';
 					break;
 				case '/agent':
 					title = 'Agents';

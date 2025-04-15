@@ -1,15 +1,15 @@
 #pc-wrap {
-	#property-detail-page {
+	#furniture-detail-page {
 		position: relative;
 		background: #fff;
 		padding-top: 87px;
 		padding-bottom: 200px;
-		.property-detail-config {
+		.furniture-detail-config {
 			width: 100%;
 			height: auto;
 			padding-top: 56px;
 			gap: 30px;
-			.property-info-config {
+			.furniture-info-config {
 				width: 100%;
 				height: auto;
 				gap: 30px;
@@ -188,7 +188,7 @@
 					}
 				}
 			}
-			.property-desc-config {
+			.furniture-desc-config {
 				width: 100%;
 				height: auto;
 				flex-direction: row;
@@ -703,7 +703,7 @@
 					}
 				}
 			}
-			.similar-properties-config {
+			.similar-furnitures-config {
 				width: 100%;
 				margin-top: 45px;
 				gap: 66px;

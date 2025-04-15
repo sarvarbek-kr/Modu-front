@@ -59,7 +59,7 @@ const About: NextPage = () => {
 							</Box>
 							<Box component={'div'}>
 								<strong>12K</strong>
-								<p>Property Ready</p>
+								<p>Furniture Ready</p>
 							</Box>
 							<Box component={'div'}>
 								<strong>20M</strong>
@@ -88,7 +88,7 @@ const About: NextPage = () => {
 								<img src="/img/icons/security.svg" alt="" />
 							</div>
 							<div className={'text-box'}>
-								<span>Property Management</span>
+								<span>Furniture Management</span>
 								<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
 							</div>
 						</Stack>
@@ -97,7 +97,7 @@ const About: NextPage = () => {
 								<img src="/img/icons/keywording.svg" alt="" />
 							</div>
 							<div className={'text_-box'}>
-								<span>Property Management</span>
+								<span>Furniture Management</span>
 								<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
 							</div>
 						</Stack>
@@ -106,7 +106,7 @@ const About: NextPage = () => {
 								<img src="/img/icons/investment.svg" alt="" />
 							</div>
 							<div className={'text-box'}>
-								<span>Property Management</span>
+								<span>Furniture Management</span>
 								<p>Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies auctor.</p>
 							</div>
 						</Stack>
@@ -132,7 +132,7 @@ const About: NextPage = () => {
 					<Stack className={'container'}>
 						<Box component={'div'} className={'left'}>
 							<strong>Need help? Talk to our expert.</strong>
-							<p>Talk to our experts or Browse through more properties.</p>
+							<p>Talk to our experts or Browse through more furnitures.</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
 							<div className={'white'}>

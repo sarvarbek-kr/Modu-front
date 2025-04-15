@@ -77,7 +77,7 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 		}
 	};
 
-	const updatePropertyHandler = useCallback(async () => {
+	const updateFurnitureHandler = useCallback(async () => {
 		try {
 			if (!user._id) throw new Error(Messages.error2);
 			updateData._id = user._id;
@@ -92,10 +92,10 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 			await updateStorage({ jwtToken });
 			updateUserInfo(result.data.updateMember?.accessToken);
 			await sweetMixinSuccessAlert('information updated successfully.');
-		 } catch (err: any) {
-				sweetErrorHandling(err).then();
-			}
-		}, [updateData]);
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	}, [updateData]);
 
 	const doDisabledCheck = () => {
 		if (
@@ -180,7 +180,7 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 						/>
 					</Stack>
 					<Stack className="about-me-box">
-						<Button className="update-button" onClick={updatePropertyHandler} disabled={doDisabledCheck()}>
+						<Button className="update-button" onClick={updateFurnitureHandler} disabled={doDisabledCheck()}>
 							<Typography>Update Profile</Typography>
 							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
 								<g clipPath="url(#clip0_7065_6985)">
