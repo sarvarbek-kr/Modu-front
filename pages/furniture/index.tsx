@@ -66,6 +66,9 @@ const FurnitureList: NextPage = ({ initialInput, ...props }: any) => {
 
 	useEffect(() => {
 		console.log('searchFilter:', searchFilter);
+		if (searchFilter) {
+			getFurnituresRefetch({ input: searchFilter });
+		}
 	}, [searchFilter]);
 
 	/** HANDLERS **/
