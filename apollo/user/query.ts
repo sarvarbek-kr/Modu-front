@@ -92,7 +92,6 @@ export const GET_FURNITURE = gql`
 			furnitureAddress
 			furnitureTitle
 			furniturePrice
-			furnitureSquare
 			furnitureBeds
 			furnitureRooms
 			furnitureViews
@@ -100,7 +99,6 @@ export const GET_FURNITURE = gql`
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
-			furnitureRent
 			memberId
 			soldAt
 			deletedAt
@@ -148,7 +146,6 @@ export const GET_FURNITURES = gql`
 				furnitureAddress
 				furnitureTitle
 				furniturePrice
-				furnitureSquare
 				furnitureBeds
 				furnitureRooms
 				furnitureViews
@@ -157,7 +154,6 @@ export const GET_FURNITURES = gql`
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
-				furnitureRent
 				memberId
 				soldAt
 				deletedAt
@@ -210,7 +206,6 @@ export const GET_AGENT_FURNITURES = gql`
 				furnitureAddress
 				furnitureTitle
 				furniturePrice
-				furnitureSquare
 				furnitureBeds
 				furnitureRooms
 				furnitureViews
@@ -218,7 +213,6 @@ export const GET_AGENT_FURNITURES = gql`
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
-				furnitureRent
 				memberId
 				soldAt
 				deletedAt
@@ -244,7 +238,6 @@ export const GET_FAVORITES = gql`
 				furnitureAddress
 				furnitureTitle
 				furniturePrice
-				furnitureSquare
 				furnitureBeds
 				furnitureRooms
 				furnitureViews
@@ -254,7 +247,6 @@ export const GET_FAVORITES = gql`
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
-				furnitureRent
 				memberId
 				soldAt
 				deletedAt
@@ -307,7 +299,6 @@ export const GET_VISITED = gql`
 				furnitureAddress
 				furnitureTitle
 				furniturePrice
-				furnitureSquare
 				furnitureBeds
 				furnitureRooms
 				furnitureViews
@@ -317,7 +308,6 @@ export const GET_VISITED = gql`
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
-				furnitureRent
 				memberId
 				soldAt
 				deletedAt

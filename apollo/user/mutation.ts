@@ -129,24 +129,28 @@ export const CREATE_FURNITURE = gql`
 			furnitureType
 			furnitureStatus
 			furnitureLocation
-			furnitureAddress
 			furnitureTitle
 			furniturePrice
-			furnitureSquare
-			furnitureBeds
-			furnitureRooms
 			furnitureViews
 			furnitureLikes
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
-			furnitureRent
+			furnitureCondition
+			furnitureColor
+			furnitureMaterial
+			furnitureBrand
 			memberId
 			soldAt
 			deletedAt
 			constructedAt
 			createdAt
 			updatedAt
+			furnitureDimensions {
+				width
+				height
+				depth
+			}
 		}
 	}
 `;
@@ -158,24 +162,28 @@ export const UPDATE_FURNITURE = gql`
 			furnitureType
 			furnitureStatus
 			furnitureLocation
-			furnitureAddress
+			furnitureCondition
+			furnitureColor
+			furnitureMaterial
+			furnitureBrand
 			furnitureTitle
 			furniturePrice
-			furnitureSquare
-			furnitureBeds
-			furnitureRooms
 			furnitureViews
 			furnitureLikes
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
-			furnitureRent
 			memberId
 			soldAt
 			deletedAt
 			constructedAt
 			createdAt
 			updatedAt
+			furnitureDimensions {
+				width
+				height
+				depth
+			}
 		}
 	}
 `;
@@ -187,18 +195,17 @@ export const LIKE_TARGET_FURNITURE = gql`
 			furnitureType
 			furnitureStatus
 			furnitureLocation
-			furnitureAddress
+			furnitureCondition
+			furnitureColor
+			furnitureMaterial
+			furnitureBrand
 			furnitureTitle
 			furniturePrice
-			furnitureSquare
-			furnitureBeds
-			furnitureRooms
 			furnitureViews
 			furnitureLikes
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
-			furnitureRent
 			memberId
 			soldAt
 			deletedAt

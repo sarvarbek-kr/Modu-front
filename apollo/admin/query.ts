@@ -50,24 +50,28 @@ export const GET_ALL_FURNITURES_BY_ADMIN = gql`
 				furnitureType
 				furnitureStatus
 				furnitureLocation
-				furnitureAddress
+				furnitureCondition
+				furnitureColor
+				furnitureMaterial
+				furnitureBrand
 				furnitureTitle
 				furniturePrice
-				furnitureSquare
-				furnitureBeds
-				furnitureRooms
 				furnitureViews
 				furnitureLikes
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
-				furnitureRent
 				memberId
 				soldAt
 				deletedAt
 				constructedAt
 				createdAt
 				updatedAt
+				furnitureDimensions {
+					width
+					height
+					depth
+				}
 				memberData {
 					_id
 					memberType

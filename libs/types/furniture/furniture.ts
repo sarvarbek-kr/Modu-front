@@ -19,7 +19,6 @@ export interface Furniture {
 	furnitureAddress: string;
 	furnitureTitle: string;
 	furniturePrice: number;
-	furnitureSquare: number;
 	furnitureBeds: number;
 	furnitureRooms: number;
 	furnitureViews: number;
@@ -29,7 +28,6 @@ export interface Furniture {
 	furnitureImages: string[];
 	furnitureDesc?: string;
 	furnitureBarter: boolean;
-	furnitureRent: boolean;
 	memberId: string;
 	soldAt?: Date;
 	deletedAt?: Date;

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { Button, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { FurnitureLocation, FurnitureType } from '../../enums/furniture.enum';
-import { REACT_APP_API_URL, furnitureSquare } from '../../config';
 import { FurnitureInput } from '../../types/furniture/furniture.input';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
@@ -12,6 +11,7 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import { CREATE_FURNITURE, UPDATE_FURNITURE } from '../../../apollo/user/mutation';
 import { GET_FURNITURE } from '../../../apollo/user/query';
+import { REACT_APP_API_URL } from '../../config';
 
 const AddFurniture = ({ initialValues, ...props }: any) => {
 	const device = useDeviceDetect();
@@ -47,10 +47,8 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 			furnitureLocation: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureLocation : '',
 			furnitureAddress: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureAddress : '',
 			furnitureBarter: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureBarter : false,
-			furnitureRent: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureRent : false,
 			furnitureRooms: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureRooms : 0,
 			furnitureBeds: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureBeds : 0,
-			furnitureSquare: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureSquare : 0,
 			furnitureDesc: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureDesc : '',
 			furnitureImages: getFurnitureData?.getFurniture ? getFurnitureData?.getFurniture?.furnitureImages : [],
 		});
@@ -117,10 +115,8 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 			insertFurnitureData.furnitureLocation === '' || // @ts-ignore
 			insertFurnitureData.furnitureAddress === '' || // @ts-ignore
 			insertFurnitureData.furnitureBarter === '' || // @ts-ignore
-			insertFurnitureData.furnitureRent === '' ||
 			insertFurnitureData.furnitureRooms === 0 ||
 			insertFurnitureData.furnitureBeds === 0 ||
-			insertFurnitureData.furnitureSquare === 0 ||
 			insertFurnitureData.furnitureDesc === '' ||
 			insertFurnitureData.furnitureImages.length === 0
 		) {
@@ -301,25 +297,6 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
 								</Stack>
-								<Stack className="price-year-after-price">
-									<Typography className="title">Rent</Typography>
-									<select
-										className={'select-description'}
-										value={insertFurnitureData.furnitureRent ? 'yes' : 'no'}
-										defaultValue={insertFurnitureData.furnitureRent ? 'yes' : 'no'}
-										onChange={({ target: { value } }) =>
-											setInsertFurnitureData({ ...insertFurnitureData, furnitureRent: value === 'yes' })
-										}
-									>
-										<option disabled={true} selected={true}>
-											Select
-										</option>
-										<option value={'yes'}>Yes</option>
-										<option value={'no'}>No</option>
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
-								</Stack>
 							</Stack>
 
 							<Stack className="config-row">
@@ -363,32 +340,6 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 												{bed}
 											</option>
 										))}
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
-								</Stack>
-								<Stack className="price-year-after-price">
-									<Typography className="title">Square</Typography>
-									<select
-										className={'select-description'}
-										value={insertFurnitureData.furnitureSquare || 'select'}
-										defaultValue={insertFurnitureData.furnitureSquare || 'select'}
-										onChange={({ target: { value } }) =>
-											setInsertFurnitureData({ ...insertFurnitureData, furnitureSquare: parseInt(value) })
-										}
-									>
-										<option disabled={true} selected={true} value={'select'}>
-											Select
-										</option>
-										{furnitureSquare.map((square: number) => {
-											if (square !== 0) {
-												return (
-													<option value={`${square}`} key={square}>
-														{square}
-													</option>
-												);
-											}
-										})}
 									</select>
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
@@ -526,10 +477,8 @@ AddFurniture.defaultProps = {
 		furnitureLocation: '',
 		furnitureAddress: '',
 		furnitureBarter: false,
-		furnitureRent: false,
 		furnitureRooms: 0,
 		furnitureBeds: 0,
-		furnitureSquare: 0,
 		furnitureDesc: '',
 		furnitureImages: [],
 	},

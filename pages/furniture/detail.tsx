@@ -227,17 +227,6 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 													<Typography className={'buy-rent'}>Barter</Typography>
 												</>
 											)}
-
-											{furniture?.furnitureRent && (
-												<>
-													<Stack className={'circle'}>
-														<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-															<circle cx="3" cy="3" r="3" fill="#EB6753" />
-														</svg>
-													</Stack>
-													<Typography className={'buy-rent'}>rent</Typography>
-												</>
-											)}
 										</Stack>
 										<Stack className={'divider'}></Stack>
 										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -265,10 +254,6 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 										<Stack className="option">
 											<img src="/img/icons/room.svg" alt="" /> <Typography>{furniture?.furnitureRooms} room</Typography>
-										</Stack>
-										<Stack className="option">
-											<img src="/img/icons/expand.svg" alt="" />{' '}
-											<Typography>{furniture?.furnitureSquare} m2</Typography>
 										</Stack>
 									</Stack>
 								</Stack>
@@ -384,10 +369,6 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 												/>
 											</svg>
 										</Stack>
-										<Stack className={'option-includes'}>
-											<Typography className={'title'}>Size</Typography>
-											<Typography className={'option-data'}>{furniture?.furnitureSquare} m2</Typography>
-										</Stack>
 									</Stack>
 									<Stack className={'option'}>
 										<Stack className={'svg-box'}>
@@ -419,10 +400,6 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 													<Typography className={'data'}>${formatterStr(furniture?.furniturePrice)}</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
-													<Typography className={'title'}>Furniture Size</Typography>
-													<Typography className={'data'}>{furniture?.furnitureSquare} m2</Typography>
-												</Box>
-												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Rooms</Typography>
 													<Typography className={'data'}>{furniture?.furnitureRooms}</Typography>
 												</Box>
@@ -442,9 +419,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Furniture Options</Typography>
-													<Typography className={'data'}>
-														For {furniture?.furnitureBarter && 'Barter'} {furniture?.furnitureRent && 'Rent'}
-													</Typography>
+													<Typography className={'data'}>For {furniture?.furnitureBarter && 'Barter'}</Typography>
 												</Box>
 											</Stack>
 										</Stack>

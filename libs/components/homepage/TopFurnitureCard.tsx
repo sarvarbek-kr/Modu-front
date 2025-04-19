@@ -52,18 +52,10 @@ const TopFurnitureCard = (props: TopFurnitureCardProps) => {
 							<img src="/img/icons/room.svg" alt="" />
 							<span>{furniture?.furnitureRooms} rooms</span>
 						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{furniture?.furnitureSquare} m2</span>
-						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<p>
-							{' '}
-							{furniture.furnitureRent ? 'Rent' : ''} {furniture.furnitureRent && furniture.furnitureBarter && '/'}{' '}
-							{furniture.furnitureBarter ? 'Barter' : ''}
-						</p>
+						<p> {furniture.furnitureBarter ? 'Barter' : ''}</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />
@@ -107,18 +99,10 @@ const TopFurnitureCard = (props: TopFurnitureCardProps) => {
 							<img src="/img/icons/room.svg" alt="" />
 							<span>{furniture?.furnitureRooms} rooms</span>
 						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{furniture?.furnitureSquare} m2</span>
-						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<p>
-							{' '}
-							{furniture.furnitureRent ? 'Rent' : ''} {furniture.furnitureRent && furniture.furnitureBarter && '/'}{' '}
-							{furniture.furnitureBarter ? 'Barter' : ''}
-						</p>
+						<p> {furniture.furnitureBarter ? 'Barter' : ''}</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />

@@ -40,7 +40,6 @@ const Footer = () => {
 						<Box component={'div'} className={'bottom'}>
 							<div>
 								<strong>Popular Search</strong>
-								<span>Furniture for Rent</span>
 								<span>Furniture Low to hide</span>
 							</div>
 							<div>
@@ -105,7 +104,6 @@ const Footer = () => {
 						<Box component={'div'} className={'bottom'}>
 							<div>
 								<strong>Popular Search</strong>
-								<span>Furniture for Rent</span>
 								<span>Furniture Low to hide</span>
 							</div>
 							<div>

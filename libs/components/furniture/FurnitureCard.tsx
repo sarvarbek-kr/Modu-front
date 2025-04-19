@@ -76,19 +76,10 @@ const FurnitureCard = (props: FurnitureCardType) => {
 						<Stack className="option">
 							<img src="/img/icons/room.svg" alt="" /> <Typography>{furniture.furnitureRooms} room</Typography>
 						</Stack>
-						<Stack className="option">
-							<img src="/img/icons/expand.svg" alt="" /> <Typography>{furniture.furnitureSquare} m2</Typography>
-						</Stack>
 					</Stack>
 					<Stack className="divider"></Stack>
 					<Stack className="type-buttons">
 						<Stack className="type">
-							<Typography
-								sx={{ fontWeight: 500, fontSize: '13px' }}
-								className={furniture.furnitureRent ? '' : 'disabled-type'}
-							>
-								Rent
-							</Typography>
 							<Typography
 								sx={{ fontWeight: 500, fontSize: '13px' }}
 								className={furniture.furnitureBarter ? '' : 'disabled-type'}

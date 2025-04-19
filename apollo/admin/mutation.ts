@@ -44,24 +44,30 @@ export const UPDATE_FURNITURE_BY_ADMIN = gql`
 			furnitureType
 			furnitureStatus
 			furnitureLocation
-			furnitureAddress
+			furnitureCondition
+			furnitureColor
+			furnitureMaterial
+			furnitureBrand
 			furnitureTitle
 			furniturePrice
-			furnitureSquare
-			furnitureBeds
-			furnitureRooms
 			furnitureViews
 			furnitureLikes
+			furnitureComments
+			furnitureRank
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
-			furnitureRent
 			memberId
 			soldAt
 			deletedAt
 			constructedAt
 			createdAt
 			updatedAt
+			furnitureDimensions {
+				width
+				height
+				depth
+			}
 		}
 	}
 `;
@@ -73,24 +79,28 @@ export const REMOVE_FURNITURE_BY_ADMIN = gql`
 			furnitureType
 			furnitureStatus
 			furnitureLocation
-			furnitureAddress
+			furnitureCondition
+			furnitureColor
+			furnitureMaterial
+			furnitureBrand
 			furnitureTitle
 			furniturePrice
-			furnitureSquare
-			furnitureBeds
-			furnitureRooms
 			furnitureViews
 			furnitureLikes
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
-			furnitureRent
 			memberId
 			soldAt
 			deletedAt
 			constructedAt
 			createdAt
 			updatedAt
+			furnitureDimensions {
+				width
+				height
+				depth
+			}
 		}
 	}
 `;

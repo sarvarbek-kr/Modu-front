@@ -58,17 +58,10 @@ const FurnitureBigCard = (props: FurnitureBigCardProps) => {
 							<img src="/img/icons/room.svg" alt="" />
 							<span>{furniture?.furnitureRooms} rooms</span>
 						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{furniture?.furnitureSquare} m2</span>
-						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<div>
-							{furniture?.furnitureRent ? <p>Rent</p> : <span>Rent</span>}
-							{furniture?.furnitureBarter ? <p>Barter</p> : <span>Barter</span>}
-						</div>
+						<div>{furniture?.furnitureBarter ? <p>Barter</p> : <span>Barter</span>}</div>
 						<div className="buttons-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />

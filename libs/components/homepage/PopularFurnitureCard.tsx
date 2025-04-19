@@ -60,21 +60,8 @@ const PopularFurnitureCard = (props: PopularFurnitureCardProps) => {
 							<img src="/img/icons/room.svg" alt="" />
 							<span>{furniture?.furnitureRooms} rooms</span>
 						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{furniture?.furnitureSquare} m2</span>
-						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
-					<div className={'bott'}>
-						<p>{furniture?.furnitureRent ? 'rent' : 'sale'}</p>
-						<div className="view-like-box">
-							<IconButton color={'default'}>
-								<RemoveRedEyeIcon />
-							</IconButton>
-							<Typography className="view-cnt">{furniture?.furnitureViews}</Typography>
-						</div>
-					</div>
 				</Box>
 			</Stack>
 		);
@@ -112,21 +99,8 @@ const PopularFurnitureCard = (props: PopularFurnitureCardProps) => {
 							<img src="/img/icons/room.svg" alt="" />
 							<span>{furniture?.furnitureRooms} rooms</span>
 						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{furniture?.furnitureSquare} m2</span>
-						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
-					<div className={'bott'}>
-						<p>{furniture?.furnitureRent ? 'rent' : 'sale'}</p>
-						<div className="view-like-box">
-							<IconButton color={'default'}>
-								<RemoveRedEyeIcon />
-							</IconButton>
-							<Typography className="view-cnt">{furniture?.furnitureViews}</Typography>
-						</div>
-					</div>
 				</Box>
 			</Stack>
 		);
