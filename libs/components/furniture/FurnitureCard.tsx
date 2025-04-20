@@ -65,7 +65,7 @@ const FurnitureCard = (props: FurnitureCardType) => {
 						</Stack>
 						<Stack className="address">
 							<Typography>
-								{furniture.furnitureBrand}, {furniture.furnitureLocation}
+								{furniture.furnitureBrand} /{furniture.furnitureLocation}
 							</Typography>
 						</Stack>
 					</Stack>

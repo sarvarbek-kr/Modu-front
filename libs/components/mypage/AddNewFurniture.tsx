@@ -340,6 +340,7 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 												step="0.1" // bu orqali 0.1, 0.5, 1.2 kabi qiymatlar kiritish mumkin
 												min="0"
 												placeholder={`Enter ${dimKey}`}
+												// @ts-ignore
 												value={insertFurnitureData.furnitureDimensions?.[dimKey] || ''}
 												onChange={({ target: { value } }) =>
 													setInsertFurnitureData({
