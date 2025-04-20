@@ -1,5 +1,14 @@
-import { FurnitureLocation, FurnitureStatus, FurnitureType } from '../../enums/furniture.enum';
+import {
+	FurnitureBrand,
+	FurnitureColor,
+	FurnitureCondition,
+	FurnitureLocation,
+	FurnitureMaterial,
+	FurnitureStatus,
+	FurnitureType,
+} from '../../enums/furniture.enum';
 import { Member } from '../member/member';
+import { FurnitureDimensionsInput } from './furniture.input';
 
 export interface MeLiked {
 	memberId: string;
@@ -16,11 +25,13 @@ export interface Furniture {
 	furnitureType: FurnitureType;
 	furnitureStatus: FurnitureStatus;
 	furnitureLocation: FurnitureLocation;
-	furnitureAddress: string;
+	furnitureCondition: FurnitureCondition;
+	furnitureDimensions: FurnitureDimensionsInput;
+	furnitureColor: FurnitureColor;
+	furnitureMaterial: FurnitureMaterial;
+	furnitureBrand: FurnitureBrand;
 	furnitureTitle: string;
 	furniturePrice: number;
-	furnitureBeds: number;
-	furnitureRooms: number;
 	furnitureViews: number;
 	furnitureLikes: number;
 	furnitureComments: number;

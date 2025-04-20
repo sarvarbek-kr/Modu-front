@@ -42,15 +42,15 @@ const TopFurnitureCard = (props: TopFurnitureCardProps) => {
 					<strong className={'title'} onClick={() => pushDetailHandler(furniture._id)}>
 						{furniture?.furnitureTitle}
 					</strong>
-					<p className={'desc'}>{furniture?.furnitureAddress}</p>
+					<p className={'desc'}>{furniture?.furnitureBrand}</p>
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/bed.svg" alt="" />
-							<span>{furniture?.furnitureBeds} bed</span>
+							<span>{furniture?.furnitureColor} color</span>
 						</div>
 						<div>
 							<img src="/img/icons/room.svg" alt="" />
-							<span>{furniture?.furnitureRooms} rooms</span>
+							<span>{furniture?.furnitureCondition} condition</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
@@ -89,15 +89,15 @@ const TopFurnitureCard = (props: TopFurnitureCardProps) => {
 					<strong className={'title'} onClick={() => pushDetailHandler(furniture._id)}>
 						{furniture?.furnitureTitle}
 					</strong>
-					<p className={'desc'}>{furniture?.furnitureAddress}</p>
+					<p className={'desc'}>{furniture?.furnitureBrand}</p>
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/bed.svg" alt="" />
-							<span>{furniture?.furnitureBeds} bed</span>
+							<span>{furniture?.furnitureColor} color</span>
 						</div>
 						<div>
 							<img src="/img/icons/room.svg" alt="" />
-							<span>{furniture?.furnitureRooms} rooms</span>
+							<span>{furniture?.furnitureCondition} Condition</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />

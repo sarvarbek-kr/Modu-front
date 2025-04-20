@@ -1,15 +1,26 @@
-import { FurnitureLocation, FurnitureStatus, FurnitureType } from '../../enums/furniture.enum';
+import {
+	FurnitureBrand,
+	FurnitureColor,
+	FurnitureCondition,
+	FurnitureLocation,
+	FurnitureMaterial,
+	FurnitureStatus,
+	FurnitureType,
+} from '../../enums/furniture.enum';
+import { FurnitureDimensionsInput } from './furniture.input';
 
 export interface FurnitureUpdate {
 	_id: string;
 	furnitureType?: FurnitureType;
 	furnitureStatus?: FurnitureStatus;
 	furnitureLocation?: FurnitureLocation;
-	furnitureAddress?: string;
+	furnitureCondition?: FurnitureCondition;
+	furnitureDimensions?: FurnitureDimensionsInput;
+	furnitureColor?: FurnitureColor;
+	furnitureMaterial?: FurnitureMaterial;
+	furnitureBrand?: FurnitureBrand;
 	furnitureTitle?: string;
 	furniturePrice?: number;
-	furnitureBeds?: number;
-	furnitureRooms?: number;
 	furnitureImages?: string[];
 	furnitureDesc?: string;
 	furnitureBarter?: boolean;

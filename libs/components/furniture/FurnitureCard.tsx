@@ -65,16 +65,16 @@ const FurnitureCard = (props: FurnitureCardType) => {
 						</Stack>
 						<Stack className="address">
 							<Typography>
-								{furniture.furnitureAddress}, {furniture.furnitureLocation}
+								{furniture.furnitureBrand}, {furniture.furnitureLocation}
 							</Typography>
 						</Stack>
 					</Stack>
 					<Stack className="options">
 						<Stack className="option">
-							<img src="/img/icons/bed.svg" alt="" /> <Typography>{furniture.furnitureBeds} bed</Typography>
+							<img src="/img/icons/bed.svg" alt="" /> <Typography>{furniture.furnitureColor} color</Typography>
 						</Stack>
 						<Stack className="option">
-							<img src="/img/icons/room.svg" alt="" /> <Typography>{furniture.furnitureRooms} room</Typography>
+							<img src="/img/icons/room.svg" alt="" /> <Typography>{furniture.furnitureCondition} condition</Typography>
 						</Stack>
 					</Stack>
 					<Stack className="divider"></Stack>

@@ -230,10 +230,6 @@ FurnitureList.defaultProps = {
 		sort: 'createdAt',
 		direction: 'DESC',
 		search: {
-			squaresRange: {
-				start: 0,
-				end: 500,
-			},
 			pricesRange: {
 				start: 0,
 				end: 2000000,

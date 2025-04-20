@@ -61,7 +61,7 @@ query GetMember($input: String!) {
         memberLikes
         memberViews
         memberFollowings
-				memberFollowers
+		memberFollowers
         memberRank
         memberWarnings
         memberBlocks
@@ -89,16 +89,22 @@ export const GET_FURNITURE = gql`
 			furnitureType
 			furnitureStatus
 			furnitureLocation
-			furnitureAddress
+			furnitureCondition
+			furnitureColor
+			furnitureMaterial
+			furnitureBrand
 			furnitureTitle
 			furniturePrice
-			furnitureBeds
-			furnitureRooms
 			furnitureViews
 			furnitureLikes
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
+			furnitureDimensions {
+				width
+				height
+				depth
+			}
 			memberId
 			soldAt
 			deletedAt
@@ -143,17 +149,23 @@ export const GET_FURNITURES = gql`
 				furnitureType
 				furnitureStatus
 				furnitureLocation
-				furnitureAddress
+				furnitureCondition
+				furnitureColor
+				furnitureMaterial
+				furnitureBrand
 				furnitureTitle
 				furniturePrice
-				furnitureBeds
-				furnitureRooms
 				furnitureViews
 				furnitureLikes
 				furnitureRank
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
+				furnitureDimensions {
+					width
+					height
+					depth
+				}
 				memberId
 				soldAt
 				deletedAt
@@ -203,16 +215,22 @@ export const GET_AGENT_FURNITURES = gql`
 				furnitureType
 				furnitureStatus
 				furnitureLocation
-				furnitureAddress
 				furnitureTitle
 				furniturePrice
-				furnitureBeds
-				furnitureRooms
+				furnitureCondition
+				furnitureColor
+				furnitureMaterial
+				furnitureBrand
 				furnitureViews
 				furnitureLikes
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
+				furnitureDimensions {
+					width
+					height
+					depth
+				}
 				memberId
 				soldAt
 				deletedAt
@@ -235,11 +253,12 @@ export const GET_FAVORITES = gql`
 				furnitureType
 				furnitureStatus
 				furnitureLocation
-				furnitureAddress
 				furnitureTitle
 				furniturePrice
-				furnitureBeds
-				furnitureRooms
+				furnitureCondition
+				furnitureColor
+				furnitureMaterial
+				furnitureBrand
 				furnitureViews
 				furnitureLikes
 				furnitureComments
@@ -253,6 +272,11 @@ export const GET_FAVORITES = gql`
 				constructedAt
 				createdAt
 				updatedAt
+				furnitureDimensions {
+					width
+					height
+					depth
+				}
 				memberData {
 					_id
 					memberType
@@ -296,11 +320,12 @@ export const GET_VISITED = gql`
 				furnitureType
 				furnitureStatus
 				furnitureLocation
-				furnitureAddress
 				furnitureTitle
 				furniturePrice
-				furnitureBeds
-				furnitureRooms
+				furnitureCondition
+				furnitureColor
+				furnitureMaterial
+				furnitureBrand
 				furnitureViews
 				furnitureLikes
 				furnitureComments
@@ -308,6 +333,11 @@ export const GET_VISITED = gql`
 				furnitureImages
 				furnitureDesc
 				furnitureBarter
+				furnitureDimensions {
+					width
+					height
+					depth
+				}
 				memberId
 				soldAt
 				deletedAt

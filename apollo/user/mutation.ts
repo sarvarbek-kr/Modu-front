@@ -206,6 +206,11 @@ export const LIKE_TARGET_FURNITURE = gql`
 			furnitureImages
 			furnitureDesc
 			furnitureBarter
+			furnitureDimensions {
+				width
+				height
+				depth
+			}
 			memberId
 			soldAt
 			deletedAt

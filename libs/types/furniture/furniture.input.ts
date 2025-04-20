@@ -1,14 +1,30 @@
-import { FurnitureLocation, FurnitureStatus, FurnitureType } from '../../enums/furniture.enum';
+import {
+	FurnitureBrand,
+	FurnitureColor,
+	FurnitureCondition,
+	FurnitureLocation,
+	FurnitureMaterial,
+	FurnitureStatus,
+	FurnitureType,
+} from '../../enums/furniture.enum';
 import { Direction } from '../../enums/common.enum';
+
+export interface FurnitureDimensionsInput {
+	width: number;
+	height: number;
+	depth: number;
+}
 
 export interface FurnitureInput {
 	furnitureType: FurnitureType;
 	furnitureLocation: FurnitureLocation;
-	furnitureAddress: string;
+	furnitureCondition: FurnitureCondition;
+	furnitureDimensions: FurnitureDimensionsInput;
+	furnitureColor: FurnitureColor;
+	furnitureMaterial: FurnitureMaterial;
+	furnitureBrand: FurnitureBrand;
 	furnitureTitle: string;
 	furniturePrice: number;
-	furnitureBeds: number;
-	furnitureRooms: number;
 	furnitureImages: string[];
 	furnitureDesc?: string;
 	furnitureBarter?: boolean;
@@ -20,12 +36,14 @@ interface PISearch {
 	memberId?: string;
 	locationList?: FurnitureLocation[];
 	typeList?: FurnitureType[];
-	roomsList?: Number[];
+	conditionList?: FurnitureCondition[];
+	colorList?: FurnitureColor[];
+	materialList?: FurnitureMaterial[];
+	brandList?: FurnitureBrand[];
+	furnitureDimensions?: FurnitureDimensionsInput;
 	options?: string[];
-	bedsList?: Number[];
 	pricesRange?: Range;
 	periodsRange?: PeriodsRange;
-	squaresRange?: Range;
 	text?: string;
 }
 
