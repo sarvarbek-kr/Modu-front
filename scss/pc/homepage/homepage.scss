@@ -159,6 +159,7 @@
 							position: absolute;
 							inset: 0; // top: 0; bottom: 0; left: 0; right: 0;
 							background-color: #4a4949;
+							border-radius: 12px 12px 12px 12px;
 
 							opacity: 0;
 							transition: opacity 0.3s ease;
@@ -173,6 +174,7 @@
 							width: 285px;
 							height: 300px;
 							background-size: cover;
+							border-radius: 12px 12px 0px 0px;
 							.shop-btn {
 								position: absolute;
 								opacity: 0;
@@ -237,6 +239,7 @@
 								.shop-btn {
 									opacity: 1;
 									transform: translateY(0);
+									border-radius: 0px 0px 0px 0px;
 								}
 								div {
 									opacity: 1;
@@ -255,6 +258,7 @@
 							border: 1px solid rgba(196, 196, 196, 0.71);
 							border-top: none;
 							background-color: #f4f5f7;
+							border-radius: 0px 0px 12px 12px;
 
 							.title {
 								overflow: hidden;
