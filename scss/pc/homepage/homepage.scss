@@ -162,7 +162,6 @@
 							opacity: 0;
 							transition: opacity 0.3s ease;
 							z-index: 2;
-							cursor: pointer;
 						}
 						&:hover::before {
 							opacity: 0.72; // 🔥 Hover qilinganda ustiga qoramtir fon tushadi
@@ -204,25 +203,29 @@
 
 							.view-like-box {
 								display: flex;
-								height: 50px;
-								width: 100px;
+								height: 30px;
+								width: 100%;
 								position: absolute;
-								justify-content: space-between;
+								top: 250px;
+								right: 10px;
+								justify-content: flex-end;
 								opacity: 0;
 								z-index: 3;
-								background: #fff;
+
 								.like {
 									display: flex;
 									position: relative;
+									color: #fff;
 								}
 
 								.view-cnt {
+									margin-top: 2px;
 									display: flex;
-									color: #000000;
+									color: #fff;
 									font-family: $font;
-									font-size: 13px;
+									font-size: 18px;
 									font-style: normal;
-									font-weight: 400;
+									font-weight: 600;
 									line-height: normal;
 									text-overflow: ellipsis;
 								}
@@ -258,27 +261,27 @@
 								text-overflow: ellipsis;
 								white-space: nowrap;
 								font-family: $font;
-								font-size: 24px;
+								font-size: 18px;
 								font-style: normal;
 								font-weight: 600;
 								line-height: 29px;
 								text-transform: capitalize;
 							}
 							.bott {
-								margin-top: 5px;
+								margin-top: 15px;
 								.furnBrand {
 									color: #898989;
 									font-family: $font;
-									font-size: 16px;
+									font-size: 14px;
 									font-style: normal;
 									font-weight: 300;
 									line-height: 150%; /* 24px */
 								}
 								.furnPrice {
-									margin-top: 5px;
+									margin-top: 15px;
 									color: #3a3a3a;
 									font-family: $font;
-									font-size: 20px;
+									font-size: 16px;
 									font-style: normal;
 									font-weight: 600;
 									line-height: 150%; /* 30px */
@@ -289,6 +292,7 @@
 				}
 			}
 		}
+
 		.video-frame {
 			width: 100%;
 			height: 678px;

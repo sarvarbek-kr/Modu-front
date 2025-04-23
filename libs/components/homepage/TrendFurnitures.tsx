@@ -118,7 +118,7 @@ const TrendFurnitures = (props: TrendFurnituresProps) => {
 							<Swiper
 								className={'trend-furniture-swiper'}
 								slidesPerView={'auto'}
-								spaceBetween={15}
+								spaceBetween={10}
 								modules={[Autoplay, Navigation, Pagination]}
 								navigation={{
 									nextEl: '.swiper-trend-next',

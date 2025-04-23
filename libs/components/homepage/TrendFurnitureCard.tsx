@@ -1,9 +1,10 @@
-import React from 'react';
-import { Stack, Box, Divider, Typography, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Stack, Box, Typography, Button, Tooltip, Snackbar } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ShareIcon from '@mui/icons-material/Share';
 import { useRouter } from 'next/router';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
@@ -20,6 +21,15 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
+	const [openSnackbar, setOpenSnackbar] = useState(false);
+
+	const copyLinkHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation(); // boshqa eventlarni to‘xtatish
+		const link = `${window.location.origin}/furniture/detail?id=${furniture._id}`;
+		navigator.clipboard.writeText(link).then(() => {
+			setOpenSnackbar(true);
+		});
+	};
 
 	/** HANDLERS **/
 
@@ -66,14 +76,37 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 						component={'div'}
 						className={'card-img'}
 						style={{ backgroundImage: `url(${REACT_APP_API_URL}/${furniture?.furnitureImages[0]})` }}
-						onClick={() => pushDetailHandler(furniture._id)}
 					>
 						{' '}
-						<Button className={'shop-btn'} onClick={() => pushDetailHandler(furniture._id)}>
+						<Button
+							className={'shop-btn'}
+							onClick={(e) => {
+								e.stopPropagation();
+								pushDetailHandler(furniture._id);
+							}}
+						>
 							<b>View Item</b>
 						</Button>
 						<div className="view-like-box">
-							<IconButton className="like" color={'default'} onClick={() => likeFurnitureHandler(user, furniture?._id)}>
+							<IconButton
+								onClick={(e) => {
+									e.stopPropagation(); // prevent click from bubbling up
+									copyLinkHandler(e);
+								}}
+								style={{ color: 'white' }}
+							>
+								<Tooltip title="Copy Link">
+									<ShareIcon />
+								</Tooltip>
+							</IconButton>
+							<IconButton
+								className="like"
+								color={'default'}
+								onClick={(e) => {
+									e.stopPropagation();
+									likeFurnitureHandler(user, furniture?._id);
+								}}
+							>
 								{furniture?.meLiked && furniture?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (
@@ -92,6 +125,14 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 							<div className="furnPrice">${furniture.furniturePrice}</div>
 						</div>
 					</Box>
+					<Snackbar
+						open={openSnackbar}
+						autoHideDuration={2000}
+						onClose={() => setOpenSnackbar(false)}
+						message="Link copied to clipboard!"
+						anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+						className="snackbar-root"
+					/>
 				</Stack>
 			</Stack>
 		);
