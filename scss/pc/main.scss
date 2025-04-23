@@ -94,7 +94,7 @@ body::-webkit-scrollbar {
 						div {
 							position: relative;
 							color: #000;
-							font-family: Poppins;
+							font-family: $font;
 							font-size: 16px;
 							font-style: normal;
 							font-weight: 500;
@@ -142,7 +142,7 @@ body::-webkit-scrollbar {
 								margin-right: 10px;
 							}
 							span {
-								font-family: Poppins;
+								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
 								font-weight: 500;
@@ -207,8 +207,8 @@ body::-webkit-scrollbar {
 			margin-right: 60px;
 		}
 		.arrivalText {
-			color: var(--Font-Color, #333);
-			font-family: Poppins;
+			color: #333;
+			font-family: $font;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 600;
@@ -222,8 +222,8 @@ body::-webkit-scrollbar {
 			width: 559px;
 			height: 127px;
 			flex-shrink: 0;
-			color: var(--Primary, #b88e2f);
-			font-family: Poppins;
+			color: #b88e2f;
+			font-family: $font;
 			font-size: 52px;
 			font-style: normal;
 			font-weight: 700;
@@ -235,8 +235,8 @@ body::-webkit-scrollbar {
 			width: 546px;
 			height: 52px;
 			flex-shrink: 0;
-			color: var(--Font-Color, #333);
-			font-family: Poppins;
+			color: #333;
+			font-family: $font;
 			font-size: 18px;
 			font-style: normal;
 			font-weight: 500;
@@ -263,7 +263,7 @@ body::-webkit-scrollbar {
 		}
 		.buyNow {
 			color: #fff;
-			font-family: Poppins;
+			font-family: $font;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 700;

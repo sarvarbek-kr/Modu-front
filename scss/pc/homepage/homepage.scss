@@ -153,7 +153,6 @@
 						display: flex;
 						flex-direction: column;
 						overflow: hidden;
-
 						&::before {
 							width: 285px;
 							content: '';
@@ -162,47 +161,82 @@
 							background-color: #4a4949;
 							opacity: 0;
 							transition: opacity 0.3s ease;
-							z-index: 1;
-							border-radius: 10px;
+							z-index: 2;
 							cursor: pointer;
 						}
-
 						&:hover::before {
 							opacity: 0.72; // 🔥 Hover qilinganda ustiga qoramtir fon tushadi
 						}
+
 						.card-img {
 							position: relative;
 							width: 285px;
 							height: 300px;
 							background-size: cover;
-							border-radius: 12px 12px 0px 0px;
-							div {
+							.shop-btn {
 								position: absolute;
-								padding: 8px 12px;
-								left: 12px;
-								bottom: 12px;
-								border-radius: 6px;
+								opacity: 0;
+								z-index: 3;
+								transition: opacity 0.3s ease;
+								padding: 10px;
+								top: 175px;
+								width: 200px;
+								height: 50px;
+								left: 40px;
+								display: flex;
+								flex-direction: row;
+								align-items: center;
+								cursor: pointer;
 								background: #fff;
-								color: #000000;
 								font-family: $font;
-								font-size: 15px;
 								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-								.view-like-box {
+								font-weight: 800;
+								font-size: 14px;
+								line-height: 15px;
+								color: #b88e2f;
+								b {
+									position: absolute;
+									display: block;
+									max-width: 100%;
+									height: auto;
+								}
+							}
+
+							.view-like-box {
+								display: flex;
+								height: 50px;
+								width: 100px;
+								position: absolute;
+								justify-content: space-between;
+								opacity: 0;
+								z-index: 3;
+								background: #fff;
+								.like {
 									display: flex;
-									flex-direction: row;
-									gap: 7px;
-									align-items: center;
-									.view-cnt {
-										color: #000000;
-										font-family: $font;
-										font-size: 13px;
-										font-style: normal;
-										font-weight: 400;
-										line-height: normal;
-										text-overflow: ellipsis;
-									}
+									position: relative;
+								}
+
+								.view-cnt {
+									display: flex;
+									color: #000000;
+									font-family: $font;
+									font-size: 13px;
+									font-style: normal;
+									font-weight: 400;
+									line-height: normal;
+									text-overflow: ellipsis;
+								}
+							}
+						}
+						&:hover {
+							.card-img {
+								.shop-btn {
+									opacity: 1;
+									transform: translateY(0);
+								}
+								div {
+									opacity: 1;
+									transform: translateY(0);
 								}
 							}
 						}
@@ -214,11 +248,10 @@
 							display: flex;
 							flex-direction: column;
 							box-sizing: border-box;
-							border-radius: 0px 0px 12px 12px;
 							border: 1px solid rgba(196, 196, 196, 0.71);
 							border-top: none;
-							background: #fff;
-							box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+							background-color: #f4f5f7;
+
 							.title {
 								overflow: hidden;
 								color: #3a3a3a;
