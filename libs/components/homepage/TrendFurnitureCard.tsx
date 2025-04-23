@@ -89,15 +89,19 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 						</Button>
 						<div className="view-like-box">
 							<IconButton
+								className="shareIcon"
 								onClick={(e) => {
 									e.stopPropagation(); // prevent click from bubbling up
 									copyLinkHandler(e);
 								}}
-								style={{ color: 'white' }}
+								style={{ color: 'white', marginLeft: '50px' }}
 							>
 								<Tooltip title="Copy Link">
 									<ShareIcon />
 								</Tooltip>
+								<div className="share" style={{ color: 'white', fontSize: '18px', fontWeight: 600, marginLeft: '9px' }}>
+									share
+								</div>
 							</IconButton>
 							<IconButton
 								className="like"
@@ -113,7 +117,7 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 									<FavoriteBorderIcon />
 								)}
 							</IconButton>
-							<Typography className="view-cnt">{furniture?.furnitureLikes}</Typography>
+							<Typography className="view-cnt">{furniture?.furnitureLikes} like</Typography>
 						</div>
 					</Box>
 					<Box component={'div'} className={'info'}>
