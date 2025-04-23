@@ -117,7 +117,7 @@
 		.trend-furnitures {
 			padding: 108px 0px 76px;
 			width: 100%;
-			height: 697px;
+			height: 797px;
 			display: flex;
 			flex-direction: row;
 			.container {
@@ -136,7 +136,7 @@
 					}
 					.trend-furniture-swiper {
 						width: 100%;
-						height: 400px;
+						height: 500px;
 						display: flex;
 						flex-direction: row;
 						.trend-furniture-slide {
@@ -149,21 +149,33 @@
 					.trend-card-box {
 						position: relative;
 						width: 300px;
-						height: 375px;
+						height: 450px;
 						display: flex;
 						flex-direction: column;
-						transition: transform 0.3s;
-						&:hover {
-							opacity: 1;
-							transform: scale(1.05);
+						overflow: hidden;
+
+						&::before {
+							width: 285px;
+							content: '';
+							position: absolute;
+							inset: 0; // top: 0; bottom: 0; left: 0; right: 0;
+							background-color: #4a4949;
+							opacity: 0;
+							transition: opacity 0.3s ease;
+							z-index: 1;
+							border-radius: 10px;
+							cursor: pointer;
+						}
+
+						&:hover::before {
+							opacity: 0.72; // 🔥 Hover qilinganda ustiga qoramtir fon tushadi
 						}
 						.card-img {
 							position: relative;
-							width: 100%;
-							height: 203px;
+							width: 285px;
+							height: 300px;
 							background-size: cover;
 							border-radius: 12px 12px 0px 0px;
-							cursor: pointer;
 							div {
 								position: absolute;
 								padding: 8px 12px;
@@ -171,16 +183,34 @@
 								bottom: 12px;
 								border-radius: 6px;
 								background: #fff;
-								color: #181a20;
+								color: #000000;
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
 								font-weight: 600;
 								line-height: normal;
+								.view-like-box {
+									display: flex;
+									flex-direction: row;
+									gap: 7px;
+									align-items: center;
+									.view-cnt {
+										color: #000000;
+										font-family: $font;
+										font-size: 13px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: normal;
+										text-overflow: ellipsis;
+									}
+								}
 							}
 						}
 						.info {
-							padding: 20px 22px 17px;
+							width: 285px;
+							height: 150px;
+							flex-shrink: 0;
+							padding: 16px;
 							display: flex;
 							flex-direction: column;
 							box-sizing: border-box;
@@ -191,86 +221,34 @@
 							box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 							.title {
 								overflow: hidden;
-								color: #181a20;
+								color: #3a3a3a;
 								text-overflow: ellipsis;
 								white-space: nowrap;
 								font-family: $font;
-								font-size: 15px;
+								font-size: 24px;
 								font-style: normal;
 								font-weight: 600;
-								line-height: normal;
+								line-height: 29px;
 								text-transform: capitalize;
-								cursor: pointer;
-							}
-							.desc {
-								margin-top: 5px;
-								overflow: hidden;
-								color: #717171;
-								font-family: $font;
-								font-size: 13px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: normal;
-								text-overflow: ellipsis;
-								white-space: nowrap;
-							}
-							.options {
-								margin-top: 15px;
-								display: flex;
-								flex-direction: row;
-								justify-content: space-between;
-								div {
-									display: flex;
-									flex-direction: row;
-									img {
-										margin-right: 5px;
-										width: 17px;
-										height: 17px;
-									}
-									span {
-										color: #181a20;
-										font-family: $font;
-										font-size: 13px;
-										font-style: normal;
-										font-weight: 400;
-										line-height: normal;
-									}
-								}
 							}
 							.bott {
-								display: flex;
-								flex-direction: row;
-								justify-content: space-between;
-								align-items: center;
-								p {
-									color: #181a20;
+								margin-top: 5px;
+								.furnBrand {
+									color: #898989;
 									font-family: $font;
-									font-size: 13px;
+									font-size: 16px;
 									font-style: normal;
-									font-weight: 400;
-									line-height: normal;
-									text-transform: capitalize;
+									font-weight: 300;
+									line-height: 150%; /* 24px */
 								}
-								button {
-									margin-left: 7px;
-									width: 16px;
-									height: 16px;
-									box-sizing: border-box;
-								}
-								.view-like-box {
-									display: flex;
-									flex-direction: row;
-									gap: 7px;
-									align-items: center;
-									.view-cnt {
-										color: #717171;
-										font-family: $font;
-										font-size: 13px;
-										font-style: normal;
-										font-weight: 400;
-										line-height: normal;
-										text-overflow: ellipsis;
-									}
+								.furnPrice {
+									margin-top: 5px;
+									color: #3a3a3a;
+									font-family: $font;
+									font-size: 20px;
+									font-style: normal;
+									font-weight: 600;
+									line-height: 150%; /* 30px */
 								}
 							}
 						}
