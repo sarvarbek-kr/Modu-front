@@ -249,12 +249,12 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 										<Typography className={'date'}>{moment().diff(furniture?.createdAt, 'days')} days ago</Typography>
 									</Stack>
 									<Stack className={'bottom-box'}>
-										<Stack className="option">
+										{/* <Stack className="option">
 											<img src="/img/icons/bed.svg" alt="" /> <Typography>{furniture?.furnitureBeds} bed</Typography>
 										</Stack>
 										<Stack className="option">
 											<img src="/img/icons/room.svg" alt="" /> <Typography>{furniture?.furnitureRooms} room</Typography>
-										</Stack>
+										</Stack> */}
 									</Stack>
 								</Stack>
 								<Stack className={'right-box'}>
@@ -314,7 +314,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 												/>
 											</svg>
 										</Stack>
-										<Stack className={'option-includes'}>
+										{/* <Stack className={'option-includes'}>
 											<Typography className={'title'}>Bedroom</Typography>
 											<Typography className={'option-data'}>{furniture?.furnitureBeds}</Typography>
 										</Stack>
@@ -326,7 +326,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 										<Stack className={'option-includes'}>
 											<Typography className={'title'}>Room</Typography>
 											<Typography className={'option-data'}>{furniture?.furnitureRooms}</Typography>
-										</Stack>
+										</Stack> */}
 									</Stack>
 									<Stack className={'option'}>
 										<Stack className={'svg-box'}>
@@ -399,14 +399,14 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 													<Typography className={'title'}>Price</Typography>
 													<Typography className={'data'}>${formatterStr(furniture?.furniturePrice)}</Typography>
 												</Box>
-												<Box component={'div'} className={'info'}>
+												{/* <Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Rooms</Typography>
 													<Typography className={'data'}>{furniture?.furnitureRooms}</Typography>
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Bedrooms</Typography>
 													<Typography className={'data'}>{furniture?.furnitureBeds}</Typography>
-												</Box>
+												</Box> */}
 											</Stack>
 											<Stack className={'right'}>
 												<Box component={'div'} className={'info'}>

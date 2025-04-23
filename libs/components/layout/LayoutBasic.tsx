@@ -43,7 +43,7 @@ const withLayoutBasic = (Component: any) => {
 					break;
 				case '/mypage':
 					title = 'my page';
-					bgImage = '/img/banner/header1.svg';
+					bgImage = '/img/banner/header2.svg';
 					break;
 				case '/community':
 					title = 'Community';
