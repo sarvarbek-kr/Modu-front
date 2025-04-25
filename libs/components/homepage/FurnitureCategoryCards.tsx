@@ -1,44 +1,80 @@
 'use client';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Box, Typography } from '@mui/material';
-import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Stack } from 'phosphor-react';
 
 const furnitureCategories = [
 	{
 		name: 'Home',
 		image: '/img/banner/homeFurniture.jpg',
-		// link: '/furniture?input={"search":{"typeList":["HOME"]}}',
-		link: '/furniture?input={%22page%22:1,%22limit%22:9,%22sort%22:%22createdAt%22,%22direction%22:%22DESC%22,%22search%22:{%22pricesRange%22:{%22start%22:0,%22end%22:2000000},%22typeList%22:[%22HOME%22]}}',
+		input: {
+			page: 1,
+			limit: 9,
+			sort: 'createdAt',
+			direction: 'DESC',
+			search: {
+				pricesRange: {
+					start: 0,
+					end: 2000000,
+				},
+				typeList: ['HOME'],
+			},
+		},
 	},
 	{
 		name: 'Office',
 		image: '/img/banner/officeFurniture.jpg',
-		link: '/furniture?input={"search":{"typeList":["OFFICE"]}}',
+		input: {
+			search: {
+				typeList: ['OFFICE'],
+			},
+		},
 	},
 	{
 		name: 'Outdoor',
 		image: '/img/banner/outdoorFurniture.png',
-		link: '/furniture?input={"search":{"typeList":["OUTDOOR"]}}',
+		input: {
+			search: {
+				typeList: ['OUTDOOR'],
+			},
+		},
 	},
 	{
 		name: 'Commercial',
 		image: '/img/banner/commercialFurniture.jpg',
-		link: '/furniture?input={"search":{"typeList":["COMMERCIAL"]}}',
+		input: {
+			search: {
+				typeList: ['COMMERCIAL'],
+			},
+		},
 	},
 	{
 		name: 'Accessories',
 		image: '/img/banner/accessoriesFurniture.jpg',
-		link: '/furniture?input={"search":{"typeList":["ACCESSORIES"]}}',
+		input: {
+			search: {
+				typeList: ['ACCESSORIES'],
+			},
+		},
 	},
 ];
 
 const FurnitureCategories = () => {
+	const router = useRouter();
+
+	const handleNavigate = useCallback(
+		(input: object) => {
+			const queryString = encodeURIComponent(JSON.stringify(input));
+			router.push(`/furniture?input=${queryString}`);
+		},
+		[router],
+	);
+
 	return (
 		<Box className={'container'} sx={{ width: '100%', px: 3, py: 6 }}>
 			<Box sx={{ width: '100%', maxWidth: '1300px', px: 3 }}>
@@ -82,42 +118,41 @@ const FurnitureCategories = () => {
 				>
 					{furnitureCategories.map((item) => (
 						<SwiperSlide key={item.name}>
-							<Link href={item.link} passHref>
+							<Box
+								onClick={() => handleNavigate(item.input)}
+								sx={{
+									height: 500,
+									width: '100%',
+									borderRadius: 3,
+									overflow: 'hidden',
+									cursor: 'pointer',
+									position: 'relative',
+									background: `url(${item.image}) center/cover no-repeat`,
+								}}
+							>
 								<Box
 									sx={{
-										height: 500,
-										width: '100%',
-										borderRadius: 3,
-										overflow: 'hidden',
-										cursor: 'pointer',
-										position: 'relative',
-										background: `url(${item.image}) center/cover no-repeat`,
+										position: 'absolute',
+										inset: 0,
+										bgcolor: 'rgba(0, 0, 0, 0.2)',
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'center',
 									}}
 								>
-									<Box
+									<Typography
+										variant="subtitle2"
+										fontWeight={300}
+										color="white"
 										sx={{
-											position: 'absolute',
-											inset: 0,
-											bgcolor: 'rgba(0, 0, 0, 0.2)',
-											display: 'flex',
-											alignItems: 'center',
-											justifyContent: 'center',
+											fontSize: '2.5rem',
+											textShadow: '0px 0px 9px rgba(0, 0, 0, 0.8), 0px 0px 10px rgba(0, 0, 0, 0.6)',
 										}}
 									>
-										<Typography
-											variant="subtitle2"
-											fontWeight={300}
-											color="white"
-											sx={{
-												fontSize: '2.5rem',
-												textShadow: '0px 0px 9px rgba(0, 0, 0, 0.8), 0px 0px 10px rgba(0, 0, 0, 0.6)',
-											}}
-										>
-											{item.name}
-										</Typography>
-									</Box>
+										{item.name}
+									</Typography>
 								</Box>
-							</Link>
+							</Box>
 						</SwiperSlide>
 					))}
 				</Swiper>
