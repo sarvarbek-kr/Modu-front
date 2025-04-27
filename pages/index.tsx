@@ -10,6 +10,7 @@ import { Stack } from '@mui/material';
 import Advertisement from '../libs/components/homepage/Advertisement';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import FurnitureCategories from '../libs/components/homepage/FurnitureCategoryCards';
+import ModuSetup from '../libs/components/homepage/moduSetup';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -36,6 +37,7 @@ const Home: NextPage = () => {
 				<FurnitureCategories />
 				<TrendFurnitures />
 				<Advertisement />
+				<ModuSetup />
 				<TopFurnitures />
 				<TopAgents />
 				<Events />

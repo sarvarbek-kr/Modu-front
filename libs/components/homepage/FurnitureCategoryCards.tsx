@@ -30,7 +30,15 @@ const furnitureCategories = [
 		name: 'Office',
 		image: '/img/banner/officeFurniture.jpg',
 		input: {
+			page: 1,
+			limit: 9,
+			sort: 'createdAt',
+			direction: 'DESC',
 			search: {
+				pricesRange: {
+					start: 0,
+					end: 2000000,
+				},
 				typeList: ['OFFICE'],
 			},
 		},
@@ -39,7 +47,15 @@ const furnitureCategories = [
 		name: 'Outdoor',
 		image: '/img/banner/outdoorFurniture.png',
 		input: {
+			page: 1,
+			limit: 9,
+			sort: 'createdAt',
+			direction: 'DESC',
 			search: {
+				pricesRange: {
+					start: 0,
+					end: 2000000,
+				},
 				typeList: ['OUTDOOR'],
 			},
 		},
@@ -48,7 +64,15 @@ const furnitureCategories = [
 		name: 'Commercial',
 		image: '/img/banner/commercialFurniture.jpg',
 		input: {
+			page: 1,
+			limit: 9,
+			sort: 'createdAt',
+			direction: 'DESC',
 			search: {
+				pricesRange: {
+					start: 0,
+					end: 2000000,
+				},
 				typeList: ['COMMERCIAL'],
 			},
 		},
@@ -57,7 +81,15 @@ const furnitureCategories = [
 		name: 'Accessories',
 		image: '/img/banner/accessoriesFurniture.jpg',
 		input: {
+			page: 1,
+			limit: 9,
+			sort: 'createdAt',
+			direction: 'DESC',
 			search: {
+				pricesRange: {
+					start: 0,
+					end: 2000000,
+				},
 				typeList: ['ACCESSORIES'],
 			},
 		},
