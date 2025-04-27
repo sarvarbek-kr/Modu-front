@@ -22,21 +22,21 @@ const TopAgents = (props: TopAgentsProps) => {
 	const router = useRouter();
 	const [topAgents, setTopAgents] = useState<Member[]>([]);
 
-/** APOLLO REQUESTS **/
-const {
-	loading: getAgentsLoading,
-	data: getAgentsData,
-	error: getAgentsError,
-	refetch: getAgentsRefetch,
-} = useQuery(GET_AGENTS, {
-	fetchPolicy: 'cache-and-network',
-	variables: { input: initialInput },
-	notifyOnNetworkStatusChange: true,
-	onCompleted: (data: T) => {
-		setTopAgents(data?.getAgents?.list);
-	},
-});
-/** HANDLERS **/
+	/** APOLLO REQUESTS **/
+	const {
+		loading: getAgentsLoading,
+		data: getAgentsData,
+		error: getAgentsError,
+		refetch: getAgentsRefetch,
+	} = useQuery(GET_AGENTS, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: initialInput },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setTopAgents(data?.getAgents?.list);
+		},
+	});
+	/** HANDLERS **/
 
 	if (device === 'mobile') {
 		return (
@@ -75,10 +75,15 @@ const {
 							<p>Our Top Agents always ready to serve you</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
-							<div className={'more-box'}>
+							<Box
+								component={'div'}
+								className={'more-box'}
+								onClick={() => router.push('/agent')}
+								sx={{ cursor: 'pointer' }} // optional: hoverda kursorga pointer chiqadi
+							>
 								<span>See All Agents</span>
 								<img src="/img/icons/rightup.svg" alt="" />
-							</div>
+							</Box>
 						</Box>
 					</Stack>
 					<Stack className={'wrapper'}>

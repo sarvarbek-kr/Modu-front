@@ -109,7 +109,7 @@ const FurnitureCategories = () => {
 					className="furniture-swiper"
 					modules={[Autoplay, Navigation, Pagination]}
 					slidesPerView={3}
-					spaceBetween={5}
+					spaceBetween={15}
 					centeredSlides={false}
 					loop={true}
 					autoplay={{ delay: 3000, disableOnInteraction: false }}

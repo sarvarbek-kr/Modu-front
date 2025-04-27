@@ -12,11 +12,11 @@
 				display: flex;
 				flex-direction: column;
 				span {
-					color: #181a20;
+					color: #333;
 					font-family: $font;
 					font-size: 34px;
 					font-style: normal;
-					font-weight: 500;
+					font-weight: 400;
 					line-height: 150%;
 					letter-spacing: -0.646px;
 					text-transform: capitalize;
@@ -25,9 +25,9 @@
 					}
 				}
 				p {
-					color: #181a20;
+					color: #666;
 					font-family: $font;
-					font-size: 14px;
+					font-size: 15px;
 					font-style: normal;
 					font-weight: 400;
 					line-height: 26px;
@@ -539,7 +539,7 @@
 							}
 						}
 						.top-agent-card {
-							width: 205px;
+							width: 210px;
 							height: 280px;
 							display: flex;
 							flex-direction: column;
@@ -563,13 +563,13 @@
 								cursor: pointer;
 							}
 							span {
-								color: #181a20;
 								text-align: center;
+								color: #898989;
 								font-family: $font;
-								font-size: 15px;
+								font-size: 14px;
 								font-style: normal;
-								font-weight: 400;
-								line-height: 28px;
+								font-weight: 300;
+								line-height: 150%; /* 24px */
 							}
 						}
 					}

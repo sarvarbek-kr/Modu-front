@@ -1,111 +1,140 @@
-import React from 'react';
-import { Stack, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Stack, Box, Typography, Button, Tooltip, Snackbar } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ShareIcon from '@mui/icons-material/Share';
 import { Furniture } from '../../types/furniture/furniture';
-import Link from 'next/link';
-import { formatterStr } from '../../utils';
-import { REACT_APP_API_URL, topFurnitureRank } from '../../config';
+import { REACT_APP_API_URL } from '../../config';
+import { useRouter } from 'next/router';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
-import IconButton from '@mui/material/IconButton';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
-interface FurnitureCardType {
+interface FurnitureCardProps {
 	furniture: Furniture;
-	likeFurnitureHandler?: any;
-	myFavorites?: boolean;
-	recentlyVisited?: boolean;
+	likeFurnitureHandler: any;
 }
 
-const FurnitureCard = (props: FurnitureCardType) => {
-	const { furniture, likeFurnitureHandler, myFavorites, recentlyVisited } = props;
+const FurnitureCard = (props: FurnitureCardProps) => {
+	const { furniture, likeFurnitureHandler } = props;
 	const device = useDeviceDetect();
+	const router = useRouter();
 	const user = useReactiveVar(userVar);
-	const imagePath: string = furniture?.furnitureImages[0]
-		? `${REACT_APP_API_URL}/${furniture?.furnitureImages[0]}`
-		: '/img/banner/header1.svg';
+	const [openSnackbar, setOpenSnackbar] = useState(false);
+
+	const copyLinkHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation(); // boshqa eventlarni to‘xtatish
+		const link = `${window.location.origin}/furniture/detail?id=${furniture._id}`;
+		navigator.clipboard.writeText(link).then(() => {
+			setOpenSnackbar(true);
+		});
+	};
+	/** HANDLERS **/
+	const pushDetailHandler = async (furnitureId: string) => {
+		console.log('furnitureId:', furnitureId);
+		await router.push({ pathname: '/furniture/detail', query: { id: furnitureId } });
+	};
 
 	if (device === 'mobile') {
-		return <div>FURNITURE CARD</div>;
+		return (
+			<Stack className="top-card-box" key={furniture._id}>
+				<Box
+					component={'div'}
+					className={'card-img'}
+					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${furniture?.furnitureImages[0]})` }}
+					onClick={() => pushDetailHandler(furniture._id)}
+				>
+					<div>${furniture.furniturePrice}</div>
+				</Box>
+				<Box component={'div'} className={'info'}>
+					<strong className={'title'} onClick={() => pushDetailHandler(furniture._id)}>
+						{furniture.furnitureTitle}
+					</strong>
+					<div className={'bott'}>
+						<div className="view-like-box">
+							<IconButton color={'default'} onClick={() => likeFurnitureHandler(user, furniture?._id)}>
+								{furniture?.meLiked && furniture?.meLiked[0]?.myFavorite ? (
+									<FavoriteIcon style={{ color: 'red' }} />
+								) : (
+									<FavoriteIcon />
+								)}
+							</IconButton>
+							<Typography className="view-cnt">{furniture?.furnitureLikes}</Typography>
+						</div>
+					</div>
+				</Box>
+			</Stack>
+		);
 	} else {
 		return (
-			<Stack className="card-config">
-				<Stack className="top">
-					<Link
-						href={{
-							pathname: '/furniture/detail',
-							query: { id: furniture?._id },
-						}}
+			<Stack className="top-card-box">
+				<Stack className="container">
+					<Box
+						component={'div'}
+						className={'card-img'}
+						style={{ backgroundImage: `url(${REACT_APP_API_URL}/${furniture?.furnitureImages[0]})` }}
 					>
-						<img src={imagePath} alt="" />
-					</Link>
-					{furniture && furniture?.furnitureRank > topFurnitureRank && (
-						<Box component={'div'} className={'top-badge'}>
-							<img src="/img/icons/electricity.svg" alt="" />
-							<Typography>TOP</Typography>
-						</Box>
-					)}
-					<Box component={'div'} className={'price-box'}>
-						<Typography>${formatterStr(furniture?.furniturePrice)}</Typography>
-					</Box>
-				</Stack>
-				<Stack className="bottom">
-					<Stack className="name-address">
-						<Stack className="name">
-							<Link
-								href={{
-									pathname: '/furniture/detail',
-									query: { id: furniture?._id },
+						{' '}
+						<Button
+							className={'shop-btn'}
+							onClick={(e) => {
+								e.stopPropagation();
+								pushDetailHandler(furniture._id);
+							}}
+						>
+							<b>View Item</b>
+						</Button>
+						<div className="view-like-box">
+							<IconButton
+								className="shareIcon"
+								onClick={(e) => {
+									e.stopPropagation(); // prevent click from bubbling up
+									copyLinkHandler(e);
+								}}
+								style={{ color: 'white', marginLeft: '50px' }}
+							>
+								<Tooltip title="Copy Link">
+									<ShareIcon />
+								</Tooltip>
+								<div className="share" style={{ color: 'white', fontSize: '18px', fontWeight: 600, marginLeft: '9px' }}>
+									share
+								</div>
+							</IconButton>
+							<IconButton
+								className="like"
+								color={'default'}
+								onClick={(e) => {
+									e.stopPropagation();
+									likeFurnitureHandler(user, furniture?._id);
 								}}
 							>
-								<Typography>{furniture.furnitureTitle}</Typography>
-							</Link>
-						</Stack>
-						<Stack className="address">
-							<Typography>
-								{furniture.furnitureBrand} /{furniture.furnitureLocation}
-							</Typography>
-						</Stack>
-					</Stack>
-					<Stack className="options">
-						<Stack className="option">
-							<img src="/img/icons/bed.svg" alt="" /> <Typography>{furniture.furnitureColor} color</Typography>
-						</Stack>
-						<Stack className="option">
-							<img src="/img/icons/room.svg" alt="" /> <Typography>{furniture.furnitureCondition} condition</Typography>
-						</Stack>
-					</Stack>
-					<Stack className="divider"></Stack>
-					<Stack className="type-buttons">
-						<Stack className="type">
-							<Typography
-								sx={{ fontWeight: 500, fontSize: '13px' }}
-								className={furniture.furnitureBarter ? '' : 'disabled-type'}
-							>
-								Barter
-							</Typography>
-						</Stack>
-						{!recentlyVisited && (
-							<Stack className="buttons">
-								<IconButton color={'default'}>
-									<RemoveRedEyeIcon />
-								</IconButton>
-								<Typography className="view-cnt">{furniture?.furnitureViews}</Typography>
-								<IconButton color={'default'} onClick={() => likeFurnitureHandler(user, furniture?._id)}>
-									{myFavorites ? (
-										<FavoriteIcon color="primary" />
-									) : furniture?.meLiked && furniture?.meLiked[0]?.myFavorite ? (
-										<FavoriteIcon color="primary" />
-									) : (
-										<FavoriteBorderIcon />
-									)}
-								</IconButton>
-								<Typography className="view-cnt">{furniture?.furnitureLikes}</Typography>
-							</Stack>
-						)}
-					</Stack>
+								{furniture?.meLiked && furniture?.meLiked[0]?.myFavorite ? (
+									<FavoriteIcon style={{ color: 'red' }} />
+								) : (
+									<FavoriteBorderIcon />
+								)}
+							</IconButton>
+							<Typography className="view-cnt">{furniture?.furnitureLikes} like</Typography>
+						</div>
+					</Box>
+					<Box component={'div'} className={'info'}>
+						<strong className={'title'} onClick={() => pushDetailHandler(furniture._id)}>
+							{furniture.furnitureTitle}
+						</strong>
+						<div className={'bott'}>
+							<div className="furnBrand">{furniture?.furnitureBrand}</div>
+							<div className="furnPrice">${furniture.furniturePrice}</div>
+						</div>
+					</Box>
+					<Snackbar
+						open={openSnackbar}
+						autoHideDuration={2000}
+						onClose={() => setOpenSnackbar(false)}
+						message="Link copied to clipboard!"
+						anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+						className="snackbar-root"
+					/>
 				</Stack>
 			</Stack>
 		);
