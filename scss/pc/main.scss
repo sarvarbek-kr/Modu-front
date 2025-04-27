@@ -194,7 +194,7 @@ body::-webkit-scrollbar {
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: calc(50% - 20px) center;
-		.container {
+		.container-main {
 			position: relative;
 			width: 643px;
 			height: 443px;
@@ -204,7 +204,7 @@ body::-webkit-scrollbar {
 			border-radius: 10px;
 			background-color: #fff3e3;
 			margin-top: 280px;
-			margin-right: 60px;
+			margin-left: 610px;
 		}
 		.arrivalText {
 			color: #333;

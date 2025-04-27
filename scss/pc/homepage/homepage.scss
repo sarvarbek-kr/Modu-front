@@ -487,23 +487,27 @@
 		}
 		.top-agents {
 			position: relative;
-			padding: 153px 0px 135px;
+			padding: 53px 0px 135px;
 			width: 100%;
 			height: 722px;
 			display: flex;
 			flex-direction: row;
 			background: #f6f6f6;
+			z-index: 0;
 			.container {
 				position: relative;
 				flex-direction: column;
 				align-items: center;
+				z-index: 1;
 				.wrapper {
+					position: relative;
 					width: 100%;
 					margin-top: 83px;
 					display: flex;
 					flex-direction: row;
 					align-items: center;
 					justify-content: space-between;
+					z-index: 2;
 					.switch-btn {
 						width: 53px;
 						height: 53px;
@@ -523,53 +527,77 @@
 						}
 					}
 					.card-wrapper {
+						position: relative;
 						width: 1174px;
 						height: 280px;
 						display: flex;
 						flex-direction: row;
+						z-index: 1;
 						.top-agents-swiper {
+							padding-left: 10px;
+							position: relative;
 							width: 99.7%;
-							height: 280px;
+							height: 480px;
 							display: flex;
 							flex-direction: row;
+
 							.top-agents-slide {
+								padding-top: 30px;
 								width: auto;
-								height: auto;
+								height: 380px;
 								display: flex;
-							}
-						}
-						.top-agent-card {
-							width: 210px;
-							height: 280px;
-							display: flex;
-							flex-direction: column;
-							img {
-								width: 209px;
-								height: 209px;
-								border-radius: 50%;
-								cursor: pointer;
-								object-fit: cover;
-							}
-							strong {
-								margin-top: 20px;
-								color: #181a20;
-								text-align: center;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-								text-transform: capitalize;
-								cursor: pointer;
-							}
-							span {
-								text-align: center;
-								color: #898989;
-								font-family: $font;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 300;
-								line-height: 150%; /* 24px */
+								.top-agent-card {
+									position: relative;
+									width: 210px;
+									height: 280px;
+									display: flex;
+									flex-direction: column;
+									transition: transform 0.3s ease; /* Add smooth scaling transition */
+									z-index: 4;
+
+									&:hover {
+										position: relative;
+										transform: scale(1.07); /* Scale up by 7% */
+										z-index: 10;
+									}
+									.top-agent-link {
+										width: 210px;
+										height: 280px;
+										display: flex;
+										flex-direction: column;
+										position: relative;
+
+										img {
+											width: 209px;
+											height: 209px;
+											border-radius: 50%;
+											cursor: pointer;
+											object-fit: cover;
+											transition: transform 1s ease;
+										}
+										strong {
+											margin-top: 20px;
+											color: #181a20;
+											text-align: center;
+											font-family: $font;
+											font-size: 15px;
+											font-style: normal;
+											font-weight: 600;
+											line-height: normal;
+											text-transform: capitalize;
+											cursor: pointer;
+										}
+										span {
+											text-align: center;
+											color: #898989;
+											font-family: $font;
+											font-size: 14px;
+											font-style: normal;
+											font-weight: 300;
+											line-height: 150%; /* 24px */
+										}
+									}
+								}
 							}
 						}
 					}
