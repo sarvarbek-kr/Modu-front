@@ -39,35 +39,35 @@ const withLayoutBasic = (Component: any) => {
 					break;
 				case '/agent/detail':
 					title = 'Agent Page';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/officeCommunity.png';
 					break;
 				case '/mypage':
 					title = 'my page';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/officeCommunity.png';
 					break;
 				case '/community':
 					title = 'Community';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/officeCommunity.png';
 					break;
 				case '/community/detail':
 					title = 'Community Detail';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/officeCommunity.png';
 					break;
 				case '/cs':
 					title = 'CS';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/officeCommunity.png';
 					break;
 				case '/account/join':
 					title = 'Login/Signup';
 					desc = 'Authentication Process';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/officeCommunity.png';
 					setAuthHeader(true);
 					break;
 				case '/member':
 					title = 'Member Page';
 					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header1.svg';
+					bgImage = '/img/banner/furnitures.png';
 					break;
 				default:
 					break;
