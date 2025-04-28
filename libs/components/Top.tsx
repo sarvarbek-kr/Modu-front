@@ -165,10 +165,10 @@ const Top = () => {
 				<Stack className={`navbar-main ${colorChange ? 'transparent' : ''} ${bgColor ? 'transparent' : ''}`}>
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
-							<Link href={'/'}>
+							<Link href={'/'} style={{ display: 'flex', flexDirection: 'row' }}>
 								<img src="/img/logo/logo-modu.svg" alt="" />
+								<h1>odu</h1>
 							</Link>
-							<h1>odu</h1>
 						</Box>
 						<Box component={'div'} className={'router-box'}>
 							<Link href={'/'}>

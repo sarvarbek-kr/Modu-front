@@ -58,7 +58,9 @@ body::-webkit-scrollbar {
 				align-items: center;
 				border-top: 1px solid rgba(255, 255, 255, 0.07);
 				&.transparent {
-					background-color: #fff3e380;
+					background-color: rgba(255, 243, 227, 0.5);
+					backdrop-filter: blur(3px); // Orqani blur qiladi
+					-webkit-backdrop-filter: blur(3px);
 				}
 				background: white;
 				.container {
@@ -550,7 +552,8 @@ body::-webkit-scrollbar {
 		height: auto;
 		display: flex;
 		flex-direction: row;
-		background: #181a20;
+
+		background: #f6f6f6;
 		.footer-container {
 			width: 1300px;
 			height: auto;
@@ -564,14 +567,27 @@ body::-webkit-scrollbar {
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
+					.footer-logo {
+						display: flex;
+						flex-direction: row;
+						img {
+							width: 50px;
+							cursor: pointer;
+						}
+						h1 {
+							color: #000;
+							font-family: $mont;
+							font-size: 35px;
+							font-style: normal;
+							font-weight: 700;
+							line-height: normal;
+							cursor: pointer;
+						}
+					}
 					.footer-box {
 						display: flex;
 						flex-direction: column;
-						.logo {
-							width: 128px;
-							height: 52px;
-							cursor: pointer;
-						}
+
 						span {
 							color: #bebdbd;
 							font-family: $font;
@@ -581,7 +597,7 @@ body::-webkit-scrollbar {
 							text-transform: capitalize;
 						}
 						p {
-							color: #fff;
+							color: #333;
 							font-family: $font;
 							font-size: 15px;
 							font-style: normal;
@@ -607,7 +623,7 @@ body::-webkit-scrollbar {
 						display: flex;
 						flex-direction: column;
 						strong {
-							color: #fff;
+							color: #333;
 							font-family: $font;
 							font-size: 15px;
 							font-style: normal;
@@ -625,13 +641,12 @@ body::-webkit-scrollbar {
 							align-items: center;
 							box-sizing: border-box;
 							border-radius: 12px;
-							background: #212329;
+							background: #fff;
 							input {
-								margin-right: 10px;
 								width: 85%;
 								border: none;
 								outline: none;
-								color: #fff;
+								color: #333;
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
@@ -639,14 +654,29 @@ body::-webkit-scrollbar {
 								line-height: 26px;
 								background: none;
 							}
-							span {
-								color: #fff;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
+							.button {
+								border-radius: 0px 10px 10px 0px;
+								margin-right: -30px;
+								margin-top: 0px;
+								height: 67px;
+								width: 330px;
+								background-color: #b88e2f;
+								align-items: center;
+								justify-content: center;
 								cursor: pointer;
+								&:hover {
+									background-color: #a6782d;
+								}
+
+								span {
+									color: #fff;
+									font-family: $font;
+									font-size: 15px;
+									font-style: normal;
+									font-weight: 600;
+									line-height: normal;
+									cursor: pointer;
+								}
 							}
 						}
 					}
@@ -660,7 +690,7 @@ body::-webkit-scrollbar {
 							flex-direction: column;
 							strong {
 								margin-bottom: 3px;
-								color: #fff;
+								color: #333;
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;
@@ -677,8 +707,7 @@ body::-webkit-scrollbar {
 								font-weight: 400;
 								cursor: pointer;
 								&:hover {
-									color: #ffffff;
-									text-decoration-line: underline;
+									color: #333;
 								}
 							}
 						}

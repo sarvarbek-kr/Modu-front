@@ -12,6 +12,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import FurnitureCategories from '../libs/components/homepage/FurnitureCategoryCards';
 import ModuSetup from '../libs/components/homepage/moduSetup';
 import Setup from '../libs/components/homepage/moduSetup';
+import AllBrand from '../libs/components/homepage/AllBrands';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -43,6 +44,7 @@ const Home: NextPage = () => {
 				<TopAgents />
 				<Events />
 				<CommunityBoards />
+				<AllBrand />
 			</Stack>
 		);
 	}

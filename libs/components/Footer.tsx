@@ -71,16 +71,17 @@ const Footer = () => {
 			<Stack className={'footer-container'}>
 				<Stack className={'main'}>
 					<Stack className={'left'}>
-						<Box component={'div'} className={'footer-box'}>
-							<img src="/img/logo/logoWhite.svg" alt="" className={'logo'} />
+						<Box component={'div'} className={'footer-logo'}>
+							<img src="/img/logo/logo-modu.svg" alt="" className={'logo'} />
+							<h1>odu</h1>
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
 							<span>total free customer care</span>
-							<p>+82 10 4867 2909</p>
+							<p>(555) 123-4567</p>
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
 							<span>nee live</span>
-							<p>+82 10 4867 2909</p>
+							<p>(555) 123-4567</p>
 							<span>Support?</span>
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
@@ -98,7 +99,9 @@ const Footer = () => {
 							<strong>keep yourself up to date</strong>
 							<div>
 								<input type="text" placeholder={'Your Email'} />
-								<span>Subscribe</span>
+								<div className="button">
+									<span>Subscribe</span>
+								</div>
 							</div>
 						</Box>
 						<Box component={'div'} className={'bottom'}>
