@@ -35,7 +35,7 @@ const withLayoutBasic = (Component: any) => {
 					break;
 				case '/agent':
 					title = 'Agents';
-					bgImage = '/img/banner/agents.webp';
+					bgImage = '/img/banner/officeAgent.png';
 					break;
 				case '/agent/detail':
 					title = 'Agent Page';
@@ -118,14 +118,14 @@ const withLayoutBasic = (Component: any) => {
 							<Top />
 						</Stack>
 
-						<Stack
-							className={`header-basic ${authHeader && 'auth'}`}
-							style={{
-								backgroundImage: `url(${memoizedValues.bgImage})`,
-								backgroundSize: 'cover',
-								boxShadow: 'inset 10px 40px 150px 40px rgb(24 22 36)',
-							}}
-						>
+						<Stack className={`header-basic ${authHeader && 'auth'}`}>
+							<Stack
+								className={'header-img'}
+								style={{
+									backgroundImage: `url(${memoizedValues.bgImage})`,
+									backgroundSize: 'cover',
+								}}
+							/>
 							<Stack className={'container'}>
 								<strong>{t(memoizedValues.title)}</strong>
 								<span>{t(memoizedValues.desc)}</span>
