@@ -10,9 +10,8 @@ import { Stack } from '@mui/material';
 import Advertisement from '../libs/components/homepage/Advertisement';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import FurnitureCategories from '../libs/components/homepage/FurnitureCategoryCards';
-import ModuSetup from '../libs/components/homepage/moduSetup';
-import Setup from '../libs/components/homepage/moduSetup';
 import AllBrand from '../libs/components/homepage/AllBrands';
+import Setup from '../libs/components/homepage/ModuSetup';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {

@@ -300,6 +300,7 @@ body::-webkit-scrollbar {
 			background-position: center;
 			background-size: cover;
 			filter: blur(2px);
+			// background: (180deg, #141414, hsla(0, 0%, 8%, 0.7));
 			z-index: 1;
 		}
 
@@ -553,7 +554,7 @@ body::-webkit-scrollbar {
 		display: flex;
 		flex-direction: row;
 
-		background: #f6f6f6;
+		background: #fff3e3;
 		.footer-container {
 			width: 1300px;
 			height: auto;
