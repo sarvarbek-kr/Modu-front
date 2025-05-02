@@ -8,13 +8,13 @@ const AllBrand = () => {
 					<img src="/img/logo/ikea-1.svg" alt="" />
 				</Stack>
 				<Stack className={'category'}>
-					<img src="/img/logo/hoff-1.svg" alt="" />
+					<img src="/img/logo/west-elm-1.svg" alt="" />
 				</Stack>
 				<Stack className={'category'}>
 					<img src="/img/logo/la-z-boy-furniture-galleries-1.svg" alt="" />
 				</Stack>
 				<Stack className={'category'}>
-					<img src="/img/logo/logo-lg.svg" alt="" />
+					<img src="/img/logo/hoff-1.svg" alt="" />
 				</Stack>
 				<Stack className={'category'}>
 					<img src="/img/logo/samsung-electronics.svg" alt="" />

@@ -3,7 +3,7 @@ import useDeviceDetect from '../libs/hooks/useDeviceDetect';
 import withLayoutMain from '../libs/components/layout/LayoutHome';
 import CommunityBoards from '../libs/components/homepage/CommunityBoards';
 import TopAgents from '../libs/components/homepage/TopAgents';
-import Events from '../libs/components/homepage/Events';
+import PhotoGrid from '../libs/components/homepage/PhotoGrid';
 import TrendFurnitures from '../libs/components/homepage/TrendFurnitures';
 import TopFurnitures from '../libs/components/homepage/TopFurnitures';
 import { Stack } from '@mui/material';
@@ -39,11 +39,12 @@ const Home: NextPage = () => {
 				<TrendFurnitures />
 				<Advertisement />
 				<Setup />
-				<TopFurnitures />
-				<TopAgents />
-				<Events />
-				<CommunityBoards />
 				<AllBrand />
+				<TopFurnitures />
+
+				<PhotoGrid />
+				<TopAgents />
+				<CommunityBoards />
 			</Stack>
 		);
 	}

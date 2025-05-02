@@ -685,7 +685,7 @@
 			position: relative;
 			padding: 53px 0px 135px;
 			width: 100%;
-			height: 722px;
+			height: 630px;
 			display: flex;
 			flex-direction: row;
 			background: #f6f6f6;
@@ -800,89 +800,138 @@
 				}
 			}
 		}
-		.events {
-			position: relative;
-			padding: 100px 0px 92px;
+		.photo-grid {
 			width: 100%;
-			height: 810px;
-			display: flex;
-			flex-direction: row;
-			background: #181a20;
-			.container {
+			max-width: 1320px;
+			margin: 0 auto;
+			padding: 20px;
+			font-family: $font;
+			margin-bottom: 80px;
+
+			.photo-grid__header {
+				text-align: center;
+				margin-bottom: 30px;
+
+				.photo-grid__title {
+					font-size: 34px;
+					font-family: $font;
+					text-transform: capitalize;
+					line-height: 150%;
+					letter-spacing: -0.646px;
+					font-weight: 400;
+					margin-bottom: 60px;
+					color: #333;
+				}
+			}
+
+			.photo-grid__content {
+				display: flex;
 				flex-direction: column;
-				align-items: center;
-				.card-wrapper {
-					position: relative;
-					margin-top: 48px;
-					width: 100%;
-					height: auto;
+				gap: 20px;
+
+				.photo-grid__row {
 					display: flex;
-					flex-direction: row;
-					justify-content: space-between;
-					.event-card {
+					gap: 20px;
+					width: 100%;
+
+					@media (max-width: 768px) {
+						flex-direction: column;
+					}
+
+					.photo-grid__card {
+						border-radius: 4px;
+						overflow: hidden;
 						position: relative;
-						width: 300px;
-						height: 420px;
-						border-radius: 12px;
-						opacity: 0.9;
-						cursor: pointer;
-						transition: opacity 0.4s;
+						box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+						transition: transform 0.3s ease;
+
 						&:hover {
-							opacity: 1;
-							scale: 1.05;
-							transition: 0.3s;
-							.more {
-								opacity: 1;
-							}
+							transform: translateY(-5px);
 						}
-						.info {
-							position: absolute;
+
+						.photo-grid__card-background {
+							width: 100%;
+							height: 100%;
+							background-size: cover;
+							background-position: center;
+							position: relative;
 							display: flex;
 							flex-direction: column;
-							top: 35px;
-							left: 10px;
-							right: 10px;
-							strong {
-								color: #f64747;
-								font-family: $font;
-								font-size: 25px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-								text-transform: capitalize;
+							justify-content: space-between;
+
+							&::before {
+								content: '';
+								position: absolute;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
 							}
-							span {
-								color: #f66767;
-								font-family: $font;
-								font-size: 20px;
-								font-style: normal;
-								font-weight: 500;
-								line-height: 28px;
-								text-transform: capitalize;
+
+							.photo-grid__card-content {
+								padding: 30px;
+								position: relative;
+								z-index: 2;
+
+								.photo-grid__card-title {
+									font-size: 36px;
+									font-weight: bold;
+									color: white;
+									text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+									margin: 0;
+									line-height: 1.2;
+								}
+							}
+
+							.photo-grid__card-info {
+								padding: 20px;
+								background-color: rgba(255, 255, 255, 0.626);
+								margin-bottom: 30px;
+								margin-right: auto;
+								margin-left: 30px;
+								width: fit-content;
+								position: relative;
+								z-index: 2;
+
+								.photo-grid__card-subtitle {
+									font-size: 18px;
+									font-weight: bold;
+									margin: 0 0 5px 0;
+									color: #333;
+								}
+
+								.photo-grid__card-price {
+									font-size: 14px;
+									margin: 0 0 5px 0;
+									color: #666;
+								}
+
+								.photo-grid__card-discount {
+									font-size: 14px;
+									font-weight: bold;
+									margin: 0;
+									color: #333;
+								}
 							}
 						}
-						.more {
-							position: absolute;
-							left: 10px;
-							right: 10px;
-							bottom: 41px;
-							display: flex;
-							flex-direction: row;
-							align-items: center;
-							opacity: 0;
-							span {
-								padding: 0px 5px;
-								border-radius: 5px;
-								background: #fffdfdc4;
-								color: #9c67f6;
-								font-family: $font;
-								font-size: 16px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 26px;
-								text-align: justify;
-								cursor: pointer;
-							}
+					}
+
+					.photo-grid__card--small {
+						width: 466px;
+						height: 506px;
+
+						@media (max-width: 768px) {
+							width: 100%;
+						}
+					}
+
+					.photo-grid__card--large {
+						width: 762px;
+						height: 506px;
+
+						@media (max-width: 768px) {
+							width: 100%;
 						}
 					}
 				}
