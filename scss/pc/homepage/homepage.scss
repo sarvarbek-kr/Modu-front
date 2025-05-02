@@ -311,13 +311,201 @@
 			transform: perspective(0px);
 			box-shadow: -3px 0px 20px 14px #34343480;
 		}
-		.setup {
-			position: relative;
-			padding: 100px 0px 92px;
-			width: 100%;
-			height: 810px;
-			display: flex;
-			flex-direction: row;
+		.room-inspiration {
+			background: #fcf8f3;
+
+			.container {
+				width: 100%;
+				max-width: 1320px;
+				height: 850px;
+				font-family: 'Poppins', sans-serif;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+				padding: 20px;
+			}
+
+			// Left Section
+			.content-section {
+				width: 30%;
+				padding-right: 20px;
+
+				.title {
+					color: #3a3a3a;
+					font-size: 40px;
+					font-weight: 600;
+					line-height: 120%;
+					margin-bottom: 20px;
+					overflow: hidden;
+				}
+
+				.description {
+					color: #616161;
+					font-size: 16px;
+					font-weight: 500;
+					line-height: 150%;
+					margin-bottom: 30px;
+				}
+
+				.explore-button {
+					background: #b88e2f;
+					width: 176px;
+					height: 48px;
+					color: #fff;
+					font-size: 16px;
+					font-weight: 600;
+					line-height: 150%;
+					border: none;
+					cursor: pointer;
+				}
+			}
+
+			// Right Section - Gallery
+			.gallery-section {
+				width: 70%;
+				position: relative;
+				display: flex;
+				justify-content: flex-start;
+				gap: 20px;
+				overflow: hidden;
+				align-items: flex-start;
+
+				// Common styles for all cards
+				.room-image {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+
+				// Main Room Card
+				.main-card {
+					width: 404px;
+					height: 600px;
+					position: relative;
+					flex-shrink: 0;
+
+					.info-overlay {
+						position: absolute;
+						bottom: 20px;
+						left: 20px;
+						background-color: rgba(255, 255, 255, 0.8);
+						backdrop-filter: blur(3px);
+						padding: 24px;
+						width: 80%;
+
+						.room-id {
+							display: flex;
+							align-items: center;
+							margin-bottom: 8px;
+
+							.id-number {
+								font-weight: 500;
+								color: #616161;
+							}
+
+							.divider {
+								margin: 0 10px;
+								border-top: 1px solid #616161;
+								width: 20px;
+							}
+
+							.room-type {
+								color: #616161;
+							}
+						}
+
+						.room-title-wrapper {
+							display: flex;
+							justify-content: space-between;
+							align-items: center;
+
+							.room-title {
+								font-size: 28px;
+								font-weight: 500;
+								color: #3a3a3a;
+								margin: 0;
+							}
+
+							.next-button {
+								background: #b88e2f;
+								border: none;
+								color: white;
+								width: 38px;
+								height: 38px;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								cursor: pointer;
+							}
+						}
+					}
+				}
+
+				// Second Room Card
+				.second-card {
+					width: 372px;
+					height: 486px;
+					position: relative;
+					flex-shrink: 0;
+
+					.arrow-button {
+						position: absolute;
+						right: -20px;
+						top: 50%;
+						transform: translateY(-50%);
+						background: white;
+						border-radius: 50%;
+						width: 40px;
+						height: 40px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						border: none;
+						box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2);
+						cursor: pointer;
+						z-index: 10;
+					}
+
+					.pagination-dots {
+						position: absolute;
+						bottom: -60px;
+						left: 20%;
+						transform: translateX(-50%);
+						display: flex;
+						gap: 20px;
+						z-index: 5;
+
+						.dot {
+							width: 12px;
+							height: 12px;
+							border-radius: 50%;
+							background: #d8d8d8;
+							border: none;
+							padding: 0;
+							cursor: pointer;
+							position: relative;
+
+							&.active {
+								background: #b88e2f;
+								border: 2px solid #c4a24d;
+								outline: 2px solid #e5d6a9;
+								outline-offset: 5px;
+							}
+						}
+					}
+				}
+
+				// Third Room Card (Partially Visible)
+				.third-card {
+					width: 372px;
+					height: 486px;
+					position: relative;
+					flex-shrink: 0;
+					margin-right: -290px; // Make it partially visible
+				}
+			}
 		}
 		.top-furnitures {
 			padding: 108px 0px 76px;
