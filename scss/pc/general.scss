@@ -1,158 +1,145 @@
-.furniture-big-card-box {
+.common-card-box {
 	position: relative;
-	margin-right: 8px;
-	margin-left: 8px;
-	margin-bottom: 35px;
-	width: 410px;
-	height: 455px;
+	width: 300px;
+	height: 450px;
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
+	&::before {
+		width: 285px;
+		content: '';
+		position: absolute;
+		inset: 0; // top: 0; bottom: 0; left: 0; right: 0;
+		background-color: #4a4949;
+		border-radius: 12px 12px 12px 12px;
+
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		z-index: 2;
+	}
+	&:hover::before {
+		opacity: 0.72; // 🔥 Hover qilinganda ustiga qoramtir fon tushadi
+	}
 	.card-img {
 		position: relative;
-		width: 100%;
-		height: 264px;
+		width: 285px;
+		height: 300px;
 		background-size: cover;
 		border-radius: 12px 12px 0px 0px;
-		cursor: pointer;
-		div.status {
+		.shop-btn {
 			position: absolute;
-			padding: 6px 34px;
-			left: 20px;
-			top: 20px;
+			opacity: 0;
+			z-index: 3;
+			transition: opacity 0.3s ease;
+			padding: 10px;
+			top: 175px;
+			width: 200px;
+			height: 50px;
+			left: 40px;
 			display: flex;
+			flex-direction: row;
 			align-items: center;
-			border-radius: 6px;
-			background: #eb6753;
-			img {
-				width: 14px;
-				height: 14px;
+			cursor: pointer;
+			background: #fff;
+			font-family: $font;
+			font-style: normal;
+			font-weight: 800;
+			font-size: 14px;
+			line-height: 15px;
+			color: #b88e2f;
+			b {
+				position: absolute;
+				display: block;
+				max-width: 100%;
+				height: auto;
 			}
-			span {
-				margin-left: 5px;
+		}
+		.view-like-box {
+			display: flex;
+			height: 30px;
+			width: 100%;
+			position: absolute;
+			top: 250px;
+			right: 10px;
+
+			opacity: 0;
+			z-index: 3;
+
+			.like {
+				display: flex;
+				position: relative;
+				color: #fff;
+			}
+
+			.view-cnt {
+				margin-top: 2px;
+				display: flex;
 				color: #fff;
 				font-family: $font;
-				font-size: 12px;
+				font-size: 18px;
 				font-style: normal;
 				font-weight: 600;
 				line-height: normal;
-				text-transform: uppercase;
+				text-overflow: ellipsis;
 			}
 		}
-		div.price {
-			position: absolute;
-			padding: 8px 12px;
-			left: 20px;
-			bottom: 20px;
-			border-radius: 6px;
-			background: #fff;
-			color: #181a20;
-			font-family: $font;
-			font-size: 15px;
-			font-style: normal;
-			font-weight: 600;
-			line-height: normal;
+	}
+	&:hover {
+		.card-img {
+			.shop-btn {
+				opacity: 1;
+				transform: translateY(0);
+				border-radius: 0px 0px 0px 0px;
+			}
+			div {
+				opacity: 1;
+				transform: translateY(0);
+			}
 		}
 	}
 	.info {
-		padding: 20px 22px 17px;
+		width: 285px;
+		height: 150px;
+		flex-shrink: 0;
+		padding: 16px;
 		display: flex;
 		flex-direction: column;
 		box-sizing: border-box;
-		border-radius: 0px 0px 12px 12px;
-		border: 1px solid #ddd;
+		border: 1px solid rgba(196, 196, 196, 0.71);
 		border-top: none;
-		background: #fff;
+		background-color: #f4f5f7;
+		border-radius: 0px 0px 12px 12px;
+
 		.title {
 			overflow: hidden;
-			color: #181a20;
+			color: #3a3a3a;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			font-family: $font;
-			font-size: 15px;
+			font-size: 18px;
 			font-style: normal;
 			font-weight: 600;
-			line-height: normal;
+			line-height: 29px;
 			text-transform: capitalize;
-			cursor: pointer;
-		}
-		.desc {
-			margin-top: 5px;
-			overflow: hidden;
-			color: #717171;
-			font-family: $font;
-			font-size: 13px;
-			font-style: normal;
-			font-weight: 400;
-			line-height: normal;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
-		.options {
-			margin-top: 15px;
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			div {
-				display: flex;
-				flex-direction: row;
-				img {
-					margin-right: 5px;
-					width: 17px;
-					height: 17px;
-				}
-				span {
-					color: #181a20;
-					font-family: $font;
-					font-size: 13px;
-					font-style: normal;
-					font-weight: 400;
-					line-height: normal;
-				}
-			}
 		}
 		.bott {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-			div {
-				width: 65px;
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: space-between;
-			}
-			p {
-				color: #181a20;
+			margin-top: 15px;
+			.furnBrand {
+				color: #898989;
 				font-family: $font;
-				font-size: 13px;
+				font-size: 14px;
 				font-style: normal;
-				font-weight: 500;
-				line-height: normal;
-				text-transform: capitalize;
+				font-weight: 300;
+				line-height: 150%; /* 24px */
 			}
-			span {
-				margin-left: 6px;
-				color: rgba(143, 143, 143, 0.54);
+			.furnPrice {
+				margin-top: 15px;
+				color: #3a3a3a;
 				font-family: $font;
-				font-size: 15px;
+				font-size: 16px;
 				font-style: normal;
-				font-weight: 500;
-				line-height: normal;
-				text-transform: capitalize;
-			}
-			button {
-				margin-left: 15px;
-				width: 16px;
-				height: 16px;
-				box-sizing: border-box;
-			}
-			.buttons-box {
-				width: auto;
-				height: auto;
-				display: flex;
-				flex-direction: row;
-				gap: 7px;
+				font-weight: 600;
+				line-height: 150%; /* 30px */
 			}
 		}
 	}

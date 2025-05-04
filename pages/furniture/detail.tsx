@@ -6,7 +6,6 @@ import { NextPage } from 'next';
 import Review from '../../libs/components/furniture/Review';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
-import FurnitureBigCard from '../../libs/components/common/FurnitureBigCard';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import WestIcon from '@mui/icons-material/West';
@@ -33,6 +32,7 @@ import { T } from '../../libs/types/common';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { CREATE_COMMENT, LIKE_TARGET_FURNITURE } from '../../apollo/user/mutation';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import CommonFurnitureCard from '../../libs/components/common/CommonFurnitureCard';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -682,12 +682,13 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 										}}
 										pagination={{
 											el: '.swiper-similar-pagination',
+											clickable: true, // Qo'shing
 										}}
 									>
 										{destinationFurnitures.map((furniture: Furniture) => {
 											return (
 												<SwiperSlide className={'similar-homes-slide'} key={furniture.furnitureTitle}>
-													<FurnitureBigCard
+													<CommonFurnitureCard
 														furniture={furniture}
 														likeFurnitureHandler={likeFurnitureHandler}
 														key={furniture?._id}
