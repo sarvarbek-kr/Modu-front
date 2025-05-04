@@ -89,27 +89,6 @@ const Filter = (props: FilterType) => {
 				.then();
 		}
 
-		if (searchFilter?.search?.colorList?.length == 0) {
-			delete searchFilter.search.colorList;
-			router
-				.push(
-					`/furniture?input=${JSON.stringify({
-						...searchFilter,
-						search: {
-							...searchFilter.search,
-						},
-					})}`,
-					`/furniture?input=${JSON.stringify({
-						...searchFilter,
-						search: {
-							...searchFilter.search,
-						},
-					})}`,
-					{ scroll: false },
-				)
-				.then();
-		}
-
 		if (searchFilter?.search?.options?.length == 0) {
 			delete searchFilter.search.options;
 			router
@@ -249,55 +228,6 @@ const Filter = (props: FilterType) => {
 				console.log('furnitureTypeSelectHandler:', e.target.value);
 			} catch (err: any) {
 				console.log('ERROR, furnitureTypeSelectHandler:', err);
-			}
-		},
-		[searchFilter],
-	);
-
-	const furnitureColorSelectHandler = useCallback(
-		async (e: any) => {
-			try {
-				const isChecked = e.target.checked;
-				const value = e.target.value;
-				if (isChecked) {
-					await router.push(
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), value] },
-						})}`,
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), value] },
-						})}`,
-						{ scroll: false },
-					);
-				} else if (searchFilter?.search?.colorList?.includes(value)) {
-					await router.push(
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: {
-								...searchFilter.search,
-								colorList: searchFilter?.search?.colorList?.filter((item: string) => item !== value),
-							},
-						})}`,
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: {
-								...searchFilter.search,
-								colorList: searchFilter?.search?.colorList?.filter((item: string) => item !== value),
-							},
-						})}`,
-						{ scroll: false },
-					);
-				}
-
-				if (searchFilter?.search?.colorList?.length == 0) {
-					alert('error');
-				}
-
-				console.log('furnitureColorSelectHandler:', e.target.value);
-			} catch (err: any) {
-				console.log('ERROR, furnitureColorSelectHandler:', err);
 			}
 		},
 		[searchFilter],
@@ -544,40 +474,6 @@ const Filter = (props: FilterType) => {
 									/>
 									<label htmlFor={location} style={{ cursor: 'pointer' }}>
 										<Typography className="furniture-type">{location}</Typography>
-									</label>
-								</Stack>
-							);
-						})}
-					</Stack>
-				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
-					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
-						Color
-					</p>
-					<Stack
-						className={`furniture-location`}
-						style={{ height: showMore ? '253px' : '115px' }}
-						onMouseEnter={() => setShowMore(true)}
-						onMouseLeave={() => {
-							if (!searchFilter?.search?.colorList) {
-								setShowMore(false);
-							}
-						}}
-					>
-						{furnitureColor.map((color: string) => {
-							return (
-								<Stack className={'input-box'} key={color}>
-									<Checkbox
-										id={color}
-										className="furniture-checkbox"
-										color="default"
-										size="small"
-										value={color}
-										checked={(searchFilter?.search?.colorList || []).includes(color as FurnitureColor)}
-										onChange={furnitureColorSelectHandler}
-									/>
-									<label htmlFor={color} style={{ cursor: 'pointer' }}>
-										<Typography className="furniture-type">{color}</Typography>
 									</label>
 								</Stack>
 							);

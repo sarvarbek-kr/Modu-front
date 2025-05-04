@@ -210,7 +210,7 @@ const FurnitureList: NextPage = ({ initialInput, ...props }: any) => {
 								{furnitures.length !== 0 && (
 									<Stack className="total-result">
 										<Typography>
-											Total {total} propert{total > 1 ? 'ies' : 'y'} available
+											Total {total} furnitur{total > 1 ? 'es' : ''} available
 										</Typography>
 									</Stack>
 								)}

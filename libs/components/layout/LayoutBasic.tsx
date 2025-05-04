@@ -31,11 +31,11 @@ const withLayoutBasic = (Component: any) => {
 				case '/furniture':
 					title = 'Furniture Search';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/furnitures.png';
+					bgImage = '/img/banner/furnitureNavbar.png';
 					break;
 				case '/agent':
 					title = 'Agents';
-					bgImage = '/img/banner/officeAgent.png';
+					bgImage = '/img/banner/agentNavbar.png';
 					break;
 				case '/agent/detail':
 					title = 'Agent Page';

@@ -110,16 +110,16 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 
 	const likeMemberHandler = async (user: any, id: string) => {
 		try {
-			if(!id) return;
-			if(!user._id) throw new Error(Messages.error2);
+			if (!id) return;
+			if (!user._id) throw new Error(Messages.error2);
 
 			await likeTargetMember({
 				variables: { input: id },
 			});
 			await getAgentsRefetch({ input: searchFilter });
-			await sweetTopSmallSuccessAlert("success", 800);
-		} catch(err: any) {
-			console.log("ERROR, likeMemberHandler:", err.message);
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			console.log('ERROR, likeMemberHandler:', err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
 	};
@@ -178,7 +178,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 							</div>
 						) : (
 							agents.map((agent: Member) => {
-								return <AgentCard agent={agent} key={agent._id} likeMemberHandler={likeMemberHandler}/>;
+								return <AgentCard agent={agent} key={agent._id} likeMemberHandler={likeMemberHandler} />;
 							})
 						)}
 					</Stack>

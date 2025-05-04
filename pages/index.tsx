@@ -41,7 +41,6 @@ const Home: NextPage = () => {
 				<Setup />
 				<AllBrand />
 				<TopFurnitures />
-
 				<PhotoGrid />
 				<TopAgents />
 				<CommunityBoards />
