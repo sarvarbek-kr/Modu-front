@@ -40,7 +40,7 @@
 				gap: 25px;
 				border-radius: 12px;
 				border: 1px solid #c4c4c4;
-				background: #fff;
+				background: #fcf8f3;
 				box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 				.photo-box {
 					gap: 23px;
@@ -89,7 +89,8 @@
 								align-items: center;
 								cursor: pointer;
 								border-radius: 12px;
-								border: 1px solid #181a20;
+								border: 0.5px solid #181a20;
+								background-color: #fff;
 								p {
 									color: #181a20;
 									font-family: $font;
@@ -202,9 +203,10 @@
 						align-self: flex-end;
 						margin-top: 30px;
 						border-radius: 12px;
-						background-color: #000000;
+						border: 1px solid;
+						background-color: #fff;
 						p {
-							color: #fff;
+							color: #000000;
 							font-family: $font;
 							font-size: 13px;
 							font-style: normal;

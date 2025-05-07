@@ -194,7 +194,7 @@ const MyMenu = () => {
 											</g>
 										</svg>
 										<Typography className={'sub-title'} variant={'subtitle1'} component={'p'}>
-											My Followers
+											Followers
 										</Typography>
 									</div>
 								</Link>
@@ -242,7 +242,7 @@ const MyMenu = () => {
 										</svg>
 
 										<Typography className={'sub-title'} variant={'subtitle1'} component={'p'}>
-											My Followings
+											Followings
 										</Typography>
 									</div>
 								</Link>

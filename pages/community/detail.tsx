@@ -24,7 +24,12 @@ import { BoardArticle } from '../../libs/types/board-article/board-article';
 import { CREATE_COMMENT, LIKE_TARGET_BOARD_ARTICLE, UPDATE_COMMENT } from '../../apollo/user/mutation';
 import { GET_BOARD_ARTICLE, GET_COMMENTS } from '../../apollo/user/query';
 import { Messages } from '../../libs/config';
-import { sweetConfirmAlert, sweetMixinErrorAlert, sweetMixinSuccessAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import {
+	sweetConfirmAlert,
+	sweetMixinErrorAlert,
+	sweetMixinSuccessAlert,
+	sweetTopSmallSuccessAlert,
+} from '../../libs/sweetAlert';
 import { CommentUpdate } from '../../libs/types/comment/comment.update';
 import error from 'next/error';
 const ToastViewerComponent = dynamic(() => import('../../libs/components/community/TViewer'), { ssr: false });
@@ -75,17 +80,17 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		refetch: boardArticleRefetch,
 	} = useQuery(GET_BOARD_ARTICLE, {
 		fetchPolicy: 'network-only',
-		variables: { 
-			input: articleId 
+		variables: {
+			input: articleId,
 		},
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: any) => {
 			setBoardArticle(data?.getBoardArticle);
 			if (data?.getBoardArticle?.memberData?.memberImage) {
 				setMemberImage(`${process.env.REACT_APP_API_URL}/${data?.getBoardArticle?.memberData?.memberImage}`);
-			    }
-		    },
-	    });
+			}
+		},
+	});
 	const {
 		loading: getCommentsLoading,
 		data: getCommentsData,
@@ -93,8 +98,8 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 		refetch: getCommentsRefetch,
 	} = useQuery(GET_COMMENTS, {
 		fetchPolicy: 'cache-and-network',
-		variables: { 
-			input: searchFilter 
+		variables: {
+			input: searchFilter,
 		},
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: any) => {
@@ -122,7 +127,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 
 	const likeBoArticleHandler = async (user: any, id: any) => {
 		try {
-			if(likeLoading) return;
+			if (likeLoading) return;
 			if (!id) return;
 			if (!user._id) throw new Error(Messages.error2);
 
@@ -133,7 +138,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 					input: id,
 				},
 			});
-			await boardArticleRefetch({ input: articleId});
+			await boardArticleRefetch({ input: articleId });
 			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, likeBoArticleHandler:', err.message);
@@ -182,8 +187,8 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 				throw new Error('provide data to update your comment!');
 
 			if (commentStatus) {
-				if (await sweetConfirmAlert("Do you want to delete the comment?")) {
-					await updateComment ({
+				if (await sweetConfirmAlert('Do you want to delete the comment?')) {
+					await updateComment({
 						variables: {
 							input: updateData,
 						},
@@ -198,16 +203,16 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 				});
 				await sweetMixinSuccessAlert('Successfully updated!');
 			}
-				await getCommentsRefetch({ input: searchFilter});
-				await getCommentsRefetch({ input: searchFilter});
-			} catch (error: any) {
-				await sweetMixinErrorAlert(error.message);
-			} finally {
-				setOpenBackdrop(false);
-				setUpdatedComment("");
-				setUpdatedCommentWordsCnt(0);
-				setUpdatedCommentId('');
-			}
+			await getCommentsRefetch({ input: searchFilter });
+			await getCommentsRefetch({ input: searchFilter });
+		} catch (error: any) {
+			await sweetMixinErrorAlert(error.message);
+		} finally {
+			setOpenBackdrop(false);
+			setUpdatedComment('');
+			setUpdatedCommentWordsCnt(0);
+			setUpdatedCommentId('');
+		}
 	};
 
 	const getCommentMemberImage = (imageUrl: string | undefined) => {
@@ -329,7 +334,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 												{boardArticle?.meLiked && boardArticle?.meLiked[0]?.myFavorite ? (
 													<ThumbUpAltIcon onClick={() => likeBoArticleHandler(user, boardArticle?._id)} />
 												) : (
-												  <ThumbUpOffAltIcon onClick={() => likeBoArticleHandler(user, boardArticle?._id)}/>
+													<ThumbUpOffAltIcon onClick={() => likeBoArticleHandler(user, boardArticle?._id)} />
 												)}
 
 												<Typography className="text">{boardArticle?.articleLikes}</Typography>
@@ -353,9 +358,9 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 										<Stack className="top">
 											<Button>
 												{boardArticle?.meLiked && boardArticle?.meLiked[0]?.myFavorite ? (
-													<ThumbUpAltIcon onClick={() => likeBoArticleHandler(user, boardArticle?._id)}/> 
-												) : (						
-												  <ThumbUpOffAltIcon onClick={() => likeBoArticleHandler(user, boardArticle?._id)}/>
+													<ThumbUpAltIcon onClick={() => likeBoArticleHandler(user, boardArticle?._id)} />
+												) : (
+													<ThumbUpOffAltIcon onClick={() => likeBoArticleHandler(user, boardArticle?._id)} />
 												)}
 												<Typography className="text">{boardArticle?.articleLikes}</Typography>
 											</Button>

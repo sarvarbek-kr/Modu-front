@@ -59,22 +59,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 		commentRefId: '',
 	});
 
-	// Added for the new design
 	const [quantity, setQuantity] = useState<number>(1);
-	const [selectedSize, setSelectedSize] = useState<string>('L');
-	const [selectedColor, setSelectedColor] = useState<string>('blue');
-
-	const sizeOptions = [
-		{ value: 'L', label: 'L' },
-		{ value: 'XL', label: 'XL' },
-		{ value: 'XS', label: 'XS' },
-	];
-
-	const colorOptions = [
-		{ value: 'blue', color: '#6366F1' },
-		{ value: 'black', color: '#000000' },
-		{ value: 'brown', color: '#b88e2f' },
-	];
 
 	/** APOLLO REQUESTS **/
 	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
@@ -219,21 +204,11 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 		}
 	};
 
-	const handleSizeChange = (size: string) => {
-		setSelectedSize(size);
-	};
-
-	const handleColorChange = (color: string) => {
-		setSelectedColor(color);
-	};
-
 	const handleAddToCart = () => {
 		// Implement add to cart functionality
 		console.log('Added to cart:', {
 			furniture,
 			quantity,
-			size: selectedSize,
-			color: selectedColor,
 		});
 	};
 
@@ -305,7 +280,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 								</Stack>
 								<Box sx={{ width: '70%', marginBottom: 2 }}>
 									<img
-										src={slideImage ? `${REACT_APP_API_URL}/${slideImage}` : '/img/property/bigImage.png'}
+										src={slideImage ? `${REACT_APP_API_URL}/${slideImage}` : '/img/furniture/bigImage.png'}
 										alt={furniture?.furnitureTitle}
 										style={{
 											width: '500px',
@@ -341,54 +316,23 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 									{furniture?.furnitureDesc || 'No description available for this product.'}
 								</Typography>
 
-								{/* Size Selection */}
-								<Box sx={{ marginBottom: 3 }}>
-									<Typography sx={{ fontWeight: 600, marginBottom: 1 }}>Size</Typography>
-									<Stack direction="row" spacing={1}>
-										{sizeOptions.map((size) => (
-											<Button
-												key={size.value}
-												variant={selectedSize === size.value ? 'contained' : 'outlined'}
-												onClick={() => handleSizeChange(size.value)}
-												sx={{
-													minWidth: '40px',
-													height: '40px',
-													backgroundColor: selectedSize === size.value ? '#b88e2f' : 'transparent',
-													color: selectedSize === size.value ? 'white' : 'black',
-													border: '1px solid #D1D5DB',
-													'&:hover': {
-														backgroundColor: selectedSize === size.value ? '#9F7833' : 'rgba(209, 213, 219, 0.1)',
-													},
-												}}
-											>
-												{size.label}
-											</Button>
-										))}
-									</Stack>
-								</Box>
-
 								{/* Color Selection */}
 								<Box sx={{ marginBottom: 3 }}>
-									<Typography sx={{ fontWeight: 600, marginBottom: 1 }}>Color</Typography>
-									<Stack direction="row" spacing={1}>
-										{colorOptions.map((colorOption) => (
+									<Box sx={{ display: 'flex' }}>
+										<Typography sx={{ width: 60, color: '#6B7280' }}>Color</Typography>
+										<Box sx={{ display: 'flex', alignItems: 'center' }}>
 											<Box
-												key={colorOption.value}
-												onClick={() => handleColorChange(colorOption.value)}
 												sx={{
-													width: '30px',
-													height: '30px',
+													width: 24,
+													height: 24,
 													borderRadius: '50%',
-													backgroundColor: colorOption.color,
-													cursor: 'pointer',
-													border: selectedColor === colorOption.value ? '2px solid #4B5563' : 'none',
-													'&:hover': {
-														transform: 'scale(1.1)',
-													},
+													marginRight: 1,
+													border: '1px solid #D1D5DB',
+													backgroundColor: furniture?.furnitureColor,
 												}}
 											/>
-										))}
-									</Stack>
+										</Box>
+									</Box>
 								</Box>
 
 								{/* Quantity and Add to Cart */}
@@ -398,6 +342,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 											display: 'flex',
 											alignItems: 'center',
 											border: '1px solid #D1D5DB',
+											backgroundColor: '#fcf8f3',
 											borderRadius: '4px',
 											width: 'fit-content',
 										}}
@@ -419,7 +364,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 										variant="contained"
 										onClick={handleAddToCart}
 										sx={{
-											backgroundColor: '#dfdfdf',
+											backgroundColor: '#fcf8f3',
 											border: '1px solid #D1D5DB',
 											color: 'black',
 											'&:hover': {
@@ -435,12 +380,14 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 									<Button
 										variant="outlined"
 										sx={{
-											borderColor: '#D1D5DB',
-											color: '#111827',
+											backgroundColor: '#fcf8f3',
+											border: '1px solid #D1D5DB',
+											color: 'black',
 											'&:hover': {
-												backgroundColor: 'rgba(209, 213, 219, 0.1)',
-												borderColor: '#9CA3AF',
+												backgroundColor: '#374151',
+												color: 'white',
 											},
+											padding: '10px 24px',
 										}}
 									>
 										+ Compare
@@ -556,6 +503,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 									<Typography className={'main-title'}>Leave A Review</Typography>
 									<Typography className={'review-title'}>Review</Typography>
 									<textarea
+										placeholder="Share your experience with this product..."
 										onChange={({ target: { value } }: any) => {
 											setInsertCommentData({ ...insertCommentData, commentContent: value });
 										}}
