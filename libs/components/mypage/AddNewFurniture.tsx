@@ -334,7 +334,7 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 
 									{['width', 'height', 'depth'].map((dimKey) => (
 										<div key={dimKey} style={{ marginBottom: '8px' }}>
-											<label style={{ marginRight: '10px' }}>{dimKey}:</label>
+											<label style={{ marginRight: '10px', borderRadius: '50%' }}>{dimKey}:</label>
 											<input
 												type="number"
 												step="0.1" // bu orqali 0.1, 0.5, 1.2 kabi qiymatlar kiritish mumkin

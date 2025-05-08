@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, CircularProgress, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutFull from '../../libs/components/layout/LayoutFull';
 import { NextPage } from 'next';
@@ -33,7 +33,7 @@ import { Direction, Message } from '../../libs/enums/common.enum';
 import { CREATE_COMMENT, LIKE_TARGET_FURNITURE } from '../../apollo/user/mutation';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 import CommonFurnitureCard from '../../libs/components/common/CommonFurnitureCard';
-
+import { Ruler, Square, MoveVertical } from 'lucide-react';
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 export const getStaticProps = async ({ locale }: any) => ({
@@ -95,7 +95,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 				sort: 'createdAt',
 				direction: Direction.DESC,
 				search: {
-					locationList: furniture?.furnitureLocation ? [furniture?.furnitureLocation] : [],
+					locationList: furniture?.furnitureType ? [furniture?.furnitureType] : [],
 				},
 			},
 		},
@@ -298,11 +298,9 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 								<Typography variant="h2" sx={{ fontSize: '36px', fontWeight: 600, marginBottom: 2 }}>
 									{furniture?.furnitureTitle || 'Asgaard sofa'}
 								</Typography>
-
 								<Typography variant="h3" sx={{ fontSize: '24px', fontWeight: 600, marginBottom: 2 }}>
 									$ {formatterStr(furniture?.furniturePrice || 250000)}
 								</Typography>
-
 								<Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 3 }}>
 									<Box sx={{ display: 'flex', color: '#F59E0B' }}>
 										{[1, 2, 3, 4, 5].map((star) => (
@@ -311,15 +309,13 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 									</Box>
 									<Typography sx={{ ml: 2, color: '#6B7280' }}>5 Customer Review</Typography>
 								</Box>
-
 								<Typography sx={{ marginBottom: 3, color: '#4B5563' }}>
 									{furniture?.furnitureDesc || 'No description available for this product.'}
 								</Typography>
-
 								{/* Color Selection */}
-								<Box sx={{ marginBottom: 3 }}>
+								<Box sx={{ marginBottom: 3, marginTop: 1 }}>
 									<Box sx={{ display: 'flex' }}>
-										<Typography sx={{ width: 60, color: '#6B7280' }}>Color</Typography>
+										<Typography sx={{ width: 60, color: '#6B7280', marginRight: '57px' }}>Color</Typography>
 										<Box sx={{ display: 'flex', alignItems: 'center' }}>
 											<Box
 												sx={{
@@ -331,6 +327,93 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 													backgroundColor: furniture?.furnitureColor,
 												}}
 											/>
+										</Box>
+									</Box>
+								</Box>
+								<Box sx={{ display: 'flex', width: '100%', marginBottom: 4 }}>
+									{/* Left side - Dimensions label */}
+									<Typography sx={{ width: 100, color: '#6B7280', marginTop: '10px', marginRight: '10px' }}>
+										Dimensions
+									</Typography>
+
+									{/* Right side - Measurement details */}
+									<Box sx={{ flex: 1 }}>
+										{/* Width */}
+										<Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+											<Box
+												sx={{
+													display: 'flex',
+													alignItems: 'center',
+													justifyContent: 'center',
+													width: 40,
+													height: 40,
+													bgcolor: 'blue.50',
+													borderRadius: 1,
+													mr: 2,
+												}}
+											>
+												<Square size={20} color="#EB6753" />
+											</Box>
+											<Box>
+												<Typography variant="caption" color="text.secondary">
+													Width
+												</Typography>
+												<Typography variant="body1" fontWeight="medium">
+													{furniture?.furnitureDimensions.width}
+												</Typography>
+											</Box>
+										</Box>
+
+										{/* Height */}
+										<Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+											<Box
+												sx={{
+													display: 'flex',
+													alignItems: 'center',
+													justifyContent: 'center',
+													width: 40,
+													height: 40,
+													bgcolor: 'green.50',
+													borderRadius: 1,
+													mr: 2,
+												}}
+											>
+												<MoveVertical size={20} color="#EB6753" />
+											</Box>
+											<Box>
+												<Typography variant="caption" color="text.secondary">
+													Height
+												</Typography>
+												<Typography variant="body1" fontWeight="medium">
+													{furniture?.furnitureDimensions.height}
+												</Typography>
+											</Box>
+										</Box>
+
+										{/* Depth */}
+										<Box sx={{ display: 'flex', alignItems: 'center' }}>
+											<Box
+												sx={{
+													display: 'flex',
+													alignItems: 'center',
+													justifyContent: 'center',
+													width: 40,
+													height: 40,
+													bgcolor: 'purple.50',
+													borderRadius: 1,
+													mr: 2,
+												}}
+											>
+												<Ruler size={20} color="#EB6753" />
+											</Box>
+											<Box>
+												<Typography variant="caption" color="text.secondary">
+													Depth
+												</Typography>
+												<Typography variant="body1" fontWeight="medium">
+													{furniture?.furnitureDimensions.depth}
+												</Typography>
+											</Box>
 										</Box>
 									</Box>
 								</Box>
@@ -393,7 +476,6 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 										+ Compare
 									</Button>
 								</Stack>
-
 								{/* Product Details */}
 								<Box sx={{ marginTop: 4, borderTop: '1px solid #E5E7EB', paddingTop: 3 }}>
 									<Stack spacing={2}>
@@ -622,7 +704,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 									<Swiper
 										className={'similar-homes-swiper'}
 										slidesPerView={'auto'}
-										spaceBetween={35}
+										spaceBetween={0}
 										modules={[Autoplay, Navigation, Pagination]}
 										navigation={{
 											nextEl: '.swiper-similar-next',

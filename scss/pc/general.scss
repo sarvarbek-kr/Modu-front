@@ -1,15 +1,17 @@
 .common-card-box {
 	position: relative;
-	width: 300px;
+	width: 285px;
 	height: 450px;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
 	&::before {
-		width: 285px;
+		width: 270px;
 		content: '';
 		position: absolute;
-		inset: 0; // top: 0; bottom: 0; left: 0; right: 0;
+		bottom: 0;
+		top: 0;
+		right: 0;
 		background-color: #4a4949;
 		border-radius: 12px 12px 12px 12px;
 
@@ -22,7 +24,7 @@
 	}
 	.card-img {
 		position: relative;
-		width: 285px;
+		width: 270px;
 		height: 300px;
 		background-size: cover;
 		border-radius: 12px 12px 0px 0px;
@@ -98,7 +100,7 @@
 		}
 	}
 	.info {
-		width: 285px;
+		width: 270px;
 		height: 150px;
 		flex-shrink: 0;
 		padding: 16px;
