@@ -5,8 +5,11 @@ import { Pagination, Stack, Typography } from '@mui/material';
 import FurnitureCard from '../furniture/FurnitureCard';
 import { Furniture } from '../../types/furniture/furniture';
 import { T } from '../../types/common';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_VISITED } from '../../../apollo/user/query';
+import { LIKE_TARGET_FURNITURE } from '../../../apollo/user/mutation';
+import { Messages } from '../../config';
+import { sweetMixinErrorAlert } from '../../sweetAlert';
 
 const RecentlyVisited: NextPage = () => {
 	const device = useDeviceDetect();
@@ -16,6 +19,7 @@ const RecentlyVisited: NextPage = () => {
 
 	/** APOLLO REQUESTS **/
 
+	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 	const {
 		loading: getVisitedLoading,
 		data: getVisitedData,
@@ -38,6 +42,23 @@ const RecentlyVisited: NextPage = () => {
 		setSearchVisited({ ...searchVisited, page: value });
 	};
 
+	const likeFurnitureHandler = async (user: any, id: string) => {
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Messages.error2);
+
+			await likeTargetFurniture({
+				variables: {
+					input: id,
+				},
+			});
+			await getVisitedRefetch({ input: searchVisited });
+		} catch (err: any) {
+			console.log('ERROR, likeFurnitureHandler:', err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
+
 	if (device === 'mobile') {
 		return <div>MODU MY FAVORITES MOBILE</div>;
 	} else {
@@ -52,7 +73,13 @@ const RecentlyVisited: NextPage = () => {
 				<Stack className="favorites-list-box">
 					{recentlyVisited?.length ? (
 						recentlyVisited?.map((furniture: Furniture) => {
-							return <FurnitureCard furniture={furniture} recentlyVisited={true} />;
+							return (
+								<FurnitureCard
+									furniture={furniture}
+									likeFurnitureHandler={likeFurnitureHandler}
+									recentlyVisited={true}
+								/>
+							);
 						})
 					) : (
 						<div className={'no-data'}>
@@ -74,7 +101,7 @@ const RecentlyVisited: NextPage = () => {
 						</Stack>
 						<Stack className="total-result">
 							<Typography>
-								Total {total} recently visited propert{total > 1 ? 'ies' : 'y'}
+								Total {total} recently visited furniture{total > 1 ? 's' : ''}
 							</Typography>
 						</Stack>
 					</Stack>

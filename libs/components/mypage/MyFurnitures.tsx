@@ -156,7 +156,9 @@ const MyFurnitures: NextPage = ({ initialInput, ...props }: any) => {
 									/>
 								</Stack>
 								<Stack className="total-result">
-									<Typography>{total} furniture available</Typography>
+									<Typography>
+										{total} furniture{total > 1 ? 's' : ''} available
+									</Typography>
 								</Stack>
 							</Stack>
 						)}
