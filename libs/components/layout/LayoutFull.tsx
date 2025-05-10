@@ -61,11 +61,11 @@ const withLayoutFull = (Component: any) => {
 							<Top />
 						</Stack>
 
-						<Stack id={'main'}>
+						<Stack id={'main'} sx={{ position: 'relative' }}>
 							<Component {...props} />
 						</Stack>
 
-						 <Chat />
+						<Chat />
 
 						<Stack id={'footer'}>
 							<Footer />

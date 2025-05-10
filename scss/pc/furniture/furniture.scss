@@ -39,35 +39,18 @@
 						border-radius: 12px;
 						background: #fff;
 						box-shadow: 0 1px 4px 0 rgba(24, 26, 32, 0.07);
-						.find-your-home {
+
+						// searching
+						.find-your-furniture {
 							position: relative;
 							width: 100%;
 							gap: 10px;
-							.furniture-location {
-								gap: 10px;
-								height: 115px;
-								overflow: hidden;
-								transition: 1s;
-								&:hover {
-									height: 253px;
-								}
-							}
 							.title-main {
 								width: 100%;
 								height: 25px;
 								color: #181a20;
 								font-family: $font;
 								font-size: 15px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-							}
-							.title {
-								width: auto;
-								height: auto;
-								color: #181a20;
-								font-family: $font;
-								font-size: 14px;
 								font-style: normal;
 								font-weight: 600;
 								line-height: normal;
@@ -102,6 +85,31 @@
 									top: 18px;
 									left: 15px;
 								}
+							}
+						}
+						// categories
+						.find-your-category {
+							position: relative;
+							width: 100%;
+							gap: 10px;
+							.title {
+								width: auto;
+								height: auto;
+								color: #181a20;
+								font-family: $font;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+							}
+							.input-box {
+								position: relative;
+								width: 100%;
+								flex-direction: row;
+								align-items: center;
+								svg {
+									cursor: pointer;
+								}
 								.furniture-checkbox {
 									width: 16px;
 									height: 15px;
@@ -111,62 +119,186 @@
 										width: 19px;
 									}
 								}
+								label {
+									line-height: 13px;
+									.furniture-type {
+										color: #181a20;
+										font-family: $font;
+										font-size: 14px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: 19px;
+									}
+								}
 							}
-							.city-select {
-								width: 100%;
-								height: 49px;
-								border-radius: 8px;
-								border: 1px solid #ddd;
-								background: #fff;
-								outline: none;
-								padding-left: 15px;
-								appearance: none;
-								cursor: pointer;
-								box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-								color: #717171;
-								font-family: $font;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 26px;
-							}
-							.divider {
-								position: absolute;
-								height: 48px;
-								border-left: 1px solid #ddd;
-								right: 39px;
-								top: 31px;
-							}
-							.arrow-down {
-								position: absolute;
-								width: 15px;
-								height: 8px;
-								color: #ddd;
-								right: 13px;
-								top: 52px;
-							}
-							.furniture-type {
+						}
+						// location
+						.find-your-location {
+							position: relative;
+							width: 100%;
+							gap: 10px;
+							.title {
+								width: auto;
+								height: auto;
 								color: #181a20;
 								font-family: $font;
 								font-size: 14px;
 								font-style: normal;
-								font-weight: 400;
-								line-height: 19px;
+								font-weight: 600;
+								line-height: normal;
 							}
-							.button-group {
-								width: 100%;
-								height: 43.998px;
-								flex-direction: row;
-								button {
-									width: 100%;
-									color: #181a20;
-									text-align: center;
-									font-family: $font;
-									font-size: 13px;
-									font-style: normal;
-									font-weight: 600;
-									line-height: normal;
+							.furniture-location {
+								gap: 10px;
+								height: 115px;
+								overflow: hidden;
+								transition: 1s;
+								&:hover {
+									height: 253px;
 								}
+
+								.input-box {
+									position: relative;
+									width: 100%;
+									flex-direction: row;
+									align-items: center;
+									svg {
+										cursor: pointer;
+									}
+									.furniture-checkbox {
+										width: 16px;
+										height: 15px;
+										border-radius: 12px;
+										margin-right: 10px;
+										svg {
+											width: 19px;
+										}
+									}
+									.furniture-loca {
+										color: #181a20;
+										font-family: $font;
+										font-size: 14px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: 19px;
+									}
+								}
+							}
+						}
+						// brand
+						.find-your-brand {
+							position: relative;
+							width: 100%;
+							gap: 10px;
+							.title {
+								width: auto;
+								height: auto;
+								color: #181a20;
+								font-family: $font;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+							}
+							.furniture-brand {
+								gap: 10px;
+								height: 115px;
+								overflow: hidden;
+								transition: 1s;
+								&:hover {
+									height: 253px;
+								}
+
+								.input-box {
+									position: relative;
+									width: 100%;
+									flex-direction: row;
+									align-items: center;
+									svg {
+										cursor: pointer;
+									}
+									.furniture-checkbox {
+										width: 16px;
+										height: 15px;
+										border-radius: 12px;
+										margin-right: 10px;
+										svg {
+											width: 19px;
+										}
+									}
+									.furniture-brand-title {
+										color: #181a20;
+										font-family: $font;
+										font-size: 14px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: 19px;
+									}
+								}
+							}
+						}
+						// options
+
+						.find-your-option {
+							position: relative;
+							width: 100%;
+							gap: 10px;
+							.title {
+								width: auto;
+								height: auto;
+								color: #181a20;
+								font-family: $font;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+							}
+							.input-box {
+								position: relative;
+								width: 100%;
+								flex-direction: row;
+								align-items: center;
+								svg {
+									cursor: pointer;
+								}
+								.furniture-checkbox {
+									width: 16px;
+									height: 15px;
+									border-radius: 12px;
+									margin-right: 10px;
+									svg {
+										width: 19px;
+									}
+								}
+								label {
+									line-height: 13px;
+
+									.furniture-option {
+										color: #181a20;
+										font-family: $font;
+										font-size: 14px;
+										font-style: normal;
+										font-weight: 400;
+										line-height: 19px;
+									}
+								}
+							}
+						}
+
+						// price Range
+						.find-your-range {
+							position: relative;
+							width: 100%;
+							gap: 10px;
+
+							.title {
+								width: auto;
+								height: auto;
+								color: #181a20;
+								font-family: $font;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
 							}
 							.square-year-input {
 								width: 100%;
@@ -186,9 +318,7 @@
 									outline: none;
 									padding-left: 15px;
 								}
-								label {
-									line-height: 13px;
-								}
+
 								input::placeholder {
 									color: #717171;
 									font-family: $font;
@@ -198,6 +328,16 @@
 									line-height: 26px;
 								}
 							}
+
+							// end
+
+							// .divider {
+							// 	position: absolute;
+							// 	height: 48px;
+							// 	border-left: 1px solid #ddd;
+							// 	right: 39px;
+							// 	top: 31px;
+							// }
 						}
 					}
 				}

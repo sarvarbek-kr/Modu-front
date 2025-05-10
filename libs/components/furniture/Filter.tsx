@@ -12,12 +12,28 @@ import {
 	Tooltip,
 	IconButton,
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { FurnitureBrand, FurnitureColor, FurnitureLocation, FurnitureType } from '../../enums/furniture.enum';
 import { FurnituresInquiry } from '../../types/furniture/furniture.input';
 import { useRouter } from 'next/router';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import RefreshIcon from '@mui/icons-material/Refresh';
+
+// Create a styled checkbox component with circular styling
+const CircleCheckbox = styled(Checkbox)({
+	padding: 4,
+	'& .MuiSvgIcon-root': {
+		borderRadius: '50%',
+	},
+	'&.Mui-checked': {
+		'& .MuiSvgIcon-root': {
+			backgroundColor: 'primary.main',
+			color: 'green',
+			borderRadius: '50%',
+		},
+	},
+});
 
 const MenuProps = {
 	PaperProps: {
@@ -388,8 +404,8 @@ const Filter = (props: FilterType) => {
 	} else {
 		return (
 			<Stack className={'filter-main'}>
-				<Stack className={'find-your-home'} mb={'40px'}>
-					<Typography className={'title-main'}>Find Your Home</Typography>
+				<Stack className={'find-your-furniture'} mb={'40px'}>
+					<Typography className={'title-main'}>Find Your Furniture</Typography>
 					<Stack className={'input-box'}>
 						<OutlinedInput
 							value={searchText}
@@ -427,14 +443,14 @@ const Filter = (props: FilterType) => {
 						</Tooltip>
 					</Stack>
 				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
+				<Stack className={'find-your-category'} mb={'30px'}>
 					<Typography className={'title'}>Categories</Typography>
 					{furnitureType.map((type: string) => (
 						<Stack className={'input-box'} key={type}>
-							<Checkbox
+							<CircleCheckbox
 								id={type}
 								className="furniture-checkbox"
-								color="default"
+								style={{ color: 'red' }}
 								size="small"
 								value={type}
 								onChange={furnitureTypeSelectHandler}
@@ -446,7 +462,7 @@ const Filter = (props: FilterType) => {
 						</Stack>
 					))}
 				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
+				<Stack className={'find-your-location'} mb={'30px'}>
 					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
 						Location
 					</p>
@@ -463,7 +479,7 @@ const Filter = (props: FilterType) => {
 						{furnitureLocation.map((location: string) => {
 							return (
 								<Stack className={'input-box'} key={location}>
-									<Checkbox
+									<CircleCheckbox
 										id={location}
 										className="furniture-checkbox"
 										color="default"
@@ -473,19 +489,19 @@ const Filter = (props: FilterType) => {
 										onChange={furnitureLocationSelectHandler}
 									/>
 									<label htmlFor={location} style={{ cursor: 'pointer' }}>
-										<Typography className="furniture-type">{location}</Typography>
+										<Typography className="furniture-loca">{location}</Typography>
 									</label>
 								</Stack>
 							);
 						})}
 					</Stack>
 				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
+				<Stack className={'find-your-brand'} mb={'30px'}>
 					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
 						Brand
 					</p>
 					<Stack
-						className={`furniture-location`}
+						className={`furniture-brand`}
 						style={{ height: showMore ? '253px' : '115px' }}
 						onMouseEnter={() => setShowMore(true)}
 						onMouseLeave={() => {
@@ -497,7 +513,7 @@ const Filter = (props: FilterType) => {
 						{furnitureBrand.map((brand: string) => {
 							return (
 								<Stack className={'input-box'} key={brand}>
-									<Checkbox
+									<CircleCheckbox
 										id={brand}
 										className="furniture-checkbox"
 										color="default"
@@ -507,7 +523,7 @@ const Filter = (props: FilterType) => {
 										onChange={furnitureBrandSelectHandler}
 									/>
 									<label htmlFor={brand} style={{ cursor: 'pointer' }}>
-										<Typography className="furniture-type">{brand}</Typography>
+										<Typography className="furniture-brand-title">{brand}</Typography>
 									</label>
 								</Stack>
 							);
@@ -515,10 +531,10 @@ const Filter = (props: FilterType) => {
 					</Stack>
 				</Stack>
 
-				<Stack className={'find-your-home'} mb={'30px'}>
+				<Stack className={'find-your-option'} mb={'30px'}>
 					<Typography className={'title'}>Options</Typography>
 					<Stack className={'input-box'}>
-						<Checkbox
+						<CircleCheckbox
 							id={'Barter'}
 							className="furniture-checkbox"
 							color="default"
@@ -528,11 +544,11 @@ const Filter = (props: FilterType) => {
 							onChange={furnitureOptionSelectHandler}
 						/>
 						<label htmlFor={'Barter'} style={{ cursor: 'pointer' }}>
-							<Typography className="propert-type">Barter</Typography>
+							<Typography className="furniture-option">Barter</Typography>
 						</label>
 					</Stack>
 				</Stack>
-				<Stack className={'find-your-home'}>
+				<Stack className={'find-your-range'}>
 					<Typography className={'title'}>Price Range</Typography>
 					<Stack className="square-year-input">
 						<input
