@@ -11,6 +11,7 @@ import {
 	MenuItem,
 	Tooltip,
 	IconButton,
+	Radio,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
@@ -19,21 +20,7 @@ import { FurnituresInquiry } from '../../types/furniture/furniture.input';
 import { useRouter } from 'next/router';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import RefreshIcon from '@mui/icons-material/Refresh';
-
-// Create a styled checkbox component with circular styling
-const CircleCheckbox = styled(Checkbox)({
-	padding: 4,
-	'& .MuiSvgIcon-root': {
-		borderRadius: '50%',
-	},
-	'&.Mui-checked': {
-		'& .MuiSvgIcon-root': {
-			backgroundColor: 'primary.main',
-			color: 'green',
-			borderRadius: '50%',
-		},
-	},
-});
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const MenuProps = {
 	PaperProps: {
@@ -447,10 +434,10 @@ const Filter = (props: FilterType) => {
 					<Typography className={'title'}>Categories</Typography>
 					{furnitureType.map((type: string) => (
 						<Stack className={'input-box'} key={type}>
-							<CircleCheckbox
+							<Checkbox
 								id={type}
 								className="furniture-checkbox"
-								style={{ color: 'red' }}
+								style={{ color: 'default' }}
 								size="small"
 								value={type}
 								onChange={furnitureTypeSelectHandler}
@@ -479,7 +466,7 @@ const Filter = (props: FilterType) => {
 						{furnitureLocation.map((location: string) => {
 							return (
 								<Stack className={'input-box'} key={location}>
-									<CircleCheckbox
+									<Checkbox
 										id={location}
 										className="furniture-checkbox"
 										color="default"
@@ -513,7 +500,7 @@ const Filter = (props: FilterType) => {
 						{furnitureBrand.map((brand: string) => {
 							return (
 								<Stack className={'input-box'} key={brand}>
-									<CircleCheckbox
+									<Checkbox
 										id={brand}
 										className="furniture-checkbox"
 										color="default"
@@ -534,7 +521,7 @@ const Filter = (props: FilterType) => {
 				<Stack className={'find-your-option'} mb={'30px'}>
 					<Typography className={'title'}>Options</Typography>
 					<Stack className={'input-box'}>
-						<CircleCheckbox
+						<Checkbox
 							id={'Barter'}
 							className="furniture-checkbox"
 							color="default"

@@ -360,7 +360,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 													Width
 												</Typography>
 												<Typography variant="body1" fontWeight="medium">
-													{furniture?.furnitureDimensions.width}
+													{furniture?.furnitureDimensions.width} cm
 												</Typography>
 											</Box>
 										</Box>
@@ -386,7 +386,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 													Height
 												</Typography>
 												<Typography variant="body1" fontWeight="medium">
-													{furniture?.furnitureDimensions.height}
+													{furniture?.furnitureDimensions.height} cm
 												</Typography>
 											</Box>
 										</Box>
@@ -412,7 +412,7 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 													Depth
 												</Typography>
 												<Typography variant="body1" fontWeight="medium">
-													{furniture?.furnitureDimensions.depth}
+													{furniture?.furnitureDimensions.depth} cm
 												</Typography>
 											</Box>
 										</Box>

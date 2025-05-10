@@ -53,6 +53,7 @@
 									line-height: normal;
 								}
 								.user-phone {
+									margin-top: 5px;
 									display: flex;
 									flex-direction: row;
 									img {
@@ -63,8 +64,9 @@
 									}
 								}
 								.view-list {
+									margin-top: 5px;
 									font-weight: bold;
-									color: red;
+									color: #b88e2f;
 								}
 							}
 						}

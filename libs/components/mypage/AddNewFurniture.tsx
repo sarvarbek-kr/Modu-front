@@ -330,14 +330,14 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
 								</Stack>
 								<Stack className="price-year-after-price">
-									<Typography className="title">Dimensions (in meters)</Typography>
+									<Typography className="title">Dimensions (in centimeter)</Typography>
 
 									{['width', 'height', 'depth'].map((dimKey) => (
 										<div key={dimKey} style={{ marginBottom: '8px' }}>
-											<label style={{ marginRight: '10px', borderRadius: '50%' }}>{dimKey}:</label>
+											{/* <label style={{ marginRight: '10px', borderRadius: '50%' }}>{dimKey}:</label> */}
 											<input
+												className="description-input"
 												type="number"
-												step="0.1" // bu orqali 0.1, 0.5, 1.2 kabi qiymatlar kiritish mumkin
 												min="0"
 												placeholder={`Enter ${dimKey}`}
 												// @ts-ignore
@@ -354,8 +354,6 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 											/>
 										</div>
 									))}
-
-									<div className={'divider'}></div>
 								</Stack>
 							</Stack>
 
@@ -491,7 +489,7 @@ const AddFurniture = ({ initialValues, ...props }: any) => {
 									</defs>
 								</svg>
 								<Stack className="text-box">
-									<Typography className="drag-title">Drag and drop images here</Typography>
+									<Typography className="drag-title">Upload images here</Typography>
 									<Typography className="format-title">Photos must be JPEG or PNG format and least 2048x768</Typography>
 								</Stack>
 								<Button

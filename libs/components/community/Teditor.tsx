@@ -180,11 +180,10 @@ const TuiEditor = () => {
 			<Stack direction="row" justifyContent="center">
 				<Button
 					variant="contained"
-					color="primary"
-					style={{ margin: '30px', width: '250px', height: '45px' }}
+					style={{ margin: '30px', width: '250px', height: '45px', color: 'white', fontWeight: 'bold' }}
 					onClick={handleRegisterButton}
 				>
-					Register
+					upload
 				</Button>
 			</Stack>
 		</Stack>
@@ -192,4 +191,3 @@ const TuiEditor = () => {
 };
 
 export default TuiEditor;
-

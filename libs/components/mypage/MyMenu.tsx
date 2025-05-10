@@ -79,9 +79,7 @@ const MyMenu = () => {
 												<Typography className={'sub-title'} variant={'subtitle1'} component={'p'}>
 													Add Furniture
 												</Typography>
-												<IconButton aria-label="delete" sx={{ ml: '40px' }}>
-													<PortraitIcon style={{ color: 'red' }} />
-												</IconButton>
+												<IconButton aria-label="delete" sx={{ ml: '40px' }}></IconButton>
 											</div>
 										</Link>
 									</ListItem>
@@ -102,9 +100,7 @@ const MyMenu = () => {
 												<Typography className={'sub-title'} variant={'subtitle1'} component={'p'}>
 													My Furnitures
 												</Typography>
-												<IconButton aria-label="delete" sx={{ ml: '36px' }}>
-													<PortraitIcon style={{ color: 'red' }} />
-												</IconButton>
+												<IconButton aria-label="delete" sx={{ ml: '36px' }}></IconButton>
 											</div>
 										</Link>
 									</ListItem>

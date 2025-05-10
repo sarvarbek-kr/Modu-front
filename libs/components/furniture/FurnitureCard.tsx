@@ -14,10 +14,12 @@ import { userVar } from '../../../apollo/store';
 interface FurnitureCardProps {
 	furniture: Furniture;
 	likeFurnitureHandler: any;
+	myFavorites?: boolean;
+	recentlyVisited?: boolean;
 }
 
 const FurnitureCard = (props: FurnitureCardProps) => {
-	const { furniture, likeFurnitureHandler } = props;
+	const { furniture, likeFurnitureHandler, myFavorites, recentlyVisited } = props;
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
