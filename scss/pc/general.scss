@@ -301,9 +301,10 @@
 	margin-bottom: 34px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	.agent-img {
-		border-radius: 12px;
-		width: 233px;
+		border-radius: 12px 12px 0px 0px;
+		width: 350px;
 		height: 273px;
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
@@ -311,11 +312,10 @@
 		div {
 			position: absolute;
 			padding: 12px;
-			top: 12px;
 			left: 12px;
-			border-radius: 6px;
-			background: #eb6753;
-			color: #fff;
+			border-radius: 0px 0px 6px 6px;
+			background: #fcf8f3;
+			color: #181a20;
 			font-family: $font;
 			font-size: 12px;
 			font-style: normal;
@@ -324,6 +324,7 @@
 		}
 	}
 	.agent-desc {
+		width: 90%;
 		margin-top: 23px;
 		display: flex;
 		flex-direction: row;
@@ -334,7 +335,7 @@
 			flex-direction: column;
 			strong {
 				color: #181a20;
-				font-family: $font;
+				font-family: $mont;
 				font-size: 15px;
 				font-style: normal;
 				font-weight: 600;
@@ -343,7 +344,7 @@
 			}
 			span {
 				color: #181a20;
-				font-family: $font;
+				font-family: $mont;
 				font-size: 15px;
 				font-style: normal;
 				font-weight: 400;
