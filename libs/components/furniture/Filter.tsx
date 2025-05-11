@@ -160,10 +160,6 @@ const Filter = (props: FilterType) => {
 					);
 				}
 
-				if (searchFilter?.search?.typeList?.length == 0) {
-					alert('error');
-				}
-
 				console.log('furnitureLocationSelectHandler:', e.target.value);
 			} catch (err: any) {
 				console.log('ERROR, furnitureLocationSelectHandler:', err);
@@ -173,47 +169,41 @@ const Filter = (props: FilterType) => {
 	);
 
 	const furnitureTypeSelectHandler = useCallback(
-		async (e: any) => {
+		async (type: any, isSelected: boolean) => {
 			try {
-				const isChecked = e.target.checked;
-				const value = e.target.value;
-				if (isChecked) {
+				if (isSelected) {
 					await router.push(
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
-							search: { ...searchFilter.search, typeList: [...(searchFilter?.search?.typeList || []), value] },
+							search: { ...searchFilter.search, typeList: [...(searchFilter?.search?.typeList || []), type] },
 						})}`,
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
-							search: { ...searchFilter.search, typeList: [...(searchFilter?.search?.typeList || []), value] },
+							search: { ...searchFilter.search, typeList: [...(searchFilter?.search?.typeList || []), type] },
 						})}`,
 						{ scroll: false },
 					);
-				} else if (searchFilter?.search?.typeList?.includes(value)) {
+				} else if (searchFilter?.search?.typeList?.includes(type)) {
 					await router.push(
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
-								typeList: searchFilter?.search?.typeList?.filter((item: string) => item !== value),
+								typeList: searchFilter?.search?.typeList?.filter((item: string) => item !== type),
 							},
 						})}`,
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
-								typeList: searchFilter?.search?.typeList?.filter((item: string) => item !== value),
+								typeList: searchFilter?.search?.typeList?.filter((item: string) => item !== type),
 							},
 						})}`,
 						{ scroll: false },
 					);
 				}
 
-				if (searchFilter?.search?.typeList?.length == 0) {
-					alert('error');
-				}
-
-				console.log('furnitureTypeSelectHandler:', e.target.value);
+				console.log('furnitureTypeSelectHandler:', type, isSelected);
 			} catch (err: any) {
 				console.log('ERROR, furnitureTypeSelectHandler:', err);
 			}
@@ -364,25 +354,80 @@ const Filter = (props: FilterType) => {
 						</Tooltip>
 					</Stack>
 				</Stack>
-				<Stack className={'find-your-category'} mb={'30px'}>
-					<Typography className={'title'}>Categories</Typography>
-					{furnitureType.map((type: string) => (
-						<Stack className={'input-box'} key={type}>
-							<Checkbox
-								id={type}
-								className="furniture-checkbox"
-								style={{ color: 'default' }}
-								size="small"
-								value={type}
-								onChange={furnitureTypeSelectHandler}
-								checked={(searchFilter?.search?.typeList || []).includes(type as FurnitureType)}
-							/>
-							<label style={{ cursor: 'pointer' }}>
-								<Typography className="furniture-type">{type}</Typography>
-							</label>
-						</Stack>
-					))}
+
+				{/* Redesigned Categories Section */}
+				<Stack className="find-your-category" mb={'30px'}>
+					<Typography className="title">Categories</Typography>
+					<Box className="category-buttons-container">
+						{furnitureType.map((type: string) => {
+							const isSelected = (searchFilter?.search?.typeList || []).includes(type as FurnitureType);
+							return (
+								<Button
+									key={type}
+									variant={isSelected ? 'contained' : 'outlined'}
+									className={`category-button ${isSelected ? 'selected' : ''}`}
+									onClick={() => furnitureTypeSelectHandler(type, !isSelected)}
+									sx={{
+										margin: '4px',
+										borderRadius: '20px',
+										textTransform: 'none',
+										color: isSelected ? 'white' : '#666',
+										borderColor: isSelected ? 'primary.main' : '#e0e0e0',
+										'&:hover': {
+											backgroundColor: isSelected ? 'primary.dark' : '#f5f5f5',
+											borderColor: isSelected ? 'primary.dark' : '#ccc',
+											transform: 'translateY(-2px)',
+										},
+										boxShadow: isSelected ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none',
+										fontWeight: isSelected ? 600 : 400,
+										fontSize: '12px',
+										padding: '6px 16px',
+										transition: 'all 0.2s ease',
+									}}
+								>
+									{type}
+								</Button>
+							);
+						})}
+					</Box>
 				</Stack>
+
+				<Stack className="find-your-category" mb={'30px'}>
+					<Typography className="title">Brand</Typography>
+					<Box className="category-buttons-container">
+						{furnitureBrand.map((type: string) => {
+							const isSelected = (searchFilter?.search?.brandList || []).includes(type as FurnitureBrand);
+							return (
+								<Button
+									key={type}
+									variant={isSelected ? 'contained' : 'outlined'}
+									className={`category-button ${isSelected ? 'selected' : ''}`}
+									onClick={() => furnitureBrandSelectHandler(type, !isSelected)}
+									sx={{
+										margin: '4px',
+										borderRadius: '20px',
+										textTransform: 'none',
+										color: isSelected ? 'white' : '#666',
+										borderColor: isSelected ? 'primary.main' : '#e0e0e0',
+										'&:hover': {
+											backgroundColor: isSelected ? 'primary.dark' : '#f5f5f5',
+											borderColor: isSelected ? 'primary.dark' : '#ccc',
+											transform: 'translateY(-2px)',
+										},
+										boxShadow: isSelected ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none',
+										fontWeight: isSelected ? 600 : 400,
+										fontSize: '12px',
+										padding: '6px 16px',
+										transition: 'all 0.2s ease',
+									}}
+								>
+									{type}
+								</Button>
+							);
+						})}
+					</Box>
+				</Stack>
+
 				<Stack className={'find-your-location'} mb={'30px'}>
 					<p className={'title'}>Location</p>
 					<Stack
@@ -414,42 +459,6 @@ const Filter = (props: FilterType) => {
 							);
 						})}
 					</Stack>
-				</Stack>
-
-				{/* New Brand Filter Section */}
-				<Stack className="find-your-brand">
-					<Typography className={'title'}>Brand</Typography>
-					<Grid container spacing={1}>
-						{furnitureBrand.map((brand: string) => (
-							<Grid item xs={4} key={brand} className="brand-vip">
-								<Chip
-									label={brand}
-									className="brand-chip"
-									color={
-										(searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand) ? 'primary' : 'default'
-									}
-									variant={
-										(searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand) ? 'filled' : 'outlined'
-									}
-									onClick={() =>
-										furnitureBrandSelectHandler(
-											brand,
-											!(searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand),
-										)
-									}
-									clickable
-									sx={{
-										width: '100%',
-										'& .MuiChip-label': {
-											color: (searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand)
-												? 'white'
-												: 'inherit',
-										},
-									}}
-								/>
-							</Grid>
-						))}
-					</Grid>
 				</Stack>
 
 				<Stack className={'find-your-range'}>

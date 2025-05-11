@@ -88,50 +88,50 @@
 							}
 						}
 						// categories
-						.find-your-category {
-							position: relative;
-							width: 100%;
-							gap: 10px;
-							.title {
-								width: auto;
-								height: auto;
-								color: #181a20;
-								font-family: $mont;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-							}
-							.input-box {
-								position: relative;
-								width: 100%;
-								flex-direction: row;
-								align-items: center;
-								svg {
-									cursor: pointer;
-								}
-								.furniture-checkbox {
-									width: 16px;
-									height: 15px;
-									border-radius: 12px;
-									margin-right: 10px;
-									svg {
-										width: 19px;
-									}
-								}
-								label {
-									line-height: 13px;
-									.furniture-type {
-										color: #181a20;
-										font-family: $mont;
-										font-size: 14px;
-										font-style: normal;
-										font-weight: 400;
-										line-height: 19px;
-									}
-								}
-							}
-						}
+						// .find-your-category {
+						// 	position: relative;
+						// 	width: 100%;
+						// 	gap: 10px;
+						// 	.title {
+						// 		width: auto;
+						// 		height: auto;
+						// 		color: #181a20;
+						// 		font-family: $mont;
+						// 		font-size: 14px;
+						// 		font-style: normal;
+						// 		font-weight: 600;
+						// 		line-height: normal;
+						// 	}
+						// 	.input-box {
+						// 		position: relative;
+						// 		width: 100%;
+						// 		flex-direction: row;
+						// 		align-items: center;
+						// 		svg {
+						// 			cursor: pointer;
+						// 		}
+						// 		.furniture-checkbox {
+						// 			width: 16px;
+						// 			height: 15px;
+						// 			border-radius: 12px;
+						// 			margin-right: 10px;
+						// 			svg {
+						// 				width: 19px;
+						// 			}
+						// 		}
+						// 		label {
+						// 			line-height: 13px;
+						// 			.furniture-type {
+						// 				color: #181a20;
+						// 				font-family: $mont;
+						// 				font-size: 14px;
+						// 				font-style: normal;
+						// 				font-weight: 400;
+						// 				line-height: 19px;
+						// 			}
+						// 		}
+						// 	}
+						// }
 						// location
 						.find-your-location {
 							position: relative;
@@ -184,31 +184,31 @@
 								}
 							}
 						}
-						// brand
-						.find-your-brand {
-							position: relative;
-							width: 100%;
-							gap: 10px;
-							margin-bottom: 30px;
-							.title {
-								width: auto;
-								height: auto;
-								color: #181a20;
-								font-family: $mont;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-							}
-							.brand-chip {
-								color: #181a20;
-								font-family: $mont;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 300;
-								line-height: 19px;
-							}
-						}
+						// // brand
+						// .find-your-brand {
+						// 	position: relative;
+						// 	width: 100%;
+						// 	gap: 10px;
+						// 	margin-bottom: 30px;
+						// 	.title {
+						// 		width: auto;
+						// 		height: auto;
+						// 		color: #181a20;
+						// 		font-family: $mont;
+						// 		font-size: 14px;
+						// 		font-style: normal;
+						// 		font-weight: 600;
+						// 		line-height: normal;
+						// 	}
+						// 	.brand-chip {
+						// 		color: #181a20;
+						// 		font-family: $mont;
+						// 		font-size: 14px;
+						// 		font-style: normal;
+						// 		font-weight: 300;
+						// 		line-height: 19px;
+						// 	}
+						// }
 
 						// price Range
 						.find-your-range {
