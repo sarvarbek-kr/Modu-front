@@ -134,7 +134,7 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 												<Typography>Following</Typography>
 												<Button
 													variant="outlined"
-													sx={{ background: '#f78181', ':hover': { background: '#f06363' } }}
+													sx={{ background: '#b88e2f', ':hover': { background: '#a0845a' } }}
 													onClick={() =>
 														unsubscribeHandler(follower?.followingData?._id, getMemberFollowingsRefetch, followInquiry)
 													}

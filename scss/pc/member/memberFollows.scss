@@ -131,12 +131,13 @@
 					justify-content: flex-end;
 					gap: 20px;
 					button {
+						border-radius: 20px;
 						border: 1px solid #b9b9b9;
-						color: #181a20;
+						color: #ececec;
 						font-family: $font;
 						font-size: 14px;
 						font-style: normal;
-						font-weight: 400;
+						font-weight: 600;
 						line-height: normal;
 					}
 					p {

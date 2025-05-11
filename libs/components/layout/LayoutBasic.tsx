@@ -66,7 +66,7 @@ const withLayoutBasic = (Component: any) => {
 					break;
 				case '/member':
 					title = 'Member Page';
-					desc = 'Home / For Rent';
+					desc = 'Furniture';
 					bgImage = '/img/banner/furnitures.png';
 					break;
 				default:
