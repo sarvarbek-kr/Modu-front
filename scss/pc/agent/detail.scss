@@ -312,9 +312,12 @@
 						width: 100%;
 						display: flex;
 						justify-content: flex-end;
-						button:disabled {
-							background: #dfdfdf;
-						}
+						cursor: pointer;
+
+						// button:disabled {
+						// 	background: #f4f5f7 !important;
+						// }
+
 						.submit-review {
 							display: flex;
 							width: 256px;
@@ -326,8 +329,22 @@
 							border-radius: 12px;
 							border: 1px solid #c4c4c4;
 							cursor: pointer;
+							transition: all 0.3s ease;
+							background: #f4f5f7;
+
+							&:hover {
+								background-color: #374151 !important;
+								transform: translateY(-2px);
+								box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+								color: #fff;
+							}
+
+							&:active {
+								transform: translateY(0);
+								box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+							}
+
 							.title {
-								color: #181a20;
 								font-family: $font;
 								font-size: 15px;
 								font-style: normal;

@@ -226,27 +226,6 @@ const FurnitureDetail: NextPage = ({ initialComment, ...props }: any) => {
 	} else {
 		return (
 			<div id={'furniture-detail-page'}>
-				{/* New Design - Start */}
-				<div className={'breadcrumb-container'}>
-					<div className={'container'}>
-						<Box className="breadcrumb" sx={{ display: 'flex', padding: '20px 0', alignItems: 'center', gap: 1 }}>
-							<Link href="/">
-								<Typography sx={{ color: '#6B7280', cursor: 'pointer' }}>Home</Typography>
-							</Link>
-							<Box component="span" sx={{ color: '#6B7280' }}>
-								&gt;
-							</Box>
-							<Link href="/shop">
-								<Typography sx={{ color: '#6B7280', cursor: 'pointer' }}>Shop</Typography>
-							</Link>
-							<Box component="span" sx={{ color: '#6B7280' }}>
-								&gt;
-							</Box>
-							<Typography sx={{ color: '#111827' }}>{furniture?.furnitureTitle || 'Asgaard sofa'}</Typography>
-						</Box>
-					</div>
-				</div>
-
 				<div className={'new-detail-section'}>
 					<div className={'container'}>
 						<Stack
