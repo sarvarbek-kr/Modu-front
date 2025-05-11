@@ -12,6 +12,11 @@ import {
 	Tooltip,
 	IconButton,
 	Radio,
+	Chip,
+	Box,
+	Collapse,
+	Paper,
+	Grid,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
@@ -20,7 +25,6 @@ import { FurnituresInquiry } from '../../types/furniture/furniture.input';
 import { useRouter } from 'next/router';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const MenuProps = {
 	PaperProps: {
@@ -46,6 +50,7 @@ const Filter = (props: FilterType) => {
 	const [furnitureBrand, setFurnitureBrand] = useState<FurnitureBrand[]>(Object.values(FurnitureBrand));
 	const [searchText, setSearchText] = useState<string>('');
 	const [showMore, setShowMore] = useState<boolean>(false);
+	const [brandExpanded, setBrandExpanded] = useState<boolean>(true);
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -92,27 +97,6 @@ const Filter = (props: FilterType) => {
 				.then();
 		}
 
-		if (searchFilter?.search?.options?.length == 0) {
-			delete searchFilter.search.options;
-			router
-				.push(
-					`/furniture?input=${JSON.stringify({
-						...searchFilter,
-						search: {
-							...searchFilter.search,
-						},
-					})}`,
-					`/furniture?input=${JSON.stringify({
-						...searchFilter,
-						search: {
-							...searchFilter.search,
-						},
-					})}`,
-					{ scroll: false },
-				)
-				.then();
-		}
-
 		if (searchFilter?.search?.brandList?.length == 0) {
 			delete searchFilter.search.brandList;
 			router
@@ -135,6 +119,7 @@ const Filter = (props: FilterType) => {
 		}
 
 		if (searchFilter?.search?.locationList) setShowMore(true);
+		if (searchFilter?.search?.brandList) setBrandExpanded(true);
 	}, [searchFilter]);
 
 	/** HANDLERS **/
@@ -236,93 +221,42 @@ const Filter = (props: FilterType) => {
 		[searchFilter],
 	);
 
-	const furnitureOptionSelectHandler = useCallback(
-		async (e: any) => {
-			try {
-				const isChecked = e.target.checked;
-				const value = e.target.value;
-				if (isChecked) {
-					await router.push(
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: { ...searchFilter.search, options: [...(searchFilter?.search?.options || []), value] },
-						})}`,
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: { ...searchFilter.search, options: [...(searchFilter?.search?.options || []), value] },
-						})}`,
-						{ scroll: false },
-					);
-				} else if (searchFilter?.search?.options?.includes(value)) {
-					await router.push(
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: {
-								...searchFilter.search,
-								options: searchFilter?.search?.options?.filter((item: string) => item !== value),
-							},
-						})}`,
-						`/furniture?input=${JSON.stringify({
-							...searchFilter,
-							search: {
-								...searchFilter.search,
-								options: searchFilter?.search?.options?.filter((item: string) => item !== value),
-							},
-						})}`,
-						{ scroll: false },
-					);
-				}
-
-				console.log('furnitureOptionSelectHandler:', e.target.value);
-			} catch (err: any) {
-				console.log('ERROR, furnitureOptionSelectHandler:', err);
-			}
-		},
-		[searchFilter],
-	);
-
 	const furnitureBrandSelectHandler = useCallback(
-		async (e: any) => {
+		async (brand: any, isSelected: boolean) => {
 			try {
-				const isChecked = e.target.checked;
-				const value = e.target.value;
-				if (isChecked) {
+				if (isSelected) {
 					await router.push(
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
-							search: { ...searchFilter.search, brandList: [...(searchFilter?.search?.brandList || []), value] },
+							search: { ...searchFilter.search, brandList: [...(searchFilter?.search?.brandList || []), brand] },
 						})}`,
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
-							search: { ...searchFilter.search, brandList: [...(searchFilter?.search?.brandList || []), value] },
+							search: { ...searchFilter.search, brandList: [...(searchFilter?.search?.brandList || []), brand] },
 						})}`,
 						{ scroll: false },
 					);
-				} else if (searchFilter?.search?.brandList?.includes(value)) {
+				} else if (searchFilter?.search?.brandList?.includes(brand)) {
 					await router.push(
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
-								brandList: searchFilter?.search?.brandList?.filter((item: string) => item !== value),
+								brandList: searchFilter?.search?.brandList?.filter((item: string) => item !== brand),
 							},
 						})}`,
 						`/furniture?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
-								brandList: searchFilter?.search?.brandList?.filter((item: string) => item !== value),
+								brandList: searchFilter?.search?.brandList?.filter((item: string) => item !== brand),
 							},
 						})}`,
 						{ scroll: false },
 					);
 				}
 
-				if (searchFilter?.search?.brandList?.length == 0) {
-					alert('error');
-				}
-
-				console.log('furnitureBrandSelectHandler:', e.target.value);
+				console.log('furnitureBrandSelectHandler:', brand, isSelected);
 			} catch (err: any) {
 				console.log('ERROR, furnitureBrandSelectHandler:', err);
 			}
@@ -444,15 +378,13 @@ const Filter = (props: FilterType) => {
 								checked={(searchFilter?.search?.typeList || []).includes(type as FurnitureType)}
 							/>
 							<label style={{ cursor: 'pointer' }}>
-								<Typography className="furniture_type">{type}</Typography>
+								<Typography className="furniture-type">{type}</Typography>
 							</label>
 						</Stack>
 					))}
 				</Stack>
 				<Stack className={'find-your-location'} mb={'30px'}>
-					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
-						Location
-					</p>
+					<p className={'title'}>Location</p>
 					<Stack
 						className={`furniture-location`}
 						style={{ height: showMore ? '253px' : '115px' }}
@@ -483,58 +415,43 @@ const Filter = (props: FilterType) => {
 						})}
 					</Stack>
 				</Stack>
-				<Stack className={'find-your-brand'} mb={'30px'}>
-					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
-						Brand
-					</p>
-					<Stack
-						className={`furniture-brand`}
-						style={{ height: showMore ? '253px' : '115px' }}
-						onMouseEnter={() => setShowMore(true)}
-						onMouseLeave={() => {
-							if (!searchFilter?.search?.brandList) {
-								setShowMore(false);
-							}
-						}}
-					>
-						{furnitureBrand.map((brand: string) => {
-							return (
-								<Stack className={'input-box'} key={brand}>
-									<Checkbox
-										id={brand}
-										className="furniture-checkbox"
-										color="default"
-										size="small"
-										value={brand}
-										checked={(searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand)}
-										onChange={furnitureBrandSelectHandler}
-									/>
-									<label htmlFor={brand} style={{ cursor: 'pointer' }}>
-										<Typography className="furniture-brand-title">{brand}</Typography>
-									</label>
-								</Stack>
-							);
-						})}
-					</Stack>
+
+				{/* New Brand Filter Section */}
+				<Stack className="find-your-brand">
+					<Typography className={'title'}>Brand</Typography>
+					<Grid container spacing={1}>
+						{furnitureBrand.map((brand: string) => (
+							<Grid item xs={4} key={brand} className="brand-vip">
+								<Chip
+									label={brand}
+									className="brand-chip"
+									color={
+										(searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand) ? 'primary' : 'default'
+									}
+									variant={
+										(searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand) ? 'filled' : 'outlined'
+									}
+									onClick={() =>
+										furnitureBrandSelectHandler(
+											brand,
+											!(searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand),
+										)
+									}
+									clickable
+									sx={{
+										width: '100%',
+										'& .MuiChip-label': {
+											color: (searchFilter?.search?.brandList || []).includes(brand as FurnitureBrand)
+												? 'white'
+												: 'inherit',
+										},
+									}}
+								/>
+							</Grid>
+						))}
+					</Grid>
 				</Stack>
 
-				<Stack className={'find-your-option'} mb={'30px'}>
-					<Typography className={'title'}>Options</Typography>
-					<Stack className={'input-box'}>
-						<Checkbox
-							id={'Barter'}
-							className="furniture-checkbox"
-							color="default"
-							size="small"
-							value={'furnitureBarter'}
-							checked={(searchFilter?.search?.options || []).includes('furnitureBarter')}
-							onChange={furnitureOptionSelectHandler}
-						/>
-						<label htmlFor={'Barter'} style={{ cursor: 'pointer' }}>
-							<Typography className="furniture-option">Barter</Typography>
-						</label>
-					</Stack>
-				</Stack>
 				<Stack className={'find-your-range'}>
 					<Typography className={'title'}>Price Range</Typography>
 					<Stack className="square-year-input">
