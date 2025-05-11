@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Stack, Tab, Typography, Button, Pagination } from '@mui/material';
+import { Stack, Tab, Typography, Button, Pagination, Box } from '@mui/material';
 import CommunityCard from '../../libs/components/common/CommunityCard';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -111,9 +111,12 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 						<Stack className="main-box">
 							<Stack className="left-config">
 								<Stack className={'image-info'}>
-									<img src={'/img/logo/logoText.svg'} />
+									<Box component={'div'} className={'footer-logo'}>
+										<img src="/img/logo/logo-modu.svg" alt="" className={'logo'} />
+										<h1>odu</h1>
+									</Box>
 									<Stack className={'community-name'}>
-										<Typography className={'name'}>Modu Community</Typography>
+										<Typography className={'name'}>Community</Typography>
 									</Stack>
 								</Stack>
 

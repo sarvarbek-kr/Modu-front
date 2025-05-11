@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import { Button, Stack, Typography, Tab, Tabs, IconButton, Backdrop, Pagination } from '@mui/material';
+import { Button, Stack, Typography, Tab, Tabs, IconButton, Backdrop, Pagination, Box } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import Moment from 'react-moment';
@@ -250,9 +250,12 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 					<Stack className="main-box">
 						<Stack className="left-config">
 							<Stack className={'image-info'}>
-								<img src={'/img/logo/logoText.svg'} />
+								<Box component={'div'} className={'footer-logo'}>
+									<img src="/img/logo/logo-modu.svg" alt="" className={'logo'} />
+									<h1>odu</h1>
+								</Box>
 								<Stack className={'community-name'}>
-									<Typography className={'name'}>Community Board Article</Typography>
+									<Typography className={'name'}>Board Article</Typography>
 								</Stack>
 							</Stack>
 							<Tabs
