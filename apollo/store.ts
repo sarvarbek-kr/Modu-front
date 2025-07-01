@@ -26,3 +26,5 @@ export const userVar = makeVar<CustomJwtPayload>({
 
 // @ts-ignore
 export const socketVar = makeVar<WebSocket>();
+// @ts-ignore
+export const notificationsVar = makeVar<Notifications>();

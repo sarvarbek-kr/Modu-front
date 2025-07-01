@@ -13,11 +13,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Link from 'next/link';
 import { SrcAlphaFactor } from 'three';
+import { useRouter } from 'next/router';
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
 		const device = useDeviceDetect();
 		const user = useReactiveVar(userVar);
+		const router = useRouter();
 
 		/** LIFECYCLES **/
 		useEffect(() => {

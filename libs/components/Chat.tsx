@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import ScrollableFeed from 'react-scrollable-feed';
 import { RippleBadge } from '../../scss/MaterialTheme/styled';
 import { useReactiveVar } from '@apollo/client';
-import { socketVar, userVar } from '../../apollo/store';
+import { notificationsVar, socketVar, userVar } from '../../apollo/store';
 import { Member } from '../types/member/member';
 import { Messages, REACT_APP_API_URL } from '../config';
 import { sweetErrorAlert } from '../sweetAlert';
@@ -60,30 +60,39 @@ const Chat = () => {
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const socket = useReactiveVar(socketVar);
+	const notifications = useReactiveVar(notificationsVar);
 
 	/** LIFECYCLES **/
 
 	useEffect(() => {
 		socket.onmessage = (msg) => {
 			const data = JSON.parse(msg.data);
-			console.log('websocket message', data);
+			console.log('websocket message:', data);
 			switch (data.event) {
 				case 'info':
 					const newInfo: InfoPayload = data;
 					setOnlineUsers(newInfo.totalClients);
 					break;
-				case 'history':
+				case 'getMessages':
 					const list: MessagePayload[] = data.list;
 					setMessagesList(list);
+					console.log('getMessages event');
 					break;
 				case 'message':
 					const newMessage: MessagePayload = data;
 					messagesList.push(newMessage);
 					setMessagesList([...messagesList]);
 					break;
+				case 'notifications':
+					console.log('notification ko', data.notifications);
+					notificationsVar(data.notifications);
+					break;
+				default:
+					break;
 			}
 		};
-	}, [socket, messagesList]);
+		console.log('Chat is rendered!');
+	}, [socket, messagesList, onlineUsers]);
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { getJwtToken, logOut, updateUserInfo } from '../auth';
-import { Stack, Box } from '@mui/material';
+import { Stack, Box, Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
@@ -13,10 +13,13 @@ import { CaretDown } from 'phosphor-react';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import Link from 'next/link';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { useReactiveVar } from '@apollo/client';
-import { userVar } from '../../apollo/store';
+import { useMutation, useReactiveVar } from '@apollo/client';
+import { notificationsVar, userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
-import { REACT_APP_API_URL } from '../config';
+import { Messages, REACT_APP_API_URL } from '../config';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../sweetAlert';
+import { RippleBadge } from '../../scss/MaterialTheme/styled';
+import { UPDATE_NOTIFICATION } from '../../apollo/user/query';
 
 const Top = () => {
 	const device = useDeviceDetect();
@@ -33,15 +36,28 @@ const Top = () => {
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
 
+	const [anchorEl3, setAnchorEl3] = React.useState<any | HTMLElement>(null);
+
+	const [notifications, setNotifications] = React.useState<Notification[]>([]);
+	const [notificationCount, setNotificationCount] = React.useState<number>(0);
+	let openNotifications = Boolean(anchorEl3);
+
+	// Apollo requests
+	const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
+	const notificationsList = useReactiveVar(notificationsVar);
+
 	/** LIFECYCLES **/
 	useEffect(() => {
+		// @ts-ignore
+		setNotifications(notificationsList?.list ?? []);
+		setNotificationCount(notificationsList?.metaCounter[0]?.total ?? 0);
 		if (localStorage.getItem('locale') === null) {
 			localStorage.setItem('locale', 'en');
 			setLang('en');
 		} else {
 			setLang(localStorage.getItem('locale'));
 		}
-	}, [router]);
+	}, [router, notificationsList, user]);
 
 	useEffect(() => {
 		switch (router.pathname) {
@@ -59,10 +75,30 @@ const Top = () => {
 	}, []);
 
 	/** HANDLERS **/
+
+	const updateNotificationHandler = async (user: any, notificationId: any) => {
+		try {
+			if (!notificationId) return;
+			if (!user._id) throw new Error(Messages.error2);
+			await updateNotification({
+				variables: { input: notificationId },
+			});
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			console.log('ERROR, updateNotificationHandler', err);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
+
 	const langClick = (e: any) => {
 		setAnchorEl2(e.currentTarget);
 	};
-
+	const notClick = (e: any) => {
+		setAnchorEl3(e.currentTarget);
+	};
+	const notClose = () => {
+		setAnchorEl3(null);
+	};
 	const langClose = () => {
 		setAnchorEl2(null);
 	};
@@ -230,8 +266,114 @@ const Top = () => {
 								</Link>
 							)}
 
-							<div className={'lan-box'}>
-								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
+							<div id="notifications" className={'lan-box'}>
+								{user?._id && (
+									<Button
+										disableRipple
+										className="btn-lang"
+										onClick={notClick}
+										style={{ marginRight: '20px', background: 'none' }}
+									>
+										<NotificationsOutlinedIcon className={'notification-icon'} />
+										<RippleBadge
+											style={{
+												margin: '-18px 0 0 0',
+												transform: 'scale(0.65)',
+											}}
+											badgeContent={notificationCount}
+										/>
+									</Button>
+								)}
+								<StyledMenu
+									anchorEl={anchorEl3}
+									open={openNotifications}
+									onClose={notClose}
+									sx={{
+										position: 'absolute',
+										left: 10,
+										top: 0,
+										maxHeight: '400px',
+										overflow: 'hidden',
+									}}
+								>
+									{notifications?.length > 0 ? (
+										notifications.map((notification) => (
+											<MenuItem
+												disableRipple
+												onClick={() =>
+													//@ts-ignore
+													updateNotificationHandler(user, notification._id)
+												}
+												sx={{
+													width: '200px',
+													display: 'flex',
+													flexDirection: 'column',
+													alignItems: 'flex-start',
+													background: '#ececec',
+													borderRadius: '5px',
+													boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+													margin: '0px 10px 10px 10px',
+													overflow: 'hidden',
+													'&:hover': { background: '#f2f2f2' },
+												}}
+											>
+												<Typography
+													sx={{
+														fontSize: '14px',
+														fontWeight: 500,
+														fontFamily: 'sans-serif',
+														color: '#000',
+													}}
+												>
+													{
+														// @ts-ignore
+														notification.notificationTitle
+													}
+												</Typography>
+												<p
+													style={{
+														fontSize: '10px',
+														fontWeight: 400,
+														fontFamily: 'sans-serif',
+														color: '#999',
+													}}
+												>
+													{
+														// @ts-ignore
+														notification.notificationDesc
+													}
+												</p>
+											</MenuItem>
+										))
+									) : (
+										<MenuItem
+											disableRipple
+											onClick={notClose}
+											id="en"
+											sx={{
+												width: '200px',
+												display: 'flex',
+												flexDirection: 'column',
+												background: '#ececec',
+												borderRadius: '5px',
+												boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+												overflow: 'hidden',
+												'&:hover': { background: '#f2f2f2' },
+											}}
+										>
+											<Typography
+												sx={{
+													fontSize: '18px',
+													fontWeight: 500,
+													fontFamily: 'sans-serif',
+													color: '#000',
+												}}
+											>
+												No Notifications Yet
+											</Typography>
+										</MenuItem>
+									)}
+								</StyledMenu>
 								<Button
 									disableRipple
 									className="btn-lang"
@@ -246,7 +388,6 @@ const Top = () => {
 										)}
 									</Box>
 								</Button>
-
 								<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose} sx={{ position: 'absolute' }}>
 									<MenuItem disableRipple onClick={langChoice} id="en">
 										<img
