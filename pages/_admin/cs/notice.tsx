@@ -13,9 +13,11 @@ import TablePagination from '@mui/material/TablePagination';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { NoticeList } from '../../../libs/components/admin/cs/NoticeList';
+import { useRouter } from 'next/router';
 
 const AdminNotice: NextPage = (props: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
+	const router = useRouter();
 
 	/** APOLLO REQUESTS **/
 	/** LIFECYCLES **/
@@ -30,7 +32,7 @@ const AdminNotice: NextPage = (props: any) => {
 					className="btn_add"
 					variant={'contained'}
 					size={'medium'}
-					// onClick={() => router.push(`/_admin/cs/faq_create`)}
+					onClick={() => router.push(`/_admin/cs/faq_create`)}
 				>
 					<AddRoundedIcon sx={{ mr: '8px' }} />
 					ADD
