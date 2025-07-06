@@ -218,7 +218,7 @@ const AdminFurnitures: NextPage = ({ initialInquiry, ...props }: any) => {
 							removeFurnitureHandler={removeFurnitureHandler}
 						/>
 
-						<Table
+						<TablePagination
 							rowsPerPageOptions={[10, 20, 40, 60]}
 							component="div"
 							count={furnituresTotal}
