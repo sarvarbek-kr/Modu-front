@@ -78,7 +78,7 @@ const TopFurnitureCard = (props: TopFurnitureCardProps) => {
 						{' '}
 						<Button
 							className={'shop-btn'}
-							onClick={(e) => {
+							onClick={(e: any) => {
 								e.stopPropagation();
 								pushDetailHandler(furniture._id);
 							}}
@@ -88,7 +88,7 @@ const TopFurnitureCard = (props: TopFurnitureCardProps) => {
 						<div className="view-like-box">
 							<IconButton
 								className="shareIcon"
-								onClick={(e) => {
+								onClick={(e: any) => {
 									e.stopPropagation(); // prevent click from bubbling up
 									copyLinkHandler(e);
 								}}
@@ -104,7 +104,7 @@ const TopFurnitureCard = (props: TopFurnitureCardProps) => {
 							<IconButton
 								className="like"
 								color={'default'}
-								onClick={(e) => {
+								onClick={(e: any) => {
 									e.stopPropagation();
 									likeFurnitureHandler(user, furniture?._id);
 								}}

@@ -60,7 +60,6 @@ export const FurnitureCard = (props: FurnitureCardProps) => {
 				</Stack>
 				<Stack className="information-box" onClick={() => pushFurnitureDetail(furniture?._id)}>
 					<Typography className="name">{furniture.furnitureTitle}</Typography>
-					<Typography className="address">{furniture.furnitureAddress}</Typography>
 					<Typography className="price">
 						<strong>${formatterStr(furniture?.furniturePrice)}</strong>
 					</Typography>

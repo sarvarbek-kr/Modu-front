@@ -34,20 +34,20 @@ const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
 	const [updateBoardArticleByAdmin] = useMutation(UPDATE_BOARD_ARTICLE_BY_ADMIN);
 	const [removeBoardArticleByAdmin] = useMutation(REMOVE_BOARD_ARTICLE_BY_ADMIN);
 
-const {
-  loading: getAllBoardArticlesByAdminLoading,
-  data: getAllBoardArticlesByAdminData,
-  error: getAllBoardArticlesByAdminError,
-  refetch: getAllBoardArticlesByAdminRefetch,
-} = useQuery(GET_ALL_BOARD_ARTICLES_BY_ADMIN, {
-  fetchPolicy: 'network-only',
-  variables: { input: communityInquiry },
-  notifyOnNetworkStatusChange: true,
-  onCompleted: (data: T) => {
-    setArticles(data?.getAllBoardArticlesByAdmin?.list);
-    setArticleTotal(data?.getAllBoardArticlesByAdmin?.metaCounter[0]?.total ?? 0);
-  },
-});
+	const {
+		loading: getAllBoardArticlesByAdminLoading,
+		data: getAllBoardArticlesByAdminData,
+		error: getAllBoardArticlesByAdminError,
+		refetch: getAllBoardArticlesByAdminRefetch,
+	} = useQuery(GET_ALL_BOARD_ARTICLES_BY_ADMIN, {
+		fetchPolicy: 'network-only',
+		variables: { input: communityInquiry },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setArticles(data?.getAllBoardArticlesByAdmin?.list);
+			setArticleTotal(data?.getAllBoardArticlesByAdmin?.metaCounter[0]?.total ?? 0);
+		},
+	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -165,21 +165,21 @@ const {
 						<Box component={'div'}>
 							<List className={'tab-menu'}>
 								<ListItem
-									onClick={(e) => tabChangeHandler(e, 'ALL')}
+									onClick={(e: any) => tabChangeHandler(e, 'ALL')}
 									value="ALL"
 									className={value === 'ALL' ? 'li on' : 'li'}
 								>
 									All
 								</ListItem>
 								<ListItem
-									onClick={(e) => tabChangeHandler(e, 'ACTIVE')}
+									onClick={(e: any) => tabChangeHandler(e, 'ACTIVE')}
 									value="ACTIVE"
 									className={value === 'ACTIVE' ? 'li on' : 'li'}
 								>
 									Active
 								</ListItem>
 								<ListItem
-									onClick={(e) => tabChangeHandler(e, 'DELETE')}
+									onClick={(e: any) => tabChangeHandler(e, 'DELETE')}
 									value="DELETE"
 									className={value === 'DELETE' ? 'li on' : 'li'}
 								>

@@ -80,7 +80,7 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 						{' '}
 						<Button
 							className={'shop-btn'}
-							onClick={(e) => {
+							onClick={(e: any) => {
 								e.stopPropagation();
 								pushDetailHandler(furniture._id);
 							}}
@@ -90,7 +90,7 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 						<div className="view-like-box">
 							<IconButton
 								className="shareIcon"
-								onClick={(e) => {
+								onClick={(e: any) => {
 									e.stopPropagation(); // prevent click from bubbling up
 									copyLinkHandler(e);
 								}}
@@ -106,7 +106,7 @@ const TrendFurnitureCard = (props: TrendFurnitureCardProps) => {
 							<IconButton
 								className="like"
 								color={'default'}
-								onClick={(e) => {
+								onClick={(e: any) => {
 									e.stopPropagation();
 									likeFurnitureHandler(user, furniture?._id);
 								}}
