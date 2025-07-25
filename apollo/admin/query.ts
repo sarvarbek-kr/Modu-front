@@ -199,3 +199,27 @@ export const GET_COMMENTS = gql`
 		}
 	}
 `;
+/**************************
+ *         NOTICE        *
+ *************************/
+
+export const GET_NOTICES = gql`
+	query GetNotices {
+		getNotices {
+			list {
+				_id
+				noticeCategory
+				noticeStatus
+				noticeTitle
+				noticeContent
+				memberId
+				createdAt
+				updatedAt
+				event
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
