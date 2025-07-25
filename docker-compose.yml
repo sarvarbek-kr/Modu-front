@@ -4,7 +4,8 @@ services:
     restart: always
     image: node:20
     ports:
-      - '3000-3000'
+      - '3000:3000'
+
     environment:
       - PORT=3000
     volumes:
